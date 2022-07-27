@@ -20,12 +20,14 @@
   .menu > li {
     margin: 0 1rem;
     overflow: hidden;
+    
 
     a {
         color: $whiteColor;
         font-size: 1rem;
         text-decoration: none;
         font-weight: 400;
+        position: relative;
     }
   }
   
@@ -79,7 +81,7 @@
     transform: rotate(-405deg);
   }
   
-  @media (max-width: 750px) {
+  @media (max-width: 800px) {
     .menu-button-container {
       display: flex;
     }

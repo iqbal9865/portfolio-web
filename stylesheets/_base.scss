@@ -9,24 +9,3 @@
     box-sizing: border-box;
     font-family: 'Raleway', sans-serif;
 }
-@media (max-width: 600px) {
-    .container {
-      padding: 0 1rem;
-    }
-  }
-  @media (min-width: 600px) {
-    .container {
-      padding: 0 2rem;
-    }
-  }
-  
-  @media (min-width: 1000px) {
-    .container {
-      padding: 0 4rem;
-    }
-  }
-  @media (min-width: 1400px) {
-    .container {
-      padding: 0 5.5rem;
-    }
-  }
