@@ -276,6 +276,9 @@
 .about-container .about-text {
   text-align: justify;
 }
+.about-container .span-name {
+  font-weight: 700;
+}
 .about-container .social-icon {
   background-color: #222;
   color: #ffffff;
@@ -285,18 +288,32 @@
   vertical-align: middle;
   border-radius: 50%;
   margin: 0 10px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.about-container .social-icon:hover {
+  background: #ffffff;
+  color: #222;
+  border: 1px solid #222;
+}
+.about-container .social-icon:hover i {
+  color: #222;
 }
 .about-container .social-icon i {
   color: #ffffff;
   margin-top: 8px;
   font-size: 15px;
-  cursor: pointer;
 }
 .about-container .resume-btn {
   display: inline-block;
   background-color: #222;
   padding: 10px 20px;
   border: 2px solid #222;
-  color: #fff;
+  color: #ffffff;
   text-transform: uppercase;
+  transition: 0.3s;
+}
+.about-container .resume-btn:hover {
+  background-color: #ffffff;
+  color: #222;
 }/*# sourceMappingURL=index.css.map */
