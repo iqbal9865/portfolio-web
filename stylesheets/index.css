@@ -259,11 +259,16 @@
     font-size: 21px !important;
   }
 }
-.about-container .about-img {
+.about-container .image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.about-container .image-container .about-img {
   position: relative;
   z-index: 10;
 }
-.about-container .about-img::before {
+.about-container .image-container .about-img::before {
   content: "";
   background-color: #E9E9E9;
   width: 100%;
@@ -316,4 +321,32 @@
 .about-container .resume-btn:hover {
   background-color: #ffffff;
   color: #222;
+}
+
+.services-section {
+  background-color: #F2F2F2;
+}
+.services-section .service-col-container {
+  padding: 25px 10px;
+}
+.services-section .service-col-container .service-item .service-icon {
+  width: 80px;
+  margin: 0 auto;
+  height: 80px;
+  border: 1.7px solid #E9E9E9;
+  border-radius: 50%;
+  background-color: #F2F2F2;
+  transition: 0.3s;
+}
+.services-section .service-col-container .service-item .service-icon:hover {
+  background-color: #ffffff;
+  box-shadow: 0 5px 30px #e3e3e3;
+}
+.services-section .service-col-container .service-item .service-icon i {
+  font-size: 30px;
+  transform: translateY(80%);
+}
+.services-section .service-col-container .service-item .service-title {
+  font-weight: 700;
+  margin: 20px 0;
 }/*# sourceMappingURL=index.css.map */
