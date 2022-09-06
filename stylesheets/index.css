@@ -329,6 +329,17 @@
 .services-section .service-col-container {
   padding: 25px 10px;
 }
+.services-section .service-col-container .service-item:hover .service-icon {
+  width: 80px;
+  margin: 0 auto;
+  height: 80px;
+  border: 1.7px solid #E9E9E9;
+  border-radius: 50%;
+  background-color: #F2F2F2;
+  transition: 0.3s;
+  background-color: #ffffff;
+  box-shadow: 0 5px 30px #e3e3e3;
+}
 .services-section .service-col-container .service-item .service-icon {
   width: 80px;
   margin: 0 auto;
@@ -337,10 +348,6 @@
   border-radius: 50%;
   background-color: #F2F2F2;
   transition: 0.3s;
-}
-.services-section .service-col-container .service-item .service-icon:hover {
-  background-color: #ffffff;
-  box-shadow: 0 5px 30px #e3e3e3;
 }
 .services-section .service-col-container .service-item .service-icon i {
   font-size: 30px;
