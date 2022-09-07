@@ -7,3 +7,6 @@
   background-color: $creamBg;
   transition: 0.3s;
 }
+@mixin border-radius($variable) {
+  border-radius: $variable;
+}
