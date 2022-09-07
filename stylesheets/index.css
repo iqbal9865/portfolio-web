@@ -416,4 +416,41 @@
 }
 .portfolio-section .project-container .modal .modal-dialog {
   max-width: 800px;
+}
+
+.contact-section .contact-form-container {
+  padding: 25px 10px;
+}
+.contact-section .contact-form-container form input, .contact-section .contact-form-container form textarea {
+  width: 100%;
+  padding: 15px;
+  border: 0;
+  background-color: #f3f4f6;
+  outline: 0;
+  border-radius: 4px;
+  margin: 5px 0;
+}
+.contact-section .contact-form-container form .message-btn {
+  display: inline-block;
+  background-color: #222;
+  padding: 10px 20px;
+  border: 2px solid #222;
+  color: #ffffff;
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+.contact-section .contact-form-container form .message-btn:hover {
+  background-color: #ffffff;
+  color: #222;
+}
+
+@media (max-width: 768px) {
+  .contact-form-responsive {
+    width: 100% !important;
+  }
+}
+@media (min-width: 769px) {
+  .contact-form-responsive {
+    width: 75% !important;
+  }
 }/*# sourceMappingURL=index.css.map */
