@@ -1,0 +1,40 @@
+.contact-section {
+  .contact-form-container {
+    padding: 25px 10px;
+    form {
+      input, textarea {
+        width: 100%;
+        padding: 15px;
+        border: 0;
+        background-color: #f3f4f6;
+        outline: 0;
+        @include border-radius(4px);
+        margin: 5px 0;
+      }
+      .message-btn {
+        display: inline-block;
+        background-color: $blackColor;
+        padding: 10px 20px;
+        border: 2px solid $blackColor;
+        color: $whiteColor;
+        text-transform: uppercase;
+        transition: 0.3s;
+
+        &:hover {
+            background-color: $whiteColor;
+            color: $blackColor;
+          }
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+    .contact-form-responsive {
+        width: 100%!important;
+    }
+}
+@media (min-width: 769px) {
+    .contact-form-responsive {
+        width: 75%!important;
+    }
+}

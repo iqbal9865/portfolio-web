@@ -1,0 +1,21 @@
+footer {
+    background-color: $blackColor;
+    color: $whiteColor;
+    text-align: center;
+    .col-footer-info {
+        line-height: 15px;
+    }
+    hr {
+        height: .1px;
+        color: rgb(104, 104, 104);
+    }
+    .right-reserved {
+        color: $grayBg;
+        font-size: 14px;
+    }
+}
+@media (max-width: 768px ) {
+    .col-footer-info {
+        margin: 15px 0;
+    }
+}

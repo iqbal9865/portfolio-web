@@ -1,176 +1,701 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Iqbal - Portfolio</title>
-    <link rel="stylesheet" href="./stylesheets/index.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</head>
-<body>
-    <main class="main" >  
-        <div id="particles-js"> </div>   
-        <div class="overlay">
-            <div class="container">
-                <nav class="top-nav" id="navbar">
-                    <div>
-                        <h1 class="logo">IQBAL</h1>
-                    </div>
-                
-                    <input id="menu-toggle" type="checkbox" />
-                    <label class='menu-button-container' for="menu-toggle">
-                        <div class='menu-button'></div>
-                    </label>
-                
-                    <ul class="menu">
-                        <li><a href="#">HOME</a></li>
-                        <li><a href="#about-section">ABOUT</a></li>
-                        <li><a href="#service-section">SERVICES</a></li>
-                        <li><a href="#">WORKS</a></li>
-                        <li><a href="#">BLOGS</a></li>
-                        <li><a href="#">CONTACT</a></li>
-                    </ul>
-                </nav>
-                
-                <section class="header-container">
-                    <div class="intro">
-                        <h1 class="name">Hi! I'm Iqbal.</h1>
-                        <p class="designation">Web Designer & Front-End Developer located in Dhaka.</p>
-                    </div>
-                    <div class="bounce">
-                        <i class="fa fa-angle-double-down"></i>
-                      </div>
-                </section>
+    <link rel="stylesheet" href="./stylesheets/index.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <main class="main">
+      <div id="particles-js"></div>
+      <div class="overlay">
+        <div class="container">
+          <nav class="top-nav" id="navbar">
+            <div>
+              <h1 class="logo">IQBAL</h1>
             </div>
+
+            <input id="menu-toggle" type="checkbox" />
+            <label class="menu-button-container" for="menu-toggle">
+              <div class="menu-button"></div>
+            </label>
+
+            <ul class="menu">
+              <li><a href="#">HOME</a></li>
+              <li><a href="#about-section">ABOUT</a></li>
+              <li><a href="#service-section">SERVICES</a></li>
+              <li><a href="#portfolio-section">WORKS</a></li>
+              <li><a href="#">BLOGS</a></li>
+              <li><a href="#contact-section">CONTACT</a></li>
+            </ul>
+          </nav>
+
+          <section class="header-container">
+            <div class="intro">
+              <h1 class="name">Hi! I'm Iqbal.</h1>
+              <p class="designation">
+                JavaScript Programmer & Front-End Developer located in Dhaka.
+              </p>
+            </div>
+            <div class="bounce">
+              <i class="fa fa-angle-double-down"></i>
+            </div>
+          </section>
         </div>
+      </div>
     </main>
 
     <section class="about-container section" id="about-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-5 image-container">
-                    <div class="about-img">
-                        <img src="./img/about-img.jpg" alt="about-image" class="img-fluid">
-                    </div>
-                </div>
-                <div class="col-md-7">
-                    <div class="about-content py-5">
-                        <h2 class="title py-1">About Me</h2>
-                        <h5 class="sub-title">Web Designer & Developer</h5>
-                        <div class="py-3 about-text">
-                            <p>Hi! This is <span class="span-name">Iqbal Ahmed</span>. I'm a Curious JavaScript Programmer & Front-End Developer focused on crafting clean and user‑friendly experiences, I am passionate about building excellent software that improves the lives of those around me.</p> 
-                            <p>I just want to expose my skills in the field of ‘web development’ and want to learn a lot of things. Coding is my passion, I don't feel bored when I coding. So you are always welcome in My World!</p>
-                        </div>
-                        <div class="social-media-container d-flex">
-                            <div class="facebook-icon social-icon">
-                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                            </div>
-                            <div class="linkedin-icon social-icon">
-                                <i class="fa fa-linkedin" aria-hidden="true"></i>
-                            </div>
-                            <div class="twitter-icon social-icon">
-                                <i class="fa fa-twitter" aria-hidden="true"></i>
-                            </div>
-                            <div class="github-icon social-icon">
-                                <i class="fa fa-github" aria-hidden="true"></i>
-                            </div>
-                            <div class="gmail-icon social-icon">
-                                <i class="fa fa-google" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                        <div class="download-btn my-5">
-                            <button class="resume-btn">
-                                DOWNLOAD RESUME
-                            </button>
-                        </div>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-5 image-container">
+            <div class="about-img">
+              <img
+                src="./img/about-img.jpg"
+                alt="about-image"
+                class="img-fluid"
+              />
             </div>
+          </div>
+          <div class="col-md-7">
+            <div class="about-content py-5">
+              <h2 class="title py-1">About Me</h2>
+              <div class="py-3 about-text">
+                <p>
+                  Hi! This is <span class="span-name">Iqbal Ahmed</span>. I'm a
+                  Curious JavaScript Programmer & Front-End Developer focused on
+                  crafting clean and user‑friendly experiences, I am passionate
+                  about building excellent software that improves the lives of
+                  those around me.
+                </p>
+                <p>
+                  I just want to expose my skills in the field of ‘web
+                  development’ and want to learn a lot of things. Coding is my
+                  passion, I don't feel bored when I coding. So you are always
+                  welcome in My World!
+                </p>
+              </div>
+
+              <div class="currently-working d-flex justify-content-between">
+                <div class="company">
+                  <h6>Jr. Software Engineer at <a href="https://syftet.com/best_teams" class="company-name"> Syftet Ltd. </a></h4>
+                  <p>February 2022 - Present</p>
+                </div>
+                <div class="company">
+                  <h6>Jr. Front-End Developer at Source9</h4>
+                  <p>December 2019 - April 2020</p>
+                </div>
+              </div>
+
+              <div class="social-media-container d-flex">
+                <div class="facebook-icon social-icon">
+                  <i class="fa fa-facebook" aria-hidden="true"></i>
+                </div>
+                <div class="linkedin-icon social-icon">
+                  <i class="fa fa-linkedin" aria-hidden="true"></i>
+                </div>
+                <div class="twitter-icon social-icon">
+                  <i class="fa fa-twitter" aria-hidden="true"></i>
+                </div>
+                <div class="github-icon social-icon">
+                  <i class="fa fa-github" aria-hidden="true"></i>
+                </div>
+                <div class="gmail-icon social-icon">
+                  <i class="fa fa-google" aria-hidden="true"></i>
+                </div>
+              </div>
+              <div class="download-btn my-5">
+                <button class="resume-btn">
+                  DOWNLOAD RESUME <i class="fa fa-download mx-2"></i>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <section class="services-section section" id="service-section">
-        <div class="container">
-            <div class="titles text-center">
-                <h5 class="sub-title">SERVICES</h5>
-                <h2 class="title">WHAT I CAN DO</h2>
+      <div class="container">
+        <div class="titles text-center">
+          <h5 class="sub-title">SERVICES</h5>
+          <h2 class="title">WHAT I CAN DO</h2>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 service-col-container">
+            <div class="service-item text-center">
+              <div class="service-icon">
+                <i class="fa fa-laptop" aria-hidden="true"></i>
+              </div>
+              <h6 class="service-title">WEB DESIGN</h6>
+              <p class="service-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Corporis temporibus ex obcaecati deleniti suscipit explicabo
+                distinctio?
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4 service-col-container">
+            <div class="service-item text-center">
+              <div class="service-icon">
+                <i class="fa fa-cogs" aria-hidden="true"></i>
+              </div>
+              <h6 class="service-title">WEB DEVELOPMENT</h6>
+              <p class="service-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Corporis temporibus ex obcaecati deleniti suscipit explicabo
+                distinctio?
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4 service-col-container">
+            <div class="service-item text-center">
+              <div class="service-icon">
+                <i class="fa fa-mobile" aria-hidden="true"></i>
+              </div>
+              <h6 class="service-title">RESPONSIVE DESIGN</h6>
+              <p class="service-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Corporis temporibus ex obcaecati deleniti suscipit explicabo
+                distinctio?
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4 service-col-container">
+            <div class="service-item text-center">
+              <div class="service-icon">
+                <i class="fa fa-rocket" aria-hidden="true"></i>
+              </div>
+              <h6 class="service-title">BRANDING IDENTITY</h6>
+              <p class="service-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Corporis temporibus ex obcaecati deleniti suscipit explicabo
+                distinctio?
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4 service-col-container">
+            <div class="service-item text-center">
+              <div class="service-icon">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+              </div>
+              <h6 class="service-title">CREATIVE DESIGN</h6>
+              <p class="service-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Corporis temporibus ex obcaecati deleniti suscipit explicabo
+                distinctio?
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4 service-col-container">
+            <div class="service-item text-center">
+              <div class="service-icon">
+                <i class="fa fa-life-ring" aria-hidden="true"></i>
+              </div>
+              <h6 class="service-title">SUPPORT</h6>
+              <p class="service-text">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Corporis temporibus ex obcaecati deleniti suscipit explicabo
+                distinctio?
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="portfolio-section section" id="portfolio-section">
+      <div class="container">
+        <div class="titles text-center">
+          <h5 class="sub-title">PORTFOLIO</h5>
+          <h2 class="title">WORK I HAVE DONE</h2>
+        </div>
+        <div class="projects-fillter-container text-center">
+          <div class="row project-container">
+            <div class="col-md-4">
+              <div class="project project-one">
+                <img
+                  src="./img/img-1.jpg"
+                  alt="demoprojectimg"
+                  class="img-fluid"
+                />
+                <div class="project-img-title">
+                  <div class="text">
+                    <div class="project-title mb-3">Doctors Portal</div>
+                    <button
+                      class="shadow btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#project-1"
+                      type="button"
+                    >
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="project project-two">
+                <img
+                  src="./img/img-2.jpg"
+                  alt="demoprojectimg"
+                  class="img-fluid"
+                />
+                <div class="project-img-title">
+                  <div class="text">
+                    <div class="project-title mb-3">Admission Funnel</div>
+                    <button
+                      class="shadow btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#project-2"
+                      type="button"
+                    >
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="project project-three">
+                <img
+                  src="./img/img-3.jpg"
+                  alt="demoprojectimg"
+                  class="img-fluid"
+                />
+                <div class="project-img-title">
+                  <div class="text">
+                    <div class="project-title mb-3">Crystal Events</div>
+                    <button
+                      class="shadow btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#project-3"
+                      type="button"
+                    >
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="project project-four">
+                <img
+                  src="./img/img-4.jpg"
+                  alt="demoprojectimg"
+                  class="img-fluid"
+                />
+                <div class="project-img-title">
+                  <div class="text">
+                    <div class="project-title mb-3">Desire Food</div>
+                    <button
+                      class="shadow btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#project-4"
+                      type="button"
+                    >
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="project project-five">
+                <img
+                  src="./img/img-5.jpg"
+                  alt="demoprojectimg"
+                  class="img-fluid"
+                />
+                <div class="project-img-title">
+                  <div class="text">
+                    <div class="project-title mb-3">City Rider</div>
+                    <button
+                      class="shadow btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#project-5"
+                      type="button"
+                    >
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="project project-six">
+                <img
+                  src="./img/img-6.jpg"
+                  alt="demoprojectimg"
+                  class="img-fluid"
+                />
+                <div class="project-img-title">
+                  <div class="text">
+                    <div class="project-title mb-3">Angular & Firebase</div>
+                    <button
+                      class="shadow btn"
+                      data-bs-toggle="modal"
+                      data-bs-target="#project-6"
+                      type="button"
+                    >
+                      <i class="fa fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-4 service-col-container">
-                    <div class="service-item text-center">
-                        <div class="service-icon">
-                            <i class="fa fa-laptop" aria-hidden="true"></i>
-                        </div>
-                        <h6 class="service-title">WEB DESIGN</h6>
-                        <p class="service-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis temporibus ex obcaecati deleniti suscipit explicabo distinctio? 
-                        </p>
-                    </div>
+            <!-- Modal -->
+
+            <div
+              class="modal fade"
+              id="project-1"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Doctors Portal
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Facilis id iusto dolorem optio consequatur dicta minus qui
+                      ut exercitationem laborum eum ducimus totam omnis maxime
+                      molestiae, quaerat veniam eveniet tenetur odio quas
+                      aliquid enim assumenda. Deserunt, sit quo ab provident,
+                      voluptatum molestiae ullam nesciunt iure magnam nihil,
+                      perspiciatis animi molestias facere maiores ipsum. Impedit
+                      fugiat, libero perferendis magni, beatae assumenda
+                      eligendi cumque molestiae hic aperiam, est dolorum iure
+                      velit optio fuga harum ullam a? Cum, error atque vel nihil
+                      dolor doloribus neque vero blanditiis voluptatum, totam
+                      quas quibusdam laudantium hic! Asperiores impedit incidunt
+                      expedita debitis magnam exercitationem molestiae quam
+                      voluptates.
+                    </p>
+                  </div>
                 </div>
-                <div class="col-md-4 service-col-container">
-                    <div class="service-item text-center">
-                        <div class="service-icon">
-                            <i class="fa fa-cogs" aria-hidden="true"></i>
-                        </div>
-                        <h6 class="service-title">WEB DEVELOPMENT</h6>
-                        <p class="service-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis temporibus ex obcaecati deleniti suscipit explicabo distinctio? 
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4 service-col-container">
-                    <div class="service-item text-center">
-                        <div class="service-icon">
-                            <i class="fa fa-mobile" aria-hidden="true"></i>
-                        </div>
-                        <h6 class="service-title">RESPONSIVE DESIGN</h6>
-                        <p class="service-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis temporibus ex obcaecati deleniti suscipit explicabo distinctio?
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4 service-col-container">
-                    <div class="service-item text-center">
-                        <div class="service-icon">
-                            <i class="fa fa-rocket" aria-hidden="true"></i>
-                        </div>
-                        <h6 class="service-title">BRANDING IDENTITY</h6>
-                        <p class="service-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis temporibus ex obcaecati deleniti suscipit explicabo distinctio? 
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4 service-col-container">
-                    <div class="service-item text-center">
-                        <div class="service-icon">
-                            <i class="fa fa-pencil" aria-hidden="true"></i>
-                        </div>
-                        <h6 class="service-title">CREATIVE DESIGN</h6>
-                        <p class="service-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis temporibus ex obcaecati deleniti suscipit explicabo distinctio? 
-                        </p>
-                    </div>
-                </div>
-                <div class="col-md-4 service-col-container">
-                    <div class="service-item text-center">
-                        <div class="service-icon">
-                            <i class="fa fa-life-ring" aria-hidden="true"></i>
-                        </div>
-                        <h6 class="service-title">SUPPORT</h6>
-                        <p class="service-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis temporibus ex obcaecati deleniti suscipit explicabo distinctio? 
-                        </p>
-                    </div>
-                </div>
+              </div>
             </div>
+
+            <div
+              class="modal fade"
+              id="project-2"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Admission Funnel
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Facilis id iusto dolorem optio consequatur dicta minus qui
+                      ut exercitationem laborum eum ducimus totam omnis maxime
+                      molestiae, quaerat veniam eveniet tenetur odio quas
+                      aliquid enim assumenda. Deserunt, sit quo ab provident,
+                      voluptatum molestiae ullam nesciunt iure magnam nihil,
+                      perspiciatis animi molestias facere maiores ipsum. Impedit
+                      fugiat, libero perferendis magni, beatae assumenda
+                      eligendi cumque molestiae hic aperiam, est dolorum iure
+                      velit optio fuga harum ullam a? Cum, error atque vel nihil
+                      dolor doloribus neque vero blanditiis voluptatum, totam
+                      quas quibusdam laudantium hic! Asperiores impedit incidunt
+                      expedita debitis magnam exercitationem molestiae quam
+                      voluptates.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="modal fade"
+              id="project-3"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Crystal Events
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Facilis id iusto dolorem optio consequatur dicta minus qui
+                      ut exercitationem laborum eum ducimus totam omnis maxime
+                      molestiae, quaerat veniam eveniet tenetur odio quas
+                      aliquid enim assumenda. Deserunt, sit quo ab provident,
+                      voluptatum molestiae ullam nesciunt iure magnam nihil,
+                      perspiciatis animi molestias facere maiores ipsum. Impedit
+                      fugiat, libero perferendis magni, beatae assumenda
+                      eligendi cumque molestiae hic aperiam, est dolorum iure
+                      velit optio fuga harum ullam a? Cum, error atque vel nihil
+                      dolor doloribus neque vero blanditiis voluptatum, totam
+                      quas quibusdam laudantium hic! Asperiores impedit incidunt
+                      expedita debitis magnam exercitationem molestiae quam
+                      voluptates.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="modal fade"
+              id="project-4"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Desire Food
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Facilis id iusto dolorem optio consequatur dicta minus qui
+                      ut exercitationem laborum eum ducimus totam omnis maxime
+                      molestiae, quaerat veniam eveniet tenetur odio quas
+                      aliquid enim assumenda. Deserunt, sit quo ab provident,
+                      voluptatum molestiae ullam nesciunt iure magnam nihil,
+                      perspiciatis animi molestias facere maiores ipsum. Impedit
+                      fugiat, libero perferendis magni, beatae assumenda
+                      eligendi cumque molestiae hic aperiam, est dolorum iure
+                      velit optio fuga harum ullam a? Cum, error atque vel nihil
+                      dolor doloribus neque vero blanditiis voluptatum, totam
+                      quas quibusdam laudantium hic! Asperiores impedit incidunt
+                      expedita debitis magnam exercitationem molestiae quam
+                      voluptates.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="modal fade"
+              id="project-5"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      City Rider
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Facilis id iusto dolorem optio consequatur dicta minus qui
+                      ut exercitationem laborum eum ducimus totam omnis maxime
+                      molestiae, quaerat veniam eveniet tenetur odio quas
+                      aliquid enim assumenda. Deserunt, sit quo ab provident,
+                      voluptatum molestiae ullam nesciunt iure magnam nihil,
+                      perspiciatis animi molestias facere maiores ipsum. Impedit
+                      fugiat, libero perferendis magni, beatae assumenda
+                      eligendi cumque molestiae hic aperiam, est dolorum iure
+                      velit optio fuga harum ullam a? Cum, error atque vel nihil
+                      dolor doloribus neque vero blanditiis voluptatum, totam
+                      quas quibusdam laudantium hic! Asperiores impedit incidunt
+                      expedita debitis magnam exercitationem molestiae quam
+                      voluptates.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="modal fade"
+              id="project-6"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                      Angular Firebase Auth
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Facilis id iusto dolorem optio consequatur dicta minus qui
+                      ut exercitationem laborum eum ducimus totam omnis maxime
+                      molestiae, quaerat veniam eveniet tenetur odio quas
+                      aliquid enim assumenda. Deserunt, sit quo ab provident,
+                      voluptatum molestiae ullam nesciunt iure magnam nihil,
+                      perspiciatis animi molestias facere maiores ipsum. Impedit
+                      fugiat, libero perferendis magni, beatae assumenda
+                      eligendi cumque molestiae hic aperiam, est dolorum iure
+                      velit optio fuga harum ullam a? Cum, error atque vel nihil
+                      dolor doloribus neque vero blanditiis voluptatum, totam
+                      quas quibusdam laudantium hic! Asperiores impedit incidunt
+                      expedita debitis magnam exercitationem molestiae quam
+                      voluptates.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
+
+    <section class="contact-section section" id="contact-section">
+      <div class="container">
+        <div class="text-center">
+          <h5 class="sub-title">CONTACT</h5>
+          <h2 class="title">GET IN TOUCH</h2>
+        </div>
+        <div class="row contact-form-container">
+          <form
+            action="https://formspree.io/f/xqkjeldo"
+            method="POST"
+            class="mx-auto contact-form-responsive"
+          >
+            <div class="row">
+              <div class="col-md-6">
+                <label for="first-name">First Name</label>
+                <input type="text" id="first-name" name="first-name" />
+              </div>
+              <div class="col-md-6">
+                <label for="last-name">Last Name</label>
+                <input type="text" id="last-name" name="last-name" />
+              </div>
+            </div>
+            <div class="row my-4">
+              <div class="col-md-6">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" />
+              </div>
+              <div class="col-md-6">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <label for="text">What's on Your Mind?</label>
+                <textarea name="text" id="text" cols="30" rows="5"></textarea>
+              </div>
+            </div>
+            <div class="text-center my-4">
+              <button class="message-btn" type="submit">
+                SEND MESSAGE
+                <i class="fa fa-paper-plane mx-2"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer-section section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3 col-footer-info">
+            <p><strong>Iqbal Ahmed</strong></p>
+            <p>Jr. Software Engineer</p>
+          </div>
+          <div class="col-md-3 col-footer-info">
+            <p><strong>Phone No.</strong></p>
+            <p>01755837019</p>
+          </div>
+          <div class="col-md-3 col-footer-info">
+            <p><strong>Email</strong></p>
+            <p>iqbalahmed9865@gmail.com</p>
+          </div>
+          <div class="col-md-3 col-footer-info">
+            <p><strong>Address</strong></p>
+            <p>Mirpur 12, Dhaka.</p>
+          </div>
+        </div>
+        <hr />
+        <div class="text-center">
+          <span class="right-reserved"
+            >Iqbal @copy; 2022. All Right Reserved</span
+          >
+        </div>
+      </div>
+    </footer>
 
     <script src="./particles.js"></script>
     <script src="./app.js"></script>
-    
-</body>
+  </body>
 </html>

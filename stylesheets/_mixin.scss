@@ -1,0 +1,12 @@
+@mixin icons-container {
+  width: 80px;
+  margin: 0 auto;
+  height: 80px;
+  border: 1.7px solid $grayBg;
+  border-radius: 50%;
+  background-color: $creamBg;
+  transition: 0.3s;
+}
+@mixin border-radius($variable) {
+  border-radius: $variable;
+}

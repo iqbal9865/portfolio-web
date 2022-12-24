@@ -1,35 +1,29 @@
+@import "mixin.scss";
 
 .services-section {
-    background-color: $creamBg;
+  background-color: $creamBg;
 
-    .service-col-container {
-        padding: 25px 10px;
-        .service-item {
-            .service-icon {
-                width: 80px;
-                margin: 0 auto;
-                height: 80px;
-               
-                border: 1.7px solid $grayBg;
-                border-radius: 50%;
-                background-color: $creamBg;
-                transition: .3s;
-                &:hover {
-                    background-color: $whiteColor;
-                    box-shadow: 0 5px 30px #e3e3e3;
-                }
-                
-                i {
-                    font-size: 30px;
-                    transform: translateY(80%);
-                   
-                }
-            }
-            .service-title {
-                font-weight: 700;
-                margin: 20px 0;
-            }
+  .service-col-container {
+    padding: 25px 10px;
+    .service-item {
+      &:hover {
+        .service-icon {
+          @include icons-container;
+          background-color: $whiteColor;
+          box-shadow: 0 5px 30px #e3e3e3;
         }
+      }
+      .service-icon {
+        @include icons-container;
+        i {
+          font-size: 30px;
+          transform: translateY(80%);
+        }
+      }
+      .service-title {
+        font-weight: 700;
+        margin: 20px 0;
+      }
     }
-    
+  }
 }
