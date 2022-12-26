@@ -9,6 +9,9 @@ footer {
         height: .1px;
         color: rgb(104, 104, 104);
     }
+    .footer-email {
+        line-break: anywhere;
+    }
     .right-reserved {
         color: $grayBg;
         font-size: 14px;
