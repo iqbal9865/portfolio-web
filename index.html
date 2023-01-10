@@ -9,9 +9,11 @@
   <link rel="stylesheet" href="./stylesheets/index.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 </head>
 
 <body>
@@ -57,12 +59,12 @@
   <section class="about-container section" id="about-section">
     <div class="container">
       <div class="row">
-        <div class="col-md-5 image-container">
+        <div class="col-md-5 image-container" data-aos="flip-left" data-aos-easing="linear">
           <div class="about-img">
             <img src="./img/iqbal.png" alt="about-image" class="img-fluid" />
           </div>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-7" data-aos="flip-right" data-aos-easing="linear">
           <div class="about-content py-5">
             <h2 class="title py-1">About Me</h2>
             <div class="py-3 about-text">
@@ -132,7 +134,7 @@
     </div>
   </section>
 
-  <section class="skill-section section" id="skill-section">
+  <section class="skill-section section" id="skill-section" data-aos="fade-up" data-aos-easing="linear">
     <div class="container">
       <div class="text-center">
         <h5 class="sub-title">SKILLS</h5>
@@ -213,7 +215,7 @@
     </div>
   </section>
 
-  <section class="portfolio-section section" id="portfolio-section">
+  <section class="portfolio-section section" id="portfolio-section" data-aos="fade-down" data-aos-easing="linear">
     <div class="container">
       <div class="titles text-center">
         <h5 class="sub-title">PORTFOLIO</h5>
@@ -425,7 +427,7 @@
     </div>
   </section>
 
-  <section class="services-section section" id="service-section">
+  <section class="services-section section" id="service-section" data-aos="zoom-in" data-aos-easing="linear">
     <div class="container">
       <div class="titles text-center">
         <h5 class="sub-title">SERVICES</h5>
@@ -515,7 +517,7 @@
     </div>
   </section>
 
-  <section class="contact-section section" id="contact-section">
+  <section class="contact-section section" id="contact-section" data-aos="zoom-in-down" data-aos-easing="linear">
     <div class="container">
       <div class="text-center">
         <h5 class="sub-title">CONTACT</h5>
@@ -587,7 +589,12 @@
     </div>
   </footer>
 
+  <script>
+    AOS.init();
+  </script>
+
   <script src="./particles.js"></script>
   <script src="./app.js"></script>
+
 </body>
 </html>
