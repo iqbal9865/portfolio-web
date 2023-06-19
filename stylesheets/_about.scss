@@ -7,6 +7,9 @@
     .about-img {
       position: relative;
       z-index: 10;
+      img {
+        max-height: 500px;
+      }
       &::before {
         content: "";
         background-color: $grayBg;
