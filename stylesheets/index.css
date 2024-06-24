@@ -228,17 +228,6 @@
   -moz-animation: bounce 2s infinite;
   -o-animation: bounce 2s infinite;
 }
-@-webkit-keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {
-    -webkit-transform: translateY(0);
-  }
-  40% {
-    -webkit-transform: translateY(-30px);
-  }
-  60% {
-    -webkit-transform: translateY(-15px);
-  }
-}
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% {
     transform: translateY(0);
@@ -376,7 +365,7 @@
 .portfolio-section .project-container .project img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 300px;
   border-radius: 5px;
 }
 .portfolio-section .project-container .project .project-img-title {
