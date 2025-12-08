@@ -1,4 +1,3 @@
-// Import Firebase modules
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
@@ -11,6 +10,6 @@ const firebaseConfig = {
     appId: "1:143891765662:web:82657a5dfd5c46a54e1e8f",
     measurementId: "G-XKEEPM7VN9"
 };
-// Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);

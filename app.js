@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("contactForm");
 
   form.addEventListener("submit", async (e) => {
-    e.preventDefault(); // Stop default form submission
+    e.preventDefault(); 
     console.log("Form submission initiated");
 
     let isValid = true;
