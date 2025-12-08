@@ -1,60 +1,68 @@
+import { db } from './firebase-app.js';
+import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-document.getElementById("contactForm").addEventListener("submit", function (e) {
-  let isValid = true;
+// Wait for the DOM to load
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contactForm");
 
-  // clear previous errors
-  document.querySelectorAll(".error").forEach(err => err.textContent = "");
-  document.querySelectorAll(".error-input").forEach(el => el.classList.remove("error-input"));
-  
-  const firstName = document.getElementById("first-name");
-  const lastName = document.getElementById("last-name");
-  const email = document.getElementById("email");
-  const phone = document.getElementById("phone");
-  const message = document.getElementById("text");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault(); // Stop default form submission
+    console.log("Form submission initiated");
 
-  if (firstName.value.trim() === "") {
-    setError(firstName, "First name is required");
-  }
+    let isValid = true;
 
-  if (lastName.value.trim() === "") {
-    setError(lastName, "Last name is required");
-  }
+    // Clear previous errors
+    document.querySelectorAll(".error").forEach(err => err.textContent = "");
+    document.querySelectorAll(".error-input").forEach(el => el.classList.remove("error-input"));
 
-  // Email Validation
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (email.value.trim() === "") {
-    setError(email, "Email is required");
-  } else if (!emailRegex.test(email.value)) {
-    setError(email, "Enter a valid email address");
-  }
+    const firstName = document.getElementById("first-name");
+    const lastName = document.getElementById("last-name");
+    const email = document.getElementById("email");
+    const phone = document.getElementById("phone");
+    const message = document.getElementById("text");
 
-  // Phone Validation
-  const phoneRegex = /^[0-9]{7,15}$/;
-  if (phone.value.trim() === "") {
-    setError(phone, "Phone number is required");
-  } else if (!phoneRegex.test(phone.value)) {
-    setError(phone, "Phone must contain only digits (7–15 digits)");
-  }
+    // Helper to set error message
+    function setError(element, msg) {
+      isValid = false;
+      element.classList.add("error-input");
+      const errorField = element.nextElementSibling;
+      if (errorField) errorField.textContent = msg;
+    }
 
-  // Message Validation
-  if (message.value.trim().length < 10) {
-    setError(message, "Message should be at least 10 characters");
-  }
+    // Validation
+    if (!firstName.value.trim()) setError(firstName, "First name is required");
+    if (!lastName.value.trim()) setError(lastName, "Last name is required");
 
-  // If errors found → stop submission
-  if (!isValid) {
-    e.preventDefault();
-  }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.value.trim()) setError(email, "Email is required");
+    else if (!emailRegex.test(email.value)) setError(email, "Enter a valid email address");
 
-  // Helper to set error message
-  function setError(element, message) {
-    isValid = false;
-    const errorField = element.nextElementSibling;
-    element.classList.add("error-input");
-    errorField.textContent = message;
-  }
+    const phoneRegex = /^[0-9]{7,15}$/;
+    if (!phone.value.trim()) setError(phone, "Phone number is required");
+    else if (!phoneRegex.test(phone.value)) setError(phone, "Phone must contain 7–15 digits");
+
+    if (!message.value.trim() || message.value.trim().length < 10) setError(message, "Message should be at least 10 characters");
+
+    if (!isValid) return;
+
+    // Save to Firestore
+    try {
+      console.log("Saving message to Firestore...");
+      const docRef = await addDoc(collection(db, "messages"), {
+        firstName: firstName.value.trim(),
+        lastName: lastName.value.trim(),
+        email: email.value.trim(),
+        phone: phone.value.trim(),
+        message: message.value.trim(),
+        createdAt: serverTimestamp()
+      });
+      alert("Message sent successfully!");
+      form.reset();
+    } catch (error) {
+      alert("Error sending message. Please try again.");
+    }
+  });
 });
-
 
 particlesJS("particles-js", {
   particles: {
@@ -183,3 +191,33 @@ update = function () {
   requestAnimationFrame(update);
 };
 requestAnimationFrame(update);
+
+
+/*
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyBzWY2S08MQAdpisyoEgP91iz6k0mmnD_Y",
+    authDomain: "portfolio-4a38e.firebaseapp.com",
+    projectId: "portfolio-4a38e",
+    storageBucket: "portfolio-4a38e.firebasestorage.app",
+    messagingSenderId: "143891765662",
+    appId: "1:143891765662:web:82657a5dfd5c46a54e1e8f",
+    measurementId: "G-XKEEPM7VN9"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
+formspree.io form submission
+action="https://formspree.io/f/xqkjeldo" 
+*/
