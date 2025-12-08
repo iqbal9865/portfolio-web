@@ -120,7 +120,7 @@
               </div>
             </div>
             <div class="download-btn my-5">
-              <a href="https://drive.google.com/file/d/1SS1-iCLm-CTs4cGVmbeHEur80AJZdbda/view?usp=share_link"
+              <a href="https://drive.google.com/file/d/14LQX7UIKVFVOwtjLWllIGATHS1cWQt-Q/view"
                 target="_blank">
                 <button class="resume-btn">
                   DOWNLOAD RESUME <i class="fa fa-download mx-2"></i>
@@ -574,33 +574,42 @@
         <h2 class="title">GET IN TOUCH</h2>
       </div>
       <div class="row contact-form-container">
-        <form action="https://formspree.io/f/xqkjeldo" method="POST" class="mx-auto contact-form-responsive">
+        <form id="contactForm" action="https://formspree.io/f/xqkjeldo" method="POST"
+          class="mx-auto contact-form-responsive">
           <div class="row">
             <div class="col-md-6">
               <label for="first-name">First Name</label>
               <input type="text" id="first-name" name="first-name" />
+              <small class="error"></small>
             </div>
             <div class="col-md-6">
               <label for="last-name">Last Name</label>
               <input type="text" id="last-name" name="last-name" />
+              <small class="error"></small>
             </div>
           </div>
+
           <div class="row my-4">
             <div class="col-md-6">
               <label for="email">Email</label>
               <input type="email" id="email" name="email" />
+              <small class="error"></small>
             </div>
             <div class="col-md-6">
               <label for="phone">Phone</label>
               <input type="tel" id="phone" name="phone" />
+              <small class="error"></small>
             </div>
           </div>
+
           <div class="row">
             <div class="col-md-12">
               <label for="text">What's on Your Mind?</label>
               <textarea name="text" id="text" cols="30" rows="5"></textarea>
+              <small class="error"></small>
             </div>
           </div>
+
           <div class="text-center my-4">
             <button class="message-btn" type="submit">
               SEND MESSAGE
@@ -608,6 +617,7 @@
             </button>
           </div>
         </form>
+
       </div>
     </div>
   </section>

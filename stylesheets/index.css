@@ -316,7 +316,6 @@
   text-decoration: none;
   color: #222;
   font-weight: 700;
-  font-style: italic;
 }
 .about-container .social-icon {
   background-color: #222;
@@ -471,7 +470,7 @@
 .contact-section .contact-form-container form input, .contact-section .contact-form-container form textarea {
   width: 100%;
   padding: 15px;
-  border: 0;
+  border: 1px solid lightgray;
   background-color: #f3f4f6;
   outline: 0;
   border-radius: 4px;
@@ -489,6 +488,18 @@
 .contact-section .contact-form-container form .message-btn:hover {
   background-color: #ffffff;
   color: #222;
+}
+
+.error {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  display: block;
+}
+
+input.error-input,
+textarea.error-input {
+  border: 1px solid red;
 }
 
 @media (max-width: 768px) {

@@ -1,3 +1,61 @@
+
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  let isValid = true;
+
+  // clear previous errors
+  document.querySelectorAll(".error").forEach(err => err.textContent = "");
+  document.querySelectorAll(".error-input").forEach(el => el.classList.remove("error-input"));
+  
+  const firstName = document.getElementById("first-name");
+  const lastName = document.getElementById("last-name");
+  const email = document.getElementById("email");
+  const phone = document.getElementById("phone");
+  const message = document.getElementById("text");
+
+  if (firstName.value.trim() === "") {
+    setError(firstName, "First name is required");
+  }
+
+  if (lastName.value.trim() === "") {
+    setError(lastName, "Last name is required");
+  }
+
+  // Email Validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (email.value.trim() === "") {
+    setError(email, "Email is required");
+  } else if (!emailRegex.test(email.value)) {
+    setError(email, "Enter a valid email address");
+  }
+
+  // Phone Validation
+  const phoneRegex = /^[0-9]{7,15}$/;
+  if (phone.value.trim() === "") {
+    setError(phone, "Phone number is required");
+  } else if (!phoneRegex.test(phone.value)) {
+    setError(phone, "Phone must contain only digits (7–15 digits)");
+  }
+
+  // Message Validation
+  if (message.value.trim().length < 10) {
+    setError(message, "Message should be at least 10 characters");
+  }
+
+  // If errors found → stop submission
+  if (!isValid) {
+    e.preventDefault();
+  }
+
+  // Helper to set error message
+  function setError(element, message) {
+    isValid = false;
+    const errorField = element.nextElementSibling;
+    element.classList.add("error-input");
+    errorField.textContent = message;
+  }
+});
+
+
 particlesJS("particles-js", {
   particles: {
     number: {
