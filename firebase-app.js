@@ -2,7 +2,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-// Firebase configuration (replace with your own keys from Firebase Console)
 const firebaseConfig = {
     apiKey: "AIzaSyBzWY2S08MQAdpisyoEgP91iz6k0mmnD_Y",
     authDomain: "portfolio-4a38e.firebaseapp.com",

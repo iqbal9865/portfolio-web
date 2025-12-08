@@ -56,11 +56,39 @@ document.addEventListener("DOMContentLoaded", () => {
         message: message.value.trim(),
         createdAt: serverTimestamp()
       });
-      alert("Message sent successfully!");
+
+      // Optional: send email via Formspree
+      await fetch("https://formspree.io/f/xqkjeldo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: firstName.value.trim(),
+          lastName: lastName.value.trim(),
+          email: email.value.trim(),
+          phone: phone.value.trim(),
+          message: message.value.trim()
+        })
+      });
+
+      Swal.fire({
+        icon: 'success',
+        title: 'Message Sent!',
+        text: 'Thank you for contacting me. I will get back to you soon.',
+        confirmButtonText: 'Close'
+      });
+
       form.reset();
     } catch (error) {
-      alert("Error sending message. Please try again.");
+      console.error(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Submission Failed',
+        text: 'Unable to send your message. Please try again later.',
+        confirmButtonText: 'Close'
+      });
+
     }
+
   });
 });
 
@@ -191,33 +219,3 @@ update = function () {
   requestAnimationFrame(update);
 };
 requestAnimationFrame(update);
-
-
-/*
-<script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBzWY2S08MQAdpisyoEgP91iz6k0mmnD_Y",
-    authDomain: "portfolio-4a38e.firebaseapp.com",
-    projectId: "portfolio-4a38e",
-    storageBucket: "portfolio-4a38e.firebasestorage.app",
-    messagingSenderId: "143891765662",
-    appId: "1:143891765662:web:82657a5dfd5c46a54e1e8f",
-    measurementId: "G-XKEEPM7VN9"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
-
-formspree.io form submission
-action="https://formspree.io/f/xqkjeldo" 
-*/
