@@ -1,6 +1,4 @@
-// UI enhancements: light/dark theme toggle, hero terminal typing and the custom animated cursor.
-// The initial theme is applied by the inline script in <head> (before first paint)
-// to avoid a flash of the wrong theme; this file only handles switching.
+
 
 (function () {
   const root = document.documentElement;

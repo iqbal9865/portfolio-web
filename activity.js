@@ -1,8 +1,4 @@
-// GitHub activity section: fills #activity-section from the public GitHub REST API
-// (unauthenticated, 60 requests/hour per visitor IP) plus a public contributions-calendar
-// API, since GitHub has no unauthenticated endpoint for the contribution graph.
-// One load costs ~5 GitHub requests; results are cached in localStorage for 30 minutes
-// and nothing is fetched until the section is close to the viewport.
+
 
 (function () {
   const container = document.querySelector("[data-github-user]");
