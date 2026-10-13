@@ -1,65 +1,79 @@
 // Light theme is the default; [data-theme="dark"] is set on <html> by the inline
 // script in index.html (saved choice or OS preference) and by the navbar toggle (ui.js).
+//
+// Both themes share one navy hue: light mode uses navy-tinted neutrals and ink,
+// dark mode is the navy from the About photo. --color-accent is the single highlight
+// (eyebrows, links, focus rings, skill bars, heatmap) and passes WCAG AA on its background.
 :root {
   color-scheme: light;
+  --font-display: "Sora", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Manrope", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+
   --color-bg: #ffffff;
-  --color-fg: #222222;
-  --color-text: #212529;
-  --color-muted: #6b6f76;
-  --color-muted-bg: #e9e9e9;
-  --color-alt-bg: #f2f2f2;
+  --color-fg: #0e1424;
+  --color-text: #3d4459;
+  --color-muted: #646b80;
+  --color-muted-bg: #e8ebf3;
+  --color-alt-bg: #f5f6fa;
   --color-surface: #ffffff;
-  --color-border: #dee2e6;
-  --color-link: #0d6efd;
-  --color-error: red;
-  --input-bg: #f3f4f6;
-  --input-border: lightgray;
-  --progress-track: #e9ecef;
+  --color-border: #e1e5ee;
+  --color-accent: #3a52d6;
+  --color-accent-soft: rgba(58, 82, 214, 0.08);
+  --color-link: #3a52d6;
+  --color-error: #d43a3a;
+  --input-bg: #f5f6fa;
+  --input-border: #d9deea;
   --card-overlay: rgba(255, 255, 255, 0.9);
-  --shadow-color: #e3e3e3;
-  --footer-bg: #222222;
-  --footer-fg: #ffffff;
-  --footer-muted: #e9e9e9;
-  --hero-bg: #0b0d11;
-  --menu-bg: #222222;
-  --menu-border: #444444;
-  --heat-0: #e6e6e6;
-  --heat-1: #bdbdbd;
-  --heat-2: #8c8c8c;
-  --heat-3: #555555;
-  --heat-4: #222222;
-  --live: #1f9d55;
+  --shadow-color: rgba(14, 20, 36, 0.09);
+  --footer-bg: #0e1424;
+  --footer-fg: #f1f3fa;
+  --footer-muted: #a3aac0;
+  --hero-bg: #0b1020;
+  --header-height: 90px;
+  --header-bg: rgba(11, 16, 32, 0.92);
+  --nav-accent: #94a9ff;
+  --menu-bg: #0e1424;
+  --menu-border: #2a3148;
+  --heat-0: #e8ebf3;
+  --heat-1: #bcc6ef;
+  --heat-2: #8597e6;
+  --heat-3: #5068dc;
+  --heat-4: #2a3db0;
+  --live: #16a34a;
 }
 
 :root[data-theme="dark"] {
   // Navy palette taken from the shirt in the About photo (~#2a2f43).
   color-scheme: dark;
   --color-bg: #252b40;
-  --color-fg: #eef0f7;
-  --color-text: #c8cde0;
-  --color-muted: #9aa1b8;
+  --color-fg: #f2f4fb;
+  --color-text: #c9cee0;
+  --color-muted: #9da4bb;
   --color-muted-bg: #2f3650;
   --color-alt-bg: #1e2336;
   --color-surface: #2c3249;
-  --color-border: #3e4560;
-  --color-link: #8ab4ff;
-  --color-error: #ff7b7b;
+  --color-border: #3c4360;
+  --color-accent: #94a9ff;
+  --color-accent-soft: rgba(148, 169, 255, 0.12);
+  --color-link: #94a9ff;
+  --color-error: #ff8080;
   --input-bg: #1e2336;
   --input-border: #434a66;
-  --progress-track: #353c57;
   --card-overlay: rgba(37, 43, 64, 0.92);
-  --shadow-color: rgba(8, 10, 20, 0.5);
-  --footer-bg: #171b2a;
-  --footer-fg: #eef0f7;
-  --footer-muted: #9aa1b8;
-  --hero-bg: #161b2b;
+  --shadow-color: rgba(8, 10, 20, 0.45);
+  --footer-bg: #161a29;
+  --footer-fg: #f2f4fb;
+  --footer-muted: #9da4bb;
+  --hero-bg: #141a2b;
+  --header-bg: rgba(20, 26, 43, 0.8);
   --menu-bg: #1e2336;
-  --menu-border: #3e4560;
+  --menu-border: #3c4360;
   --heat-0: #2f3650;
-  --heat-1: #4a5578;
-  --heat-2: #6f7ca6;
-  --heat-3: #a3afd4;
-  --heat-4: #e6eaf7;
+  --heat-1: #3d4a86;
+  --heat-2: #5a6fc6;
+  --heat-3: #8ea3ff;
+  --heat-4: #d6deff;
   --live: #4ade80;
 }
 
@@ -69,15 +83,16 @@
   }
 }
 
+// Anchor jumps stop below the fixed header instead of under it.
+html {
+  scroll-padding-top: 66px;
+}
+
 // index.css loads before Bootstrap, so these overrides use an extra selector
 // to beat Bootstrap's equal-specificity rules.
 html body {
   background-color: var(--color-bg);
   color: var(--color-text);
-}
-
-.skill-section .progress {
-  background-color: var(--progress-track);
 }
 
 // Added briefly by ui.js while switching themes so colors cross-fade

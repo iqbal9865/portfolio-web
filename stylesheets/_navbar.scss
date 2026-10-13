@@ -1,3 +1,24 @@
+// Fixed site header. Transparent over the hero; once the page scrolls, ui.js adds
+// .is-scrolled and it becomes a frosted navy bar. It stays dark in both themes (like the
+// hero and footer), so the white nav text and toggle work everywhere.
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 20px 0;
+  transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+
+  &.is-scrolled {
+    padding: 8px 0;
+    background-color: var(--header-bg);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06), 0 10px 30px rgba(5, 8, 18, 0.25);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    backdrop-filter: blur(14px) saturate(160%);
+  }
+}
+
 .top-nav {
   display: flex;
   flex-direction: row;
@@ -5,8 +26,19 @@
   justify-content: space-between;
   color: $heroText;
   height: 50px;
-  padding: 1em 0;
-  margin: 20px 0;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: $heroText;
+  text-decoration: none;
+
+  &:hover {
+    color: $heroText;
+  }
 }
 
 .menu {
@@ -19,14 +51,43 @@
 
 .menu > li {
   margin: 0 1rem;
-  overflow: hidden;
+  padding: 6px 0;
 
   a {
     color: $heroText;
-    font-size: 1rem;
+    font-size: 0.85rem;
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     position: relative;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    // Underline that marks the section currently in view (set by ui.js).
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+      height: 2px;
+      border-radius: 2px;
+      background-color: var(--nav-accent);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    &.is-active {
+      opacity: 1;
+
+      &::after {
+        transform: scaleX(1);
+      }
+    }
   }
 }
 
@@ -84,10 +145,11 @@
   .menu-button-container {
     display: flex;
   }
+  // Drops down right under the fixed header (its containing block).
   .menu {
     position: absolute;
-    top: 0;
-    margin-top: 85px;
+    top: 100%;
+    margin-top: 0;
     left: 0;
     flex-direction: column;
     width: 100%;
@@ -110,6 +172,7 @@
   .menu > li {
     display: flex;
     justify-content: center;
+    overflow: hidden;
     margin: 0;
     padding: 0.5em 0;
     width: 100%;
@@ -125,15 +188,6 @@
   }
 }
 
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-.sticky + .content {
-  padding-top: 60px;
-}
 
 // Right side of the navbar: menu links + theme toggle (and the hamburger on mobile).
 .nav-actions {

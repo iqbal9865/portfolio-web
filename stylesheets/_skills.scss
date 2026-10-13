@@ -1,7 +1,129 @@
+@import "mixin.scss";
+
+// Skills as grouped cards with tags (no percentage bars).
 .skill-section {
-    background-color: $creamBg;
-    .skill-color {
-        background-color: $blackColor;
-        opacity: .92;
+  background-color: $creamBg;
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .skill-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.75rem;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    border-radius: 12px;
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px var(--shadow-color);
     }
+  }
+
+  // The AI card gets a hint of the accent, since it's what's new.
+  .skill-group-new {
+    border-color: var(--color-accent-soft);
+    background-image: linear-gradient(160deg, var(--color-accent-soft), transparent 55%);
+  }
+
+  .skill-group-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 0.85rem;
+  }
+
+  .skill-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background-color: var(--color-accent-soft);
+    color: var(--color-accent);
+    font-size: 1.2rem;
+  }
+
+  .skill-group-title {
+    margin: 0;
+    white-space: nowrap;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .skill-badge {
+    margin-left: auto;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background-color: var(--color-accent);
+    color: $whiteColor;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .skill-group-desc {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--color-muted);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0.2rem 0 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      padding: 5px 12px;
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      background-color: var(--color-alt-bg);
+      color: $blackColor;
+      font-size: 0.85rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .skill-section {
+    .skills-grid {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .skill-group {
+      padding: 1.4rem;
+    }
+  }
+}
+
+// Narrow phones: the badge drops under the title instead of squeezing it.
+@media (max-width: 480px) {
+  .skill-section .skill-badge {
+    order: 3;
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-section .skill-group {
+    transition: none;
+  }
 }

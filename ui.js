@@ -144,3 +144,69 @@
   }
   requestAnimationFrame(followPointer);
 })();
+
+// Sticky header: frosted bar once the page scrolls, highlight for the section in view,
+// and the mobile menu closes after a link is chosen.
+(function () {
+  const header = document.getElementById("site-header");
+  if (!header) return;
+  const menuToggle = document.getElementById("menu-toggle");
+  const links = Array.from(header.querySelectorAll('.menu a[href^="#"]'));
+
+  let ticking = false;
+  function updateHeader() {
+    header.classList.toggle("is-scrolled", window.scrollY > 24);
+    ticking = false;
+  }
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateHeader);
+      }
+    },
+    { passive: true }
+  );
+  updateHeader();
+
+  // The link whose section crosses the upper part of the screen is marked active.
+  const sections = links
+    .map((link) => {
+      const id = link.getAttribute("href").slice(1);
+      return id ? document.getElementById(id) : null;
+    })
+    .filter(Boolean);
+
+  function setActive(id) {
+    links.forEach((link) => {
+      const active = link.getAttribute("href") === `#${id}`;
+      link.classList.toggle("is-active", active);
+      if (active) link.setAttribute("aria-current", "true");
+      else link.removeAttribute("aria-current");
+    });
+  }
+
+  if ("IntersectionObserver" in window && sections.length) {
+    const visible = new Map();
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => visible.set(entry.target.id, entry.isIntersecting));
+        // First section (in page order) that is inside the band wins; none means the hero.
+        const current = sections.find((section) => visible.get(section.id));
+        setActive(current ? current.id : "");
+      },
+      { rootMargin: "-35% 0px -60% 0px" }
+    );
+    sections.forEach((section) => observer.observe(section));
+  }
+
+  links.concat(Array.from(header.querySelectorAll(".logo"))).forEach((link) =>
+    link.addEventListener("click", () => {
+      if (menuToggle) menuToggle.checked = false;
+    })
+  );
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && menuToggle && menuToggle.checked) menuToggle.checked = false;
+  });
+})();

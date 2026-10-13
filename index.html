@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Iqbal - Portfolio</title>
+  <title>Iqbal Ahmed | Software Engineer</title>
   <script>
     // Apply the saved (or OS-preferred) theme before first paint to avoid a flash.
     (function () {
@@ -17,6 +17,10 @@
       document.documentElement.setAttribute("data-theme", theme);
     })();
   </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Manrope:wght@400;500;600;700;800&family=Sora:wght@500;600;700;800&display=swap" />
   <link rel="stylesheet" href="./stylesheets/index.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
@@ -28,50 +32,55 @@
 </head>
 
 <body>
+  <!-- Fixed site header: transparent over the hero, frosted bar once the page scrolls (ui.js). -->
+  <header class="site-header" id="site-header">
+    <div class="container">
+      <nav class="top-nav" id="navbar" aria-label="Main">
+        <div>
+          <a class="logo" href="#" aria-label="Iqbal Ahmed, back to top">IQBAL</a>
+        </div>
+
+        <div class="nav-actions">
+          <input id="menu-toggle" type="checkbox" aria-label="Toggle menu" />
+          <label class="menu-button-container" for="menu-toggle">
+            <div class="menu-button"></div>
+          </label>
+
+          <ul class="menu">
+            <li><a href="#">HOME</a></li>
+            <li><a href="#about-section">ABOUT</a></li>
+            <li><a href="#skill-section">SKILLS</a></li>
+            <li><a href="#portfolio-section">WORKS</a></li>
+            <li><a href="#activity-section">ACTIVITY</a></li>
+            <li><a href="#contact-section">CONTACT</a></li>
+          </ul>
+
+          <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.5" />
+              <path
+                d="M12 1.5v2M12 20.5v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1.5 12h2M20.5 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
   <main class="main">
     <div id="particles-js"></div>
     <div class="overlay">
       <div class="container">
-        <nav class="top-nav" id="navbar">
-          <div>
-            <h1 class="logo">IQBAL</h1>
-          </div>
-
-          <div class="nav-actions">
-            <input id="menu-toggle" type="checkbox" />
-            <label class="menu-button-container" for="menu-toggle">
-              <div class="menu-button"></div>
-            </label>
-
-            <ul class="menu">
-              <li><a href="#">HOME</a></li>
-              <li><a href="#about-section">ABOUT</a></li>
-              <li><a href="#skill-section">SKILLS</a></li>
-              <li><a href="#portfolio-section">WORKS</a></li>
-              <li><a href="#activity-section">ACTIVITY</a></li>
-              <li><a href="#contact-section">CONTACT</a></li>
-            </ul>
-
-            <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">
-              <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-              </svg>
-              <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="12" r="4.5" />
-                <path
-                  d="M12 1.5v2M12 20.5v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1.5 12h2M20.5 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-              </svg>
-            </button>
-          </div>
-        </nav>
-
         <section class="header-container">
           <div class="intro">
             <h1 class="name">Hi! I'm Iqbal.</h1>
             <p class="designation">
-              Software Engineer | Front-End Specialist | Creating Thoughtful & Scalable Web Applications
+              Software Engineer &middot; Front-End Specialist &middot; Creating thoughtful, scalable web applications
             </p>
           </div>
 
@@ -117,23 +126,35 @@
         </div>
         <div class="col-md-7" data-aos="flip-right" data-aos-easing="linear">
           <div class="about-content py-5">
-            <h2 class="title py-1">About Me</h2>
+            <h5 class="sub-title">ABOUT</h5>
+            <h2 class="title">About me</h2>
             <div class="py-3 about-text">
               <p>
-                Hi! This is Iqbal Ahmed, a dedicated JavaScript Programmer and Front-End Developer with a passion for
-                creating seamless, user-friendly experiences. I thrive on crafting high-quality software that enhances
-                the lives of users
+                I'm Iqbal Ahmed, a software engineer with a front-end focus. I build fast, user-friendly web and mobile
+                applications with JavaScript and TypeScript, using React, Angular, React Native and Node.js, and I care
+                about clean code and products people enjoy using.
               </p>
               <p>
-                Over the years, I've honed my skills in web development and am continually seeking new knowledge to stay
-                at the forefront of technology. Coding isn't just a job for me; it's my passion and my journey towards
-                innovation. Welcome to my world of endless curiosity and creativity!
+                Right now I'm actively exploring AI-powered software development: building MCP (Model Context Protocol)
+                servers that connect AI models to real tools and data, automating workflows with AI, and developing
+                agentic applications where AI agents plan and carry out multi-step tasks. I'm most interested in where
+                these ideas meet solid software engineering, so the result is reliable, secure and genuinely useful.
               </p>
+            </div>
+
+            <div class="about-focus">
+              <span class="about-focus-label">Currently exploring</span>
+              <ul>
+                <li>MCP servers</li>
+                <li>AI automation</li>
+                <li>Agentic AI development</li>
+                <li>Software engineering</li>
+              </ul>
             </div>
 
             <div class="currently-working d-flex justify-content-between flex-wrap">
               <div class="company">
-                <h6>Jr. Software Engineer at <a href="https://syftet.com/" class="company-name"> Syftet Ltd.
+                <h6>Software Engineer at <a href="https://syftet.com/" class="company-name"> Syftet Ltd.
                   </a></h6>
                   <p>February 2022 - February 2025</p>
               </div>
@@ -186,100 +207,74 @@
     <div class="container">
       <div class="text-center">
         <h5 class="sub-title">SKILLS</h5>
-        <h2 class="title">MY PROFESSIONAL SKILLS</h2>
+        <h2 class="title">My professional skills</h2>
       </div>
 
-      <div class="row mt-5">
-
-
-        <div class="col-md-6">
-          <small>CSS/Sass</small>
-          <div class="progress mb-3" style="height: 5px">
-            <div class="progress-bar skill-color" role="progressbar" style="width: 95%" aria-valuenow="72"
-              aria-valuemin="0" aria-valuemax="100"></div>
+      <div class="skills-grid">
+        <article class="skill-group">
+          <div class="skill-group-head">
+            <span class="skill-icon" aria-hidden="true"><i class="fa fa-code"></i></span>
+            <h3 class="skill-group-title">Front-end</h3>
+            
           </div>
-        </div>
-
-        <div class="col-md-6">
-          <small>Tailwind</small>
-          <div class="progress mb-3" style="height: 5px">
-            <div class="progress-bar skill-color" role="progressbar" style="width: 90%" aria-valuenow="72"
-              aria-valuemin="0" aria-valuemax="100"></div>
+          <p class="skill-group-desc">Responsive, accessible interfaces and state management for complex web apps.</p>
+          <ul class="skill-tags">
+            <li>JavaScript</li>
+            <li>TypeScript</li>
+            <li>React</li>
+            <li>Angular</li>
+            <li>Redux</li>
+            <li>RxJS</li>
+            <li>HTML5</li>
+            <li>CSS / Sass</li>
+            <li>Tailwind CSS</li>
+            <li>Bootstrap</li>
+          </ul>
+        </article>
+        <article class="skill-group">
+          <div class="skill-group-head">
+            <span class="skill-icon" aria-hidden="true"><i class="fa fa-mobile"></i></span>
+            <h3 class="skill-group-title">Mobile</h3>
+            
           </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          <small>JavaScript</small>
-          <div class="progress mb-3" style="height: 5px">
-            <div class="progress-bar skill-color" role="progressbar" style="width: 90%" aria-valuenow="72"
-              aria-valuemin="0" aria-valuemax="100"></div>
+          <p class="skill-group-desc">Cross-platform apps for Android and iOS from a single codebase.</p>
+          <ul class="skill-tags">
+            <li>React Native</li>
+            <li>Expo</li>
+            <li>Redux</li>
+            <li>SQLite</li>
+          </ul>
+        </article>
+        <article class="skill-group">
+          <div class="skill-group-head">
+            <span class="skill-icon" aria-hidden="true"><i class="fa fa-server"></i></span>
+            <h3 class="skill-group-title">Back-end &amp; data</h3>
+            
           </div>
-        </div>
-
-        <div class="col-md-6">
-          <small>React</small>
-          <div class="progress mb-3" style="height: 5px">
-            <div class="progress-bar skill-color" role="progressbar" style="width: 85%" aria-valuenow="72"
-              aria-valuemin="0" aria-valuemax="100"></div>
+          <p class="skill-group-desc">APIs, real-time features and the data behind them.</p>
+          <ul class="skill-tags">
+            <li>Node.js</li>
+            <li>Express.js</li>
+            <li>REST APIs</li>
+            <li>WebSocket</li>
+            <li>PostgreSQL</li>
+            <li>Firebase</li>
+          </ul>
+        </article>
+        <article class="skill-group skill-group-new">
+          <div class="skill-group-head">
+            <span class="skill-icon" aria-hidden="true"><i class="fa fa-microchip"></i></span>
+            <h3 class="skill-group-title">AI &amp; automation</h3>
+            <span class="skill-badge">Exploring</span>
           </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          <small>React-Native</small>
-          <div class="progress mb-3" style="height: 5px">
-            <div class="progress-bar skill-color" role="progressbar" style="width: 85%" aria-valuenow="72"
-              aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-
-
-        <div class="col-md-6">
-          <small>Redux</small>
-          <div class="progress mb-3" style="height: 5px">
-            <div class="progress-bar skill-color" role="progressbar" style="width: 80%" aria-valuenow="72"
-              aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          <small>Angular</small>
-          <div class="progress mb-3" style="height: 5px">
-            <div class="progress-bar skill-color" role="progressbar" style="width: 80%" aria-valuenow="72"
-              aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <small>TypeScript</small>
-          <div class="progress mb-3" style="height: 5px">
-            <div class="progress-bar skill-color" role="progressbar" style="width: 80%" aria-valuenow="72"
-              aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-6">
-          <small>Node.Js</small>
-          <div class="progress mb-3" style="height: 5px">
-            <div class="progress-bar skill-color" role="progressbar" style="width: 70%" aria-valuenow="72"
-              aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
-
-        <div class="col-md-6">
-          <small>MySQL</small>
-          <div class="progress mb-3" style="height: 5px">
-            <div class="progress-bar skill-color" role="progressbar" style="width: 70%" aria-valuenow="72"
-              aria-valuemin="0" aria-valuemax="100"></div>
-          </div>
-        </div>
+          <p class="skill-group-desc">Connecting AI models to real tools and automating workflows with agents.</p>
+          <ul class="skill-tags">
+            <li>MCP servers</li>
+            <li>Agentic AI</li>
+            <li>AI automation</li>
+            <li>Python</li>
+          </ul>
+        </article>
       </div>
     </div>
   </section>
@@ -288,7 +283,7 @@
     <div class="container">
       <div class="titles text-center">
         <h5 class="sub-title">PORTFOLIO</h5>
-        <h2 class="title">SELECTED WORK</h2>
+        <h2 class="title">Selected work</h2>
       </div>
       <!-- works.js renders the projects listed in projects.js into these containers. -->
       <div class="works-featured" data-works-featured></div>
@@ -305,7 +300,7 @@
     <div class="container">
       <div class="titles text-center">
         <h5 class="sub-title">ACTIVITY</h5>
-        <h2 class="title">WHAT I'M BUILDING</h2>
+        <h2 class="title">What I'm building</h2>
       </div>
 
       <div class="activity" data-github-user="iqbal9865" aria-busy="true">
@@ -374,7 +369,7 @@
     <div class="container">
       <div class="text-center">
         <h5 class="sub-title">CONTACT</h5>
-        <h2 class="title">GET IN TOUCH</h2>
+        <h2 class="title">Get in touch</h2>
       </div>
       <div class="row contact-form-container">
         <form id="contactForm" class="mx-auto contact-form-responsive">

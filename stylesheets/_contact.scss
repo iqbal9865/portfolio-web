@@ -9,8 +9,20 @@
         color: $blackColor;
         background-color: var(--input-bg);
         outline: 0;
-        @include border-radius(4px);
+        @include border-radius(10px);
         margin: 5px 0;
+        transition: border-color 0.2s, box-shadow 0.2s, background-color 0.2s;
+
+        &:focus {
+          border-color: var(--color-accent);
+          background-color: var(--color-surface);
+          box-shadow: 0 0 0 4px var(--color-accent-soft);
+        }
+      }
+      label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: $blackColor;
       }
       .message-btn {
         min-height: 44px;
@@ -19,7 +31,7 @@
         padding: 10px 20px;
         border: 2px solid $blackColor;
         color: $whiteColor;
-        text-transform: uppercase;
+        @include solid-button;
         transition: 0.3s;
 
         &:hover {

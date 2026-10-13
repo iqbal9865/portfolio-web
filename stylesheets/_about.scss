@@ -24,15 +24,43 @@
   }
 
   .about-text {
-    text-align: justify;
+    font-size: 1.05rem;
+
+    p {
+      margin-bottom: 1rem;
+    }
+  }
+
+  // Experience / education lines.
+  .company {
+    h6 {
+      margin-bottom: 0.15rem;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0;
+      line-height: 1.5;
+    }
+    p {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+    }
   }
   .span-name {
     font-weight: 700;
   }
   .company-name {
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
     color: $blackColor;
     font-weight: 700;
+    transition: color 0.2s;
+
+    &:hover {
+      color: var(--color-accent);
+    }
   }
   .social-media-container {
     flex-wrap: wrap;
@@ -42,14 +70,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: $blackColor;
-    color: $whiteColor;
-    width: 40px;
-    height: 40px;
+    background-color: var(--color-surface);
+    color: $blackColor;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    // Inset ring instead of a border, so the link inside keeps the full 40px.
-    box-shadow: inset 0 0 0 1px transparent;
-    transition: 0.3s;
+    // Inset ring instead of a border, so the link inside keeps the full size.
+    box-shadow: inset 0 0 0 1px var(--color-border);
+    transition: 0.25s;
 
     // The link fills the whole circle so the full icon is clickable, not just the glyph.
     a {
@@ -63,18 +91,19 @@
     }
 
     &:hover {
-      background: $whiteColor;
-      color: $blackColor;
-      box-shadow: inset 0 0 0 1px $blackColor;
+      background: var(--color-accent);
+      box-shadow: inset 0 0 0 1px var(--color-accent);
+      transform: translateY(-2px);
 
       i {
-        color: $blackColor;
+        color: #ffffff;
       }
     }
 
     i {
-      color: $whiteColor;
+      color: $blackColor;
       font-size: 17px;
+      transition: color 0.25s;
     }
   }
   .resume-btn {
@@ -86,7 +115,7 @@
     border: 2px solid $blackColor;
     color: $whiteColor;
     text-decoration: none;
-    text-transform: uppercase;
+    @include solid-button;
     transition: 0.3s;
 
     &:hover {
@@ -107,5 +136,42 @@
     .about-text {
       text-align: left;
     }
+  }
+}
+
+// "Currently exploring" tags under the About text.
+.about-container .about-focus {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 0.9rem;
+  margin-bottom: 1.75rem;
+
+  .about-focus-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    padding: 5px 12px;
+    border: 1px solid var(--color-accent-soft);
+    border-radius: 999px;
+    background-color: var(--color-accent-soft);
+    color: var(--color-accent);
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.4;
   }
 }

@@ -19,6 +19,8 @@
   // (short laptop screens, landscape phones). 100svh = the visible area on mobile,
   // excluding the browser's address bar; 100vh is the fallback for older browsers.
   .overlay {
+    // Room for the fixed site header that sits on top of the hero.
+    padding-top: var(--header-height);
     // Vignette that fades the grid toward the edges.
     background: radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.55) 100%);
     position: relative;
@@ -33,12 +35,6 @@
       display: flex;
       flex-direction: column;
     }
-  }
-
-  .logo {
-    font-family: "Cormorant SC", serif;
-    font-size: 2rem;
-    margin: 0;
   }
 
   .header-container {
@@ -58,12 +54,17 @@
   .name {
     font-size: clamp(3.5rem, 5.5vw, 6rem);
     font-weight: 800;
-    margin: 12px 0;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+    color: $heroText;
+    margin: 12px 0 20px;
   }
   .designation {
-    font-size: 24px;
+    max-width: 34ch;
+    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.72);
     margin: 0;
   }
   // Minimal mouse outline with a wheel that scrolls down in a loop.

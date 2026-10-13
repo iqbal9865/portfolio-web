@@ -34,14 +34,14 @@ npx serve .            # or: python -m http.server 8000
 - `_variable.scss` maps the old Sass names onto those tokens, so `$blackColor` = `var(--color-fg)` (main foreground), `$whiteColor` = `var(--color-bg)`, `$grayBg` and `$creamBg` are the alternate section backgrounds. This makes dark mode an inversion of the monochrome palette. Because they're CSS vars, Sass color functions (`darken()`, `rgba($x, …)`) won't work on them.
 - `$heroText` (always `#fff`) is for anything on the hero image (nav, toggle, scroll indicator), which is the same in both themes. The footer has its own `--footer-*` tokens and stays dark.
 - The theme is set on `<html data-theme>` by an inline script in `<head>` before first paint (saved choice in `localStorage.theme`, otherwise the OS preference). `ui.js` handles the toggle and the cross-fade.
-- `_base.scss` pulls in the Google Fonts (Raleway is the body font, Cormorant SC is used for the logo) and **Font Awesome 4.7** through CSS `@import`. All `fa fa-*` icons rely on that import because `index.html` has no Font Awesome `<link>`.
-- Light mode is monochrome (black, white and grays). Dark mode is a navy palette matched to the shirt in the About photo (~`#2a2f43`): page `#252b40`, alt sections `#1e2336`, footer `#171b2a`. The hero (`--hero-bg`) and mobile menu (`--menu-bg`, `--menu-border`) also have tokens, so they turn navy in dark mode. 768px / 800px are the main breakpoints, and 801–991px tightens the nav spacing.
+- **Typography:** Sora (headings, `--font-display`), Manrope (body, `--font-body`) and JetBrains Mono (code and chips, `--font-mono`) load from Google Fonts through a `<link>` in `<head>`. `_base.scss` sets them and defines the section heading pattern: `.sub-title` is a small uppercase accent eyebrow with a leading rule, and `.title` is a large sentence-case display heading. Its `solid-button` mixin gives every solid button the same type. **Font Awesome 4.7** still comes in through a CSS `@import` in `_base.scss`, and all `fa fa-*` icons rely on it.
+- Light mode uses navy-tinted neutrals with near-black navy ink (`#0e1424`). Both themes share one accent, `--color-accent` (light `#3a52d6`, dark `#94a9ff`), used for eyebrows, link underlines, focus rings, skill bars, the heatmap and hovers. Every text color passes WCAG AA on its background, so recheck contrast if you change a token. Dark mode is a navy palette matched to the shirt in the About photo (~`#2a2f43`): page `#252b40`, alt sections `#1e2336`, footer `#171b2a`. The hero (`--hero-bg`) and mobile menu (`--menu-bg`, `--menu-border`) also have tokens, so they turn navy in dark mode. 768px / 800px are the main breakpoints, and 801–991px tightens the nav spacing.
 
 ## External dependencies (CDN, in `index.html`)
 
 | Library | Version | Used for |
 |---|---|---|
-| Bootstrap CSS + JS bundle | 5.0.2 | grid, utilities, progress bars (the JS bundle is no longer used by anything) |
+| Bootstrap CSS + JS bundle | 5.0.2 | grid and utilities (the JS bundle is no longer used by anything) |
 | AOS | `@next` (unpinned) | scroll animations through `data-aos="..."` attributes, started by an inline `AOS.init()` |
 | SweetAlert2 | `@11` | success/error popups after the contact form is submitted (`Swal.fire`) |
 | Firebase JS SDK | 12.6.0 (gstatic ESM URLs) | Firestore |
@@ -73,7 +73,8 @@ Load order matters: `stylesheets/index.css` is linked **before** Bootstrap, so a
 ## Content editing
 
 Nearly all copy is hardcoded in `index.html`:
-- **Skills**: each skill is a Bootstrap `.progress` bar. The `style="width: NN%"` value is what's displayed.
+- **Skills**: four `.skill-group` cards in `.skills-grid` (Front-end, Mobile, Back-end & data, AI & automation), each with a Font Awesome icon, a one-line description and a `.skill-tags` list. Edit the `<li>` tags in `index.html`. `.skill-group-new` with a `.skill-badge` ("Exploring") marks the AI card.
+- **Header / navbar**: `<header class="site-header">` is fixed at the top, outside `.main`. The hero's `.overlay` has `padding-top: var(--header-height)` to make room for it. `ui.js` adds `.is-scrolled` after 24px of scrolling (frosted `--header-bg` bar, dark in both themes), marks the link for the section in view with `.is-active` and `aria-current`, and unchecks `#menu-toggle` when a link is tapped or Esc is pressed. `scroll-padding-top` on `html` keeps anchor jumps clear of the header.
 - **Portfolio (Works)**: content lives in `projects.js` (`window.PROJECTS`), and `works.js` renders it. A featured project (`featured: true`) gets a large row with alternating sides. The others become cards in a 2-column grid, filtered by `category`. Clicking any project opens a full-screen case study panel (`#case-study`) at `#work/<id>`. Back and Esc close it, and moving between case studies with Next replaces the history entry. The panel sits at the **end of `<body>`** because AOS gives animated sections a `transform`, which would break `position: fixed`. Every field after `tagline` is optional, and a missing field hides its part of the case study (see the comment at the top of `projects.js`). Images come from `img/`.
 - **Hero**: there's no photo. The backdrop is CSS (glows plus a grid in `.main`, `_header.scss`), and the right side holds a decorative terminal (`.terminal` in `index.html`, styled in `_terminal.scss`, hidden below 992px, but stacked under the intro on tall tablets: 768–991px wide and at least 820px tall). To change what it types, edit its `<p class="term-line">` elements. A line with a `.term-cmd` span gets typed character by character, and any other line appears whole. The lines use `white-space: pre`, so the spaces inside them are what's displayed.
 - **Images** live in `img/`.
@@ -85,8 +86,7 @@ Leave these as they are unless asked to fix them:
 - The end of `app.js` calls `new Stats()` (the particles.js demo FPS counter), but Stats.js is never loaded and `.js-count-particles` doesn't exist. This throws a `ReferenceError` on every page load. The form listener and particles are set up before that line, so they still work.
 - `firebase-app.js` imports `collection, addDoc, serverTimestamp` but doesn't use them.
 - In the Firestore + Formspree flow, a Formspree failure isn't checked (`response.ok` is never read), so the user still sees "Message Sent!". If Firestore fails, the email is never sent.
-- `index.html`: every progress bar has `aria-valuenow="72"` no matter its width. The Twitter icon has no link.
+- `index.html`: the Twitter icon has no link.
 - SweetAlert2 popups aren't themed and stay light in dark mode.
-- The `.sticky` / `.sticky + .content` styles in `_navbar.scss` aren't used, because no JS adds the class.
 - `img/` holds unused assets (`banner-bg.jpg`, `about-img.jpg`, `img-1/2/5.jpg`, `Iqbal_Formal_Pic1.jpg`, `iqbal_formal_pic3.jpg`). Some images are large (the profile JPGs are ~1.1 MB each, `Admission.gif` is ~3.4 MB).
 - `.gitignore` and `.readme` are empty files.

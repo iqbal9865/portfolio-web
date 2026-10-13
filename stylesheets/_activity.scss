@@ -26,7 +26,7 @@
       font-weight: 700;
       text-decoration: none;
       overflow-wrap: anywhere;
-      border-bottom: 1px solid currentColor;
+      border-bottom: 2px solid var(--color-accent);
     }
   }
 
@@ -74,6 +74,8 @@
   }
 
   .activity-stat-value {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
     font-size: 1.6rem;
     font-weight: 700;
     line-height: 1.2;
@@ -81,7 +83,9 @@
     overflow-wrap: anywhere;
 
     &[data-stat="languages"] {
-      font-size: 1rem;
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      letter-spacing: 0;
       line-height: 1.4;
       min-height: 1.9rem;
       display: flex;
@@ -195,7 +199,7 @@
     min-width: 0;
 
     &:hover .activity-item-title {
-      text-decoration: underline;
+      color: var(--color-accent);
     }
   }
 
@@ -266,7 +270,7 @@
     background-color: $blackColor;
     color: $whiteColor;
     text-decoration: none;
-    text-transform: uppercase;
+    @include solid-button;
     transition: 0.3s;
 
     &:hover {

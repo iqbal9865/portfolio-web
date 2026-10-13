@@ -1,9 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400;500;600;700&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap");
-
+// Fonts (Sora for headings, Manrope for text, JetBrains Mono for code) are loaded by a
+// <link> in index.html's <head>. Font Awesome 4.7 still comes in through this import.
 @import url(https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css);
 
 @import "variable.scss";
@@ -12,8 +8,49 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Raleway", sans-serif;
 }
+
+// `html body` / `html h1` beat Bootstrap's equal rules (index.css loads before Bootstrap).
+html body {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    color: $blackColor;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font-family: inherit;
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: #ffffff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
 .section {
   padding: 6rem 0;
 
@@ -21,11 +58,44 @@
     padding: 4rem 0;
   }
 }
-.title {
-  text-transform: uppercase;
+
+// Section heading: small accent eyebrow (.sub-title) above a large display title (.title).
+html .sub-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.9rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
   font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+
+  &::before {
+    content: "";
+    width: 1.5rem;
+    height: 2px;
+    border-radius: 2px;
+    background-color: currentColor;
+  }
+}
+
+html .title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.2vw, 2.9rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
   color: $blackColor;
 }
-.sub-title {
-  font-weight: 400;
+
+// Shared look for the site's solid buttons (resume, send message, case study, GitHub profile).
+@mixin solid-button {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 8px;
 }
