@@ -181,6 +181,9 @@ html .title {
   --hero-bg: #0b1020;
   --hero-grad: linear-gradient(90deg, #79c0ff, #94a9ff 50%, #4ade80);
   --hero-grad-line: linear-gradient(90deg, #79c0ff, #94a9ff);
+  --logo-mark-bg: linear-gradient(135deg, #79c0ff, #94a9ff 55%, #4ade80);
+  --logo-mark-fg: #0b1020;
+  --logo-mark-glow: rgba(148, 169, 255, 0.35);
   --header-height: 90px;
   --header-bg: rgba(11, 16, 32, 0.92);
   --nav-accent: #94a9ff;
@@ -320,15 +323,42 @@ html body {
 }
 
 .logo {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
-  font-weight: 700;
-  letter-spacing: 0.24em;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   color: #ffffff;
   text-decoration: none;
 }
 .logo:hover {
   color: #ffffff;
+}
+
+.logo-mark {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--logo-mark-bg);
+  color: var(--logo-mark-fg);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  box-shadow: 0 6px 20px var(--logo-mark-glow);
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.logo:hover .logo-mark {
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.logo-name {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1;
 }
 
 .menu {
