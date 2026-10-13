@@ -110,7 +110,7 @@
   document.body.append(dot, ring);
   root.classList.add("has-custom-cursor");
 
-  const interactive = "a, button, label, select, .social-icon";
+  const interactive = "a, button, label, select";
   const textField = "input, textarea";
 
   let mouseX = -100;
@@ -210,3 +210,6 @@
     if (e.key === "Escape" && menuToggle && menuToggle.checked) menuToggle.checked = false;
   });
 })();
+
+// Footer copyright year.
+document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));

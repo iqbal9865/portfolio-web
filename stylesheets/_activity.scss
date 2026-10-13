@@ -297,6 +297,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .activity-section .activity-pulse::after,
+  .contact-section .availability-dot::after,
   .activity-section .activity-skeleton {
     animation: none;
   }

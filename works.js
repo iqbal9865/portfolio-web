@@ -90,6 +90,8 @@
       </a>`
       )
       .join("");
+    // Filtering changes the section height; AOS caches positions, so let it re-measure.
+    if (window.AOS) window.requestAnimationFrame(() => window.AOS.refresh());
   }
 
   const section = (title, body) =>

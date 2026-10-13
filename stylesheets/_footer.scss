@@ -7,7 +7,32 @@ footer {
     }
     hr {
         height: .1px;
-        color: rgb(104, 104, 104);
+        color: var(--footer-muted);
+    }
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+    .footer-social {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 1.5rem;
+
+        a {
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+            transition: 0.25s;
+
+            &:hover {
+                background-color: var(--footer-fg);
+                color: var(--footer-bg);
+            }
+        }
     }
     .footer-email {
         line-break: anywhere;

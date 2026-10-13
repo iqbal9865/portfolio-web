@@ -41,6 +41,7 @@
   --heat-3: #5068dc;
   --heat-4: #2a3db0;
   --live: #16a34a;
+  --live-soft: rgba(22, 163, 74, 0.1);
 }
 
 :root[data-theme="dark"] {
@@ -75,6 +76,7 @@
   --heat-3: #8ea3ff;
   --heat-4: #d6deff;
   --live: #4ade80;
+  --live-soft: rgba(74, 222, 128, 0.12);
 }
 
 @media (prefers-reduced-motion: no-preference) {

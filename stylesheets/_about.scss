@@ -62,50 +62,62 @@
       color: var(--color-accent);
     }
   }
-  .social-media-container {
-    flex-wrap: wrap;
-    gap: 12px;
-  }
-  .social-icon {
+  // Labelled links to professional profiles.
+  .social-links {
     display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .social-link {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 18px 0 14px;
+    border-radius: 999px;
     background-color: var(--color-surface);
-    color: $blackColor;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    // Inset ring instead of a border, so the link inside keeps the full size.
     box-shadow: inset 0 0 0 1px var(--color-border);
+    color: $blackColor;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
     transition: 0.25s;
 
-    // The link fills the whole circle so the full icon is clickable, not just the glyph.
-    a {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      text-decoration: none;
+    i {
+      font-size: 17px;
     }
 
     &:hover {
-      background: var(--color-accent);
+      background-color: var(--color-accent);
       box-shadow: inset 0 0 0 1px var(--color-accent);
+      color: #ffffff;
       transform: translateY(-2px);
-
-      i {
-        color: #ffffff;
-      }
-    }
-
-    i {
-      color: $blackColor;
-      font-size: 17px;
-      transition: color 0.25s;
     }
   }
+
+  .resume-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: 2.5rem;
+  }
+
+  .resume-view {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: $blackColor;
+    text-decoration: underline;
+    text-decoration-color: var(--color-accent);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+
+    &:hover {
+      color: var(--color-accent);
+    }
+  }
+
   .resume-btn {
     display: inline-flex;
     align-items: center;
@@ -116,7 +128,16 @@
     color: $whiteColor;
     text-decoration: none;
     @include solid-button;
+    gap: 10px;
     transition: 0.3s;
+
+    small {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      opacity: 0.7;
+    }
 
     &:hover {
       background-color: $whiteColor;

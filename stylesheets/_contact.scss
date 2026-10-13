@@ -1,4 +1,50 @@
 .contact-section {
+  // "Open to roles" status and the direct email line under the heading.
+  .availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 1.25rem 0 0;
+    padding: 7px 16px 7px 13px;
+    border-radius: 999px;
+    background-color: var(--live-soft);
+    color: $blackColor;
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+
+  .availability-dot {
+    position: relative;
+    width: 9px;
+    height: 9px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: var(--live);
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background-color: var(--live);
+      animation: activity-pulse 1.8s ease-out infinite;
+    }
+  }
+
+  .contact-lede {
+    max-width: 46ch;
+    margin: 1rem auto 0;
+
+    a {
+      font-weight: 700;
+      color: $blackColor;
+      text-decoration-color: var(--color-accent);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+      overflow-wrap: anywhere;
+    }
+  }
+
   .contact-form-container {
     padding: 25px 10px;
     form {

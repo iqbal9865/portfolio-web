@@ -8,7 +8,9 @@
   const API = "https://api.github.com";
   const CALENDAR_API = `https://github-contributions-api.jogruber.de/v4/${user}?y=last`;
   const CACHE_KEY = `gh-activity:${user}`;
-  const CACHE_MAX_AGE = 24 * 60 * 60 * 1000; // shown instantly on return visits, then refreshed
+  // Saved data is shown instantly on return visits, then refreshed. Even old data beats an
+  // error when GitHub is unreachable or rate-limited, so it is kept for a week.
+  const CACHE_MAX_AGE = 7 * 24 * 60 * 60 * 1000;
   const FULL_REFRESH_MS = 30 * 60 * 1000; // re-read stats even without a new push
   const POLL_MS = 2 * 60 * 1000; // one request per check, so ~30 requests/hour at most
   const RATE_RESERVE = 8;
@@ -66,7 +68,13 @@
   function readCache() {
     try {
       const cached = JSON.parse(localStorage.getItem(CACHE_KEY));
-      if (cached && Date.now() - cached.savedAt < CACHE_MAX_AGE) return cached;
+      if (cached && cached.data && Date.now() - cached.savedAt < CACHE_MAX_AGE) {
+        if (!("complete" in cached.data) && Array.isArray(cached.data.commits) && !cached.data.commits.length) {
+          cached.data.commits = null;
+          cached.data.signature = "stale";
+        }
+        return cached;
+      }
     } catch (e) {}
     return null;
   }
@@ -102,6 +110,9 @@
         )
       )
     );
+    if (commitLists.length && commitLists.every((r) => r.status === "rejected")) {
+      throw new Error("commits unavailable");
+    }
     return commitLists
       .filter((r) => r.status === "fulfilled")
       .flatMap((r) => r.value)
@@ -125,7 +136,10 @@
 
     return {
       signature: signatureOf(repos),
-      publicRepos: profile.status === "fulfilled" ? profile.value.public_repos : repos.length,
+      // Requests can fail part-way (e.g. the 60/hour limit runs out mid-load). Missing parts
+      // are null so check() can keep the last good values and retry instead of showing blanks.
+      complete: profile.status === "fulfilled" && commits.status === "fulfilled",
+      publicRepos: profile.status === "fulfilled" ? profile.value.public_repos : null,
       languages: Object.entries(languageCounts)
         .sort((a, b) => b[1] - a[1])
         .slice(0, 3)
@@ -138,7 +152,7 @@
         pushedAt: r.pushed_at,
         url: r.html_url,
       })),
-      commits: commits.status === "fulfilled" ? commits.value : [],
+      commits: commits.status === "fulfilled" ? commits.value : null,
       calendar:
         calendar.status === "fulfilled"
           ? { total: calendar.value.total.lastYear, days: calendar.value.contributions }
@@ -156,7 +170,7 @@
       $(".activity-now").hidden = true;
     }
 
-    $('[data-stat="repos"]').textContent = data.publicRepos;
+    $('[data-stat="repos"]').textContent = data.publicRepos == null ? "–" : data.publicRepos;
     $('[data-stat="contributions"]').textContent = data.calendar ? data.calendar.total : "–";
     $('[data-stat="languages"]').textContent = data.languages.join(" · ") || "–";
     const lastPush = $('[data-stat="last-push"]');
@@ -203,6 +217,12 @@
     scroller.scrollLeft = scroller.scrollWidth;
   }
 
+  // The section changes height when data (or an error) arrives; AOS caches section
+  // positions, so let it re-measure or later sections reveal at the wrong scroll point.
+  function refreshScrollAnimations() {
+    if (window.AOS) window.requestAnimationFrame(() => window.AOS.refresh());
+  }
+
   function renderList(target, items, emptyText, build) {
     target.textContent = "";
     if (!items.length) {
@@ -214,6 +234,7 @@
 
   function render(data, previous) {
     $("[data-error]").hidden = true;
+    container.querySelectorAll(".activity-skeleton").forEach((sk) => sk.remove());
     $(".activity-now").hidden = false;
     $(".activity-calendar-card").hidden = false;
     container.querySelectorAll(".row").forEach((row) => (row.hidden = false));
@@ -221,8 +242,9 @@
     renderCalendar(data.calendar);
 
     // Commits that weren't on screen before (e.g. a push while the page is open) get a brief highlight.
-    const seen = previous ? new Set(previous.commits.map((c) => c.sha)) : null;
-    renderList($("[data-commits]"), data.commits, "No recent public commits.", (c) =>
+    const seen = previous && previous.commits ? new Set(previous.commits.map((c) => c.sha)) : null;
+    const commitsEmpty = data.commits ? "No recent public commits." : "Commits couldn't be loaded right now. They'll appear on the next check.";
+    renderList($("[data-commits]"), data.commits || [], commitsEmpty, (c) =>
       el("a", { class: `activity-item${seen && !seen.has(c.sha) ? " is-new" : ""}`, href: c.url, target: "_blank", rel: "noopener" }, [
         el("span", { class: "activity-item-title", text: c.message }),
         el("span", { class: "activity-meta" }, [
@@ -246,20 +268,30 @@
     );
 
     container.setAttribute("aria-busy", "false");
+    refreshScrollAnimations();
   }
 
   function showError() {
     container.setAttribute("aria-busy", "false");
-    $("[data-error]").hidden = false;
+    refreshScrollAnimations();
+    const error = $("[data-error]");
+    error.hidden = false;
+    if (pausedUntil > Date.now()) {
+      const at = new Date(pausedUntil).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      error.textContent = `GitHub's hourly request limit for this network has been reached. Activity will load automatically after ${at}.`;
+    }
     container.querySelectorAll(".activity-skeleton").forEach((s) => s.remove());
     $(".activity-now").hidden = true;
     $(".activity-calendar-card").hidden = true;
     container.querySelectorAll(".activity-card").forEach((c) => {
-      if (!c.querySelector(".activity-list li")) c.closest(".row").hidden = true;
+      // Only the commit/repo lists sit in a .row; the calendar card is hidden above.
+      const row = c.closest(".row");
+      if (row && c.querySelector(".activity-list") && !c.querySelector(".activity-list li")) row.hidden = true;
     });
   }
 
   let current = null; // the data on screen
+  let retryTimer = 0;
   let fullLoadedAt = 0;
   let lastChecked = 0;
   let checking = false;
@@ -285,15 +317,31 @@
       const changed = !current || current.signature !== signatureOf(ownRepos(repoList));
       if (changed || Date.now() - fullLoadedAt > FULL_REFRESH_MS) {
         const data = await loadAll(repoList);
-        fullLoadedAt = Date.now();
-        // Keep the last good calendar if the calendar API hiccups.
-        if (!data.calendar && current) data.calendar = current.calendar;
+        // Keep the last good values for anything that failed this time.
+        if (current) {
+          if (!data.calendar) data.calendar = current.calendar;
+          if (data.commits === null) data.commits = current.commits;
+          if (data.publicRepos === null) data.publicRepos = current.publicRepos;
+        }
+        if (data.complete) {
+          fullLoadedAt = Date.now();
+        } else {
+          // Incomplete: keep the old signature so the next check loads everything again.
+          data.signature = current ? current.signature : "incomplete";
+        }
         render(data, current);
         current = data;
         writeCache(data);
       }
     } catch (e) {
       if (!current) showError();
+      // Rate-limited: try again as soon as the limit resets instead of waiting for a poll.
+      if (pausedUntil > Date.now() && !retryTimer) {
+        retryTimer = window.setTimeout(() => {
+          retryTimer = 0;
+          check();
+        }, pausedUntil - Date.now() + 2000);
+      }
     } finally {
       checking = false;
       tick();
