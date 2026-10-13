@@ -4,7 +4,7 @@ This file guides Claude Code (claude.ai/code) when it works in this repository.
 
 ## Project overview
 
-Iqbal Ahmed's personal portfolio, live at https://iqbal-ahmed-dev.netlify.app/ (Netlify). It is one static page, hand-written in 2022 with no framework and no build tooling apart from Sass. The page has these sections in order: hero (with particles), About, Skills, Works (portfolio), Activity (live GitHub data), Contact and Footer. Contact form submissions go to Firebase Firestore and are emailed via Formspree.
+Iqbal Ahmed's personal portfolio, live at https://iqbal-ahmed-dev.netlify.app/ (Netlify). It is one static page, hand-written in 2022 with no framework and no build tooling apart from Sass. The page has these sections in order: hero (with particles), About, Skills, Works (portfolio), Recommendations (LinkedIn quotes), Activity (live GitHub data), Contact and Footer. Contact form submissions go to Firebase Firestore and are emailed via Formspree.
 
 There is no `package.json`, bundler, test suite or linter. All third-party libraries load from CDNs.
 
@@ -25,7 +25,7 @@ npx serve .            # or: python -m http.server 8000
   sass --watch stylesheets/index.scss:stylesheets/index.css  # while editing
   ```
   Commit the regenerated `index.css` together with the SCSS change. (`index.css.map` is currently an empty file.)
-- `index.scss` only lists `@import`s, one partial per page section: `_theme` (light/dark tokens and Bootstrap overrides), `_navbar` (including the theme toggle), `_header` (hero, mouse scroll indicator), `_about`, `_skills`, `_portfolio` (Works section and case study panel), `_activity` (GitHub activity section), `_contact` (form and validation error styles), `_footer`, `_terminal` (hero terminal), `_cursor` (custom cursor).
+- `index.scss` only lists `@import`s, one partial per page section: `_theme` (light/dark tokens and Bootstrap overrides), `_navbar` (including the theme toggle), `_header` (hero, mouse scroll indicator), `_about`, `_skills`, `_portfolio` (Works section and case study panel), `_recommendations`, `_activity` (GitHub activity section), `_contact` (form and validation error styles), `_footer`, `_terminal` (hero terminal), `_cursor` (custom cursor).
 - Shared helpers: `_mixin.scss` (`icons-container`, `border-radius($r)`).
 
 ### Theming (light / dark)
@@ -75,6 +75,7 @@ Load order matters: `stylesheets/index.css` is linked **before** Bootstrap, so a
 
 Nearly all copy is hardcoded in `index.html`:
 - **Skills**: four `.skill-group` cards in `.skills-grid` (Front-end, Mobile, Back-end & data, AI & automation), each with a Font Awesome icon, a one-line description and a `.skill-tags` list. Edit the `<li>` tags in `index.html`. `.skill-group-new` with a `.skill-badge` ("Exploring") marks the AI card.
+- **Recommendations**: two `.rec` cards in `index.html`, quoted word for word from LinkedIn (don't edit the wording, including the typos, so it matches the source). Each card shows one sentence from the text as `.rec-highlight`, and `.rec-toggle` in `ui.js` swaps it for the full `.rec-full` text and calls `AOS.refresh()`. The section has no menu link, so no nav item is active while it's in view. It uses the alternate background, and Activity uses the plain one.
 - **Header / navbar**: `<header class="site-header">` is fixed at the top, outside `.main`. The hero's `.overlay` has `padding-top: var(--header-height)` to make room for it. `ui.js` adds `.is-scrolled` after 24px of scrolling (frosted `--header-bg` bar, dark in both themes), marks the link for the section in view with `.is-active` and `aria-current`, and unchecks `#menu-toggle` when a link is tapped or Esc is pressed. `scroll-padding-top` on `html` keeps anchor jumps clear of the header.
 - **Portfolio (Works)**: content lives in `projects.js` (`window.PROJECTS`), and `works.js` renders it. A featured project (`featured: true`) gets a large row with alternating sides. The others become cards in a 2-column grid, filtered by `category`. Clicking any project opens a full-screen case study panel (`#case-study`) at `#work/<id>`. Back and Esc close it, and moving between case studies with Next replaces the history entry. The panel sits at the **end of `<body>`** because AOS gives animated sections a `transform`, which would break `position: fixed`. Every field after `tagline` is optional, and a missing field hides its part of the case study (see the comment at the top of `projects.js`). Images come from `img/`.
 - **Hero**: there's no photo. The backdrop is CSS (glows plus a grid in `.main`, `_header.scss`), and the right side holds a decorative terminal (`.terminal` in `index.html`, styled in `_terminal.scss`, hidden below 992px, but stacked under the intro on tall tablets: 768–991px wide and at least 820px tall). To change what it types, edit its `<p class="term-line">` elements. A line with a `.term-cmd` span gets typed character by character, and any other line appears whole. The lines use `white-space: pre`, so the spaces inside them are what's displayed.

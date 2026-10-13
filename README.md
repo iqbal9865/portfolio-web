@@ -26,6 +26,7 @@ It is a lightweight static site written in hand-crafted HTML, Sass and vanilla J
 | **About** | Background, experience, education, social links and résumé download |
 | **Skills** | Proficiency overview across core technologies |
 | **Works** | Featured projects, a filterable project grid and a case study for each project |
+| **Recommendations** | Quotes from colleagues, as published on LinkedIn |
 | **Activity** | Real-time GitHub contributions, commits and repositories |
 | **Contact** | Message form with validation and instant confirmation |
 

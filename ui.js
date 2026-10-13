@@ -194,7 +194,10 @@
         entries.forEach((entry) => visible.set(entry.target.id, entry.isIntersecting));
         // First section (in page order) that is inside the band wins; none means the hero.
         const current = sections.find((section) => visible.get(section.id));
-        setActive(current ? current.id : "");
+        // No menu section in view: Home while still in the hero, otherwise nothing
+        // (e.g. Recommendations, which has no menu link).
+        const inHero = window.scrollY < window.innerHeight * 0.5;
+        setActive(current ? current.id : inHero ? "" : null);
       },
       { rootMargin: "-35% 0px -60% 0px" }
     );
@@ -213,3 +216,18 @@
 
 // Footer copyright year.
 document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
+
+// Recommendations: "Read full recommendation" shows the whole quote in place of the highlight.
+document.querySelectorAll(".rec-toggle").forEach((button) => {
+  button.addEventListener("click", () => {
+    const card = button.closest(".rec");
+    const full = document.getElementById(button.getAttribute("aria-controls"));
+    const open = button.getAttribute("aria-expanded") === "true";
+    button.setAttribute("aria-expanded", String(!open));
+    full.hidden = open;
+    card.querySelector(".rec-highlight").hidden = !open;
+    button.querySelector(".rec-toggle-label").textContent = open ? "Read full recommendation" : "Show less";
+    // The section's height changed; AOS caches positions of the sections below.
+    if (window.AOS) window.requestAnimationFrame(() => window.AOS.refresh());
+  });
+});
