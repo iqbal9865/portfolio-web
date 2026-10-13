@@ -22,6 +22,12 @@
   --hero-bg: #0b0d11;
   --menu-bg: #222222;
   --menu-border: #444444;
+  --heat-0: #e6e6e6;
+  --heat-1: #bdbdbd;
+  --heat-2: #8c8c8c;
+  --heat-3: #555555;
+  --heat-4: #222222;
+  --live: #1f9d55;
 }
 
 :root[data-theme="dark"] {
@@ -47,6 +53,12 @@
   --hero-bg: #161b2b;
   --menu-bg: #1e2336;
   --menu-border: #3e4560;
+  --heat-0: #2f3650;
+  --heat-1: #4a5578;
+  --heat-2: #6f7ca6;
+  --heat-3: #a3afd4;
+  --heat-4: #e6eaf7;
+  --live: #4ade80;
 }
 
 @media (prefers-reduced-motion: no-preference) {

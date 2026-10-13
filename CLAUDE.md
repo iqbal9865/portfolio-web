@@ -4,7 +4,7 @@ This file guides Claude Code (claude.ai/code) when it works in this repository.
 
 ## Project overview
 
-Iqbal Ahmed's personal portfolio. It is one static page, hand-written in 2022 with no framework and no build tooling apart from Sass. The page has these sections in order: hero (with particles), About, Skills, Works (portfolio), Services, Contact and Footer. Contact form submissions go to Firebase Firestore and are emailed via Formspree.
+Iqbal Ahmed's personal portfolio. It is one static page, hand-written in 2022 with no framework and no build tooling apart from Sass. The page has these sections in order: hero (with particles), About, Skills, Works (portfolio), Activity (live GitHub data), Contact and Footer. Contact form submissions go to Firebase Firestore and are emailed via Formspree.
 
 There is no `package.json`, bundler, test suite or linter. All third-party libraries load from CDNs.
 
@@ -25,7 +25,7 @@ npx serve .            # or: python -m http.server 8000
   sass --watch stylesheets/index.scss:stylesheets/index.css  # while editing
   ```
   Commit the regenerated `index.css` together with the SCSS change. (`index.css.map` is currently an empty file.)
-- `index.scss` only lists `@import`s, one partial per page section: `_theme` (light/dark tokens and Bootstrap overrides), `_navbar` (including the theme toggle), `_header` (hero, mouse scroll indicator), `_about`, `_skills`, `_portfolio` (project cards and modals), `_service`, `_contact` (form and validation error styles), `_footer`, `_terminal` (hero terminal), `_cursor` (custom cursor).
+- `index.scss` only lists `@import`s, one partial per page section: `_theme` (light/dark tokens and Bootstrap overrides), `_navbar` (including the theme toggle), `_header` (hero, mouse scroll indicator), `_about`, `_skills`, `_portfolio` (project cards and modals), `_activity` (GitHub activity section), `_contact` (form and validation error styles), `_footer`, `_terminal` (hero terminal), `_cursor` (custom cursor).
 - Shared helpers: `_mixin.scss` (`icons-container`, `border-radius($r)`).
 
 ### Theming (light / dark)
@@ -57,6 +57,7 @@ Load order matters: `stylesheets/index.css` is linked **before** Bootstrap, so a
 - **`app.js`** (a module) does two separate jobs:
   1. **Contact form** (`#contactForm`): validation on the client, then `addDoc` into the Firestore `messages` collection (`firstName, lastName, email, phone, message, createdAt: serverTimestamp()`), then a POST of the same fields to Formspree (`https://formspree.io/f/xqkjeldo`), then a SweetAlert. Validation rules: first and last name required, valid email, phone of 7–15 digits only, message of at least 10 chars. Errors are written to the `<small class="error">` that is the input's **next sibling** (`element.nextElementSibling`), and the input gets the `.error-input` class. Keep that markup shape if you change the form. Field ids are `first-name`, `last-name`, `email`, `phone`, `text`.
   2. **Particles**: `particlesJS("particles-js", {...})` config (white circles drifting down, click to repulse).
+- **`activity.js`** (classic script, `defer`) fills the Activity section for the user in `data-github-user` (`iqbal9865`). It calls the public GitHub REST API without a token, so the limit is 60 requests per hour per visitor IP. It makes about 5 calls: profile, repos sorted by push date, and commits by that user in the 3 most recently pushed repos. The Events API no longer includes commits in push events, which is why commits are read per repo. The contribution heatmap comes from `github-contributions-api.jogruber.de`, because GitHub has no unauthenticated endpoint for it. Results are cached in `localStorage` (`gh-activity:<user>`) for 30 minutes, and nothing is fetched until the section is within 600px of the viewport. All text is inserted with `textContent`. If the GitHub calls fail, an error line and the profile button are shown, and if only the calendar fails, its card is hidden. The heatmap colors are the `--heat-0..4` tokens, and the live dot is `--live`.
 - **`ui.js`** (classic script, loaded after AOS) holds UI behavior. It's kept separate from `app.js` because `app.js` throws at `new Stats()` (see Known quirks), and any code added after that line would never run.
   1. **Hero terminal typing**: types out `#terminal-body`, or shows it statically when reduced motion is on.
   2. **Theme toggle** (`#theme-toggle` in the nav): switches `data-theme`, saves the choice to `localStorage`, and follows OS changes until the visitor picks a theme.

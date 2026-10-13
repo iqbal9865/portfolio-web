@@ -48,7 +48,7 @@
               <li><a href="#about-section">ABOUT</a></li>
               <li><a href="#skill-section">SKILLS</a></li>
               <li><a href="#portfolio-section">WORKS</a></li>
-              <li><a href="#service-section">SERVICES</a></li>
+              <li><a href="#activity-section">ACTIVITY</a></li>
               <li><a href="#contact-section">CONTACT</a></li>
             </ul>
 
@@ -376,92 +376,70 @@
     </div>
   </section>
 
-  <section class="services-section section" id="service-section" data-aos="zoom-in" data-aos-easing="linear">
+  <!-- GitHub activity: activity.js fills the [data-*] slots from the GitHub API when the section nears the viewport. -->
+  <section class="activity-section section" id="activity-section" data-aos="fade-up" data-aos-easing="linear">
     <div class="container">
       <div class="titles text-center">
-        <h5 class="sub-title">SERVICES</h5>
-        <h2 class="title">WHAT I CAN DO</h2>
+        <h5 class="sub-title">ACTIVITY</h5>
+        <h2 class="title">WHAT I'M BUILDING</h2>
       </div>
 
-      <div class="row">
-        <div class="col-md-4 service-col-container">
-          <div class="service-item text-center">
-            <div class="service-icon">
-              <i class="fa fa-laptop" aria-hidden="true"></i>
+      <div class="activity" data-github-user="iqbal9865" aria-busy="true">
+        <div class="activity-now">
+          <span class="activity-pulse" aria-hidden="true"></span>
+          <span>Currently working on <a data-now href="https://github.com/iqbal9865" target="_blank" rel="noopener">&hellip;</a></span>
+        </div>
+
+        <div class="activity-stats">
+          <div class="activity-stat"><span class="activity-stat-value" data-stat="contributions">&ndash;</span><span class="activity-stat-label">Contributions this year</span></div>
+          <div class="activity-stat"><span class="activity-stat-value" data-stat="repos">&ndash;</span><span class="activity-stat-label">Public repositories</span></div>
+          <div class="activity-stat"><span class="activity-stat-value" data-stat="languages">&ndash;</span><span class="activity-stat-label">Top languages</span></div>
+          <div class="activity-stat"><span class="activity-stat-value" data-stat="last-push">&ndash;</span><span class="activity-stat-label">Last push</span></div>
+        </div>
+
+        <div class="activity-card activity-calendar-card">
+          <div class="activity-card-head">
+            <h3 class="activity-card-title">Contributions</h3>
+            <div class="activity-legend" aria-hidden="true">
+              Less <i class="lvl-0"></i><i class="lvl-1"></i><i class="lvl-2"></i><i class="lvl-3"></i><i class="lvl-4"></i> More
             </div>
-            <h6 class="service-title">WEB DESIGN</h6>
-            <p class="service-text">
-              This service focuses on the visual and interactive aspects of a website. I craft unique and user-centered
-              designs that are not only aesthetically pleasing but also easy to navigate and use, ensuring a positive
-              user experience.
-            </p>
+          </div>
+          <div class="activity-calendar-scroll" tabindex="0" aria-label="Contribution calendar, scrollable">
+            <div class="activity-calendar" data-calendar></div>
           </div>
         </div>
-        <div class="col-md-4 service-col-container">
-          <div class="service-item text-center">
-            <div class="service-icon">
-              <i class="fa fa-cogs" aria-hidden="true"></i>
+
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="activity-card h-100">
+              <h3 class="activity-card-title">Latest commits</h3>
+              <ul class="activity-list" data-commits>
+                <li class="activity-skeleton"></li>
+                <li class="activity-skeleton"></li>
+                <li class="activity-skeleton"></li>
+              </ul>
             </div>
-            <h6 class="service-title">WEB DEVELOPMENT</h6>
-            <p class="service-text">
-              This service involves the technical implementation of websites. I build functional and robust websites
-              using programming languages like HTML, CSS, and JavaScript, Node.Js, ensuring they are accessible,
-              user-friendly, and compatible across various devices.
-            </p>
+          </div>
+          <div class="col-lg-6">
+            <div class="activity-card h-100">
+              <h3 class="activity-card-title">Recently active repositories</h3>
+              <ul class="activity-list" data-repos>
+                <li class="activity-skeleton"></li>
+                <li class="activity-skeleton"></li>
+                <li class="activity-skeleton"></li>
+              </ul>
+            </div>
           </div>
         </div>
-        <div class="col-md-4 service-col-container">
-          <div class="service-item text-center">
-            <div class="service-icon">
-              <i class="fa fa-mobile" aria-hidden="true"></i>
-            </div>
-            <h6 class="service-title">RESPONSIVE DESIGN</h6>
-            <p class="service-text">
-              This service ensures websites adapt seamlessly to different screen sizes and devices, from desktops and
-              laptops to tablets and smartphones. I create websites that provide an optimal viewing experience across
-              all platforms, enhancing user engagement and satisfaction.
-            </p>
-          </div>
-        </div>
-        <div class="col-md-4 service-col-container">
-          <div class="service-item text-center">
-            <div class="service-icon">
-              <i class="fa fa-rocket" aria-hidden="true"></i>
-            </div>
-            <h6 class="service-title">CROSS PLATFORM</h6>
-            <p class="service-text">
-              This service focuses on creating applications that can run smoothly on multiple operating systems, such as
-              iOS and Android. I utilize technologies that allow for code reusability and efficient development across
-              different platforms, saving time and resources.
-            </p>
-          </div>
-        </div>
-        <div class="col-md-4 service-col-container">
-          <div class="service-item text-center">
-            <div class="service-icon">
-              <i class="fa fa-pencil" aria-hidden="true"></i>
-            </div>
-            <h6 class="service-title">CREATIVE DESIGN</h6>
-            <p class="service-text">
-              This service encompasses the development of unique and visually striking designs that go beyond basic
-              aesthetics. I specialize in crafting innovative and eye-catching visuals, including logos, branding
-              materials, illustrations, and graphic design elements, to enhance brand identity and leave a lasting
-              impression.
-            </p>
-          </div>
-        </div>
-        <div class="col-md-4 service-col-container">
-          <div class="service-item text-center">
-            <div class="service-icon">
-              <i class="fa fa-life-ring" aria-hidden="true"></i>
-            </div>
-            <h6 class="service-title">SUPPORT</h6>
-            <p class="service-text">
-              This service provides ongoing assistance and maintenance for your website or application. I offer timely
-              support to address any technical issues, implement updates and upgrades, and ensure your online presence
-              remains functional, secure, and up-to-date.
-            </p>
-          </div>
+
+        <p class="activity-error" data-error hidden>
+          GitHub activity couldn't be loaded right now.
+        </p>
+
+        <div class="text-center">
+          <a class="activity-profile-btn" href="https://github.com/iqbal9865" target="_blank" rel="noopener">
+            View GitHub profile <i class="fa fa-github" aria-hidden="true"></i>
+          </a>
         </div>
       </div>
     </div>
@@ -704,6 +682,7 @@
     AOS.init();
   </script>
   <script src="./ui.js"></script>
+  <script src="./activity.js" defer></script>
   <script type="module" src="./firebase-app.js"></script>
   <script type="module" src="./app.js"></script>
 </body>
