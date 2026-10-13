@@ -5,11 +5,16 @@
       position: relative;
       width: 100%;
       margin: 20px 0;
+      overflow: hidden;
+      @include border-radius(5px);
 
+      // Fixed 4:3 frame; object-fit crops instead of stretching, whatever the column width.
       img {
         display: block;
         width: 100%;
-        height: 300px;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
         @include border-radius(5px);
       }
 
@@ -18,7 +23,7 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: rgba(255, 255, 255, 0.9);
+        background-color: var(--card-overlay);
         overflow: hidden;
         width: 100%;
         height: 100%;
@@ -36,12 +41,6 @@
         .project-title {
           font-weight: 700;
           color: $blackColor;
-        }
-
-        button {
-          i {
-            font-size: 25px;
-          }
         }
       }
 
@@ -64,17 +63,61 @@
         }
       }
     }
-    .modal {
-      top: 15%;
-      .modal-dialog {
-        max-width: 800px;
-      }
-    }
   }
 }
 
-@media (max-width: 768px) {
-  .modal {
-    top: 5%!important;
+// Project modals (at the end of <body>). Wider than Bootstrap's default 500px; the dialogs
+// are centered and scroll internally (modal-dialog-centered/-scrollable) so they fit short screens.
+@media (min-width: 576px) {
+  .project-modal .modal-dialog {
+    max-width: min(800px, calc(100% - 2rem));
+  }
+}
+
+// Touch screens have no hover, so the title and open button are always shown
+// as a caption bar along the bottom of each card.
+@media (hover: none) {
+  .portfolio-section .project-container .project {
+    .project-img-title {
+      top: auto;
+      height: auto;
+      transform: none;
+      border-radius: 0;
+    }
+
+    .text {
+      position: static;
+      transform: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 8px 6px 16px;
+      font-size: 17px;
+
+      .project-title {
+        margin: 0 !important;
+        text-align: left;
+      }
+
+      .btn {
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        box-shadow: none !important;
+
+        i {
+          font-size: 20px;
+        }
+      }
+    }
+
+    &:hover {
+      img {
+        opacity: 1;
+      }
+      .project-img-title {
+        transform: none;
+      }
+    }
   }
 }

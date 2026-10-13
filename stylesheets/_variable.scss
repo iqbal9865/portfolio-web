@@ -1,4 +1,9 @@
-$blackColor: #222;
-$whiteColor: #ffffff;
-$grayBg: #e9e9e9;
-$creamBg: #f2f2f2;
+// Theme-aware colors: these point at CSS custom properties defined in _theme.scss,
+// so every partial automatically follows the active light/dark theme.
+$blackColor: var(--color-fg);
+$whiteColor: var(--color-bg);
+$grayBg: var(--color-muted-bg);
+$creamBg: var(--color-alt-bg);
+
+// The hero always sits on a dark photo + overlay, so its text stays white in both themes.
+$heroText: #ffffff;

@@ -6,6 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Iqbal - Portfolio</title>
+  <script>
+    // Apply the saved (or OS-preferred) theme before first paint to avoid a flash.
+    (function () {
+      var theme = "light";
+      try {
+        theme = localStorage.getItem("theme") ||
+          (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      } catch (e) {}
+      document.documentElement.setAttribute("data-theme", theme);
+    })();
+  </script>
   <link rel="stylesheet" href="./stylesheets/index.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
@@ -26,31 +37,71 @@
             <h1 class="logo">IQBAL</h1>
           </div>
 
-          <input id="menu-toggle" type="checkbox" />
-          <label class="menu-button-container" for="menu-toggle">
-            <div class="menu-button"></div>
-          </label>
+          <div class="nav-actions">
+            <input id="menu-toggle" type="checkbox" />
+            <label class="menu-button-container" for="menu-toggle">
+              <div class="menu-button"></div>
+            </label>
 
-          <ul class="menu">
-            <li><a href="#">HOME</a></li>
-            <li><a href="#about-section">ABOUT</a></li>
-            <li><a href="#skill-section">SKILLS</a></li>
-            <li><a href="#portfolio-section">WORKS</a></li>
-            <li><a href="#service-section">SERVICES</a></li>
-            <li><a href="#contact-section">CONTACT</a></li>
-          </ul>
+            <ul class="menu">
+              <li><a href="#">HOME</a></li>
+              <li><a href="#about-section">ABOUT</a></li>
+              <li><a href="#skill-section">SKILLS</a></li>
+              <li><a href="#portfolio-section">WORKS</a></li>
+              <li><a href="#service-section">SERVICES</a></li>
+              <li><a href="#contact-section">CONTACT</a></li>
+            </ul>
+
+            <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Switch to dark mode">
+              <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+              </svg>
+              <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="4.5" />
+                <path
+                  d="M12 1.5v2M12 20.5v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1.5 12h2M20.5 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+              </svg>
+            </button>
+          </div>
         </nav>
 
         <section class="header-container">
           <div class="intro">
             <h1 class="name">Hi! I'm Iqbal.</h1>
             <p class="designation">
-              Jr. Software Engineer | Front-End Specialist | Creating Thoughtful & Scalable Web Applications
+              Software Engineer | Front-End Specialist | Creating Thoughtful & Scalable Web Applications
             </p>
           </div>
-          <div class="bounce">
-            <i class="fa fa-angle-double-down"></i>
+
+          <!-- Decorative terminal; ui.js types it out line by line. The intro above carries the same info. -->
+          <div class="terminal" aria-hidden="true">
+            <div class="terminal-bar">
+              <span class="terminal-dot"></span>
+              <span class="terminal-dot"></span>
+              <span class="terminal-dot"></span>
+              <span class="terminal-title">iqbal@portfolio: ~</span>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+<p class="term-line"><span class="term-prompt">❯</span> <span class="term-path">~</span> <span class="term-cmd">whoami</span></p>
+<p class="term-line">Iqbal Ahmed · Software Engineer</p>
+<p class="term-line">📍 London, United Kingdom</p>
+<p class="term-line"><span class="term-prompt">❯</span> <span class="term-path">~</span> <span class="term-cmd">cat stack.json</span></p>
+<p class="term-line">{</p>
+<p class="term-line">  <span class="tk-key">"frontend"</span>: [<span class="tk-str">"React"</span>, <span class="tk-str">"Angular"</span>, <span class="tk-str">"TypeScript"</span>],</p>
+<p class="term-line">  <span class="tk-key">"mobile"</span>:   [<span class="tk-str">"React Native"</span>, <span class="tk-str">"Redux"</span>],</p>
+<p class="term-line">  <span class="tk-key">"backend"</span>:  [<span class="tk-str">"Node.js"</span>, <span class="tk-str">"MySQL"</span>]</p>
+<p class="term-line">}</p>
+<p class="term-line"><span class="term-prompt">❯</span> <span class="term-path">~</span> <span class="term-cmd">./journey.sh</span></p>
+<p class="term-line"><span class="tk-ok">✔</span> 3 yrs shipping web &amp; mobile apps @ Syftet Ltd.</p>
+<p class="term-line"><span class="tk-ok">✔</span> MSc Computer Science @ UCB</p>
+<p class="term-line"><span class="term-prompt">❯</span> <span class="term-path">~</span> <span class="term-caret"></span></p>
+            </div>
           </div>
+          <a href="#about-section" class="scroll-indicator" aria-label="Scroll to About section">
+            <span class="scroll-mouse"><span class="scroll-wheel"></span></span>
+          </a>
         </section>
       </div>
     </div>
@@ -83,13 +134,13 @@
             <div class="currently-working d-flex justify-content-between flex-wrap">
               <div class="company">
                 <h6>Jr. Software Engineer at <a href="https://syftet.com/" class="company-name"> Syftet Ltd.
-                  </a></h4>
+                  </a></h6>
                   <p>February 2022 - February 2025</p>
               </div>
               <div class="company">
                 <h6>MSc in Computer Science at <a href="https://www.ucb.ac.uk/" class="company-name"> University College
                     Birmingham
-                  </a> </h4>
+                  </a></h6>
                   <p>February 2025 - Present</p>
               </div>
             </div>
@@ -119,11 +170,10 @@
                 </a>
               </div>
             </div>
-            <div class="download-btn my-5">
-              <a href="https://drive.google.com/file/d/14LQX7UIKVFVOwtjLWllIGATHS1cWQt-Q/view" target="_blank">
-                <button class="resume-btn">
-                  DOWNLOAD RESUME <i class="fa fa-download mx-2"></i>
-                </button>
+            <div class="download-btn mt-5">
+              <a href="https://drive.google.com/file/d/14LQX7UIKVFVOwtjLWllIGATHS1cWQt-Q/view" target="_blank"
+                class="resume-btn">
+                DOWNLOAD RESUME <i class="fa fa-download mx-2"></i>
               </a>
             </div>
           </div>
@@ -242,7 +292,7 @@
       </div>
       <div class="projects-fillter-container text-center">
         <div class="row project-container">
-          <div class="col-md-4">
+          <div class="col-sm-6 col-lg-4">
             <div class="project project-one">
               <img src="./img/mosque.jpg" alt="demoprojectimg" class="img-fluid" />
               <div class="project-img-title">
@@ -255,7 +305,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-sm-6 col-lg-4">
             <div class="project project-two">
               <img src="./img/iNwe.jpg" alt="demoprojectimg" class="img-fluid" />
               <div class="project-img-title">
@@ -268,7 +318,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-sm-6 col-lg-4">
             <div class="project project-three">
               <img src="./img/img-3.jpg" alt="demoprojectimg" class="img-fluid" />
               <div class="project-img-title">
@@ -281,7 +331,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-sm-6 col-lg-4">
             <div class="project project-four">
               <img src="./img/img-4.jpg" alt="demoprojectimg" class="img-fluid" />
               <div class="project-img-title">
@@ -294,7 +344,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-sm-6 col-lg-4">
             <div class="project project-five">
               <img src="./img/Admission.gif" alt="demoprojectimg" class="img-fluid" />
               <div class="project-img-title">
@@ -307,7 +357,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-sm-6 col-lg-4">
             <div class="project project-six">
               <img src="./img/img-6.jpg" alt="demoprojectimg" class="img-fluid" />
               <div class="project-img-title">
@@ -321,155 +371,6 @@
             </div>
           </div>
 
-          <!-- Modal -->
-          <div class="modal fade" id="project-1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
-                    Daily Islam
-                  </h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <p>
-                    The Daily Islam is an online educational platform to help users build smart Islamic Lifestyles and
-                    gain true knowledge of Islam. It's a cross-platform application developed using React Native,
-                    designed to provide the Muslim ummah with comprehensive information about Islam and facilitate
-                    connection with the global Muslim community. My contributions to this project include developing
-                    major portions of the application, such as the Books Module, Prayer Module, Dua Module, and Quran
-                    Module.
-                  </p>
-                  <p><strong>Technology uses:</strong> React-Native, Redux, TypeScript, SQ-Lite, Expo </p>
-                  <p><a href="https://play.google.com/store/apps/details?id=org.dailyislam.android.preview&hl=en"
-                      target="_blank">Go to Play Store</a></p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal fade" id="project-2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
-                    iNwe Web
-                  </h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <p>A messaging platform developed using Angular, enabling users to connect with friends and family,
-                    share their thoughts, and communicate either peer-to-peer or in groups. In this project, I
-                    contributed by implementing the WebSocket feature for seamless client-server connections using
-                    Stomp.js, and developing various chat room features such as message reactions, reply, forward
-                    message, and many other chat-related functionalities.
-                  </p>
-                  <p><strong>Technology uses:</strong> Angular, WebSocket, TypeScript, RxJs </p>
-                  <p>
-                    <a href="http://chat.inweapp.com/" target="_blank">Go to Live Site</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal fade" id="project-3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
-                    OZ BANGLA
-                  </h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <p>Oz Bangla is a leading data-driven digital marketing agency based in Bangladesh. I worked on the OZ
-                    BANGLA project at Syftet Ltd. I designed an intuitive UI and developed the client-side with Angular,
-                    integrating REST APIs and managing state. On the back-end, I built REST APIs using Node.js and
-                    Express.js, ensuring smooth data flow and robust application performance.</p>
-                  <p><strong>Technology uses:</strong> React, Firebase, Express.js, MongoDB</p>
-                  <p>
-                    <a href="http://portal.ozbangla.com/" target="_blank">Go to Live Site</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal fade" id="project-4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
-                    Silvrback
-                  </h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <p>Silvrback is a well-supported platform hosting a small community of writers. It’s more personal. I
-                    worked on the Silvrback project, where my primary responsibilities included designing the website
-                    using SCSS and implementing key functionalities with JavaScript. I crafted a visually appealing and
-                    responsive design using SCSS, ensuring consistency and scalability across the site. Additionally, I
-                    utilized JavaScript to implement intersection functionality, enhancing user interactions and
-                    improving the overall user experience.
-                  </p>
-                  <p><strong>Technology uses:</strong> SCSS, Bootstrap, JavaScript, Ruby-on-Rails </p>
-                  <p>
-                    <a href="https://www.silvrback.com/" target="_blank">Go to Live Site</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal fade" id="project-5" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
-                    Admission Funnel
-                  </h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <p>Admission Funnel System is a marketing strategy where a System is designed to attract students go
-                    through admission and enrollment. Funnel system & Email Automation Increase website visitors and its
-                    make business strategy more effective. Online admission and application form drop-offs make
-                    organization better experienced.</p>
-                  <p><strong>Technology uses:</strong> React, React-Router, Firebase, Node.js </p>
-                  <p>
-                    <a href="https://admission-funnel.web.app/" target="_blank">Go to Live Site</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="modal fade" id="project-6" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
-                    Doctors Portal
-                  </h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <p>
-                    Doctors Portal is a Hospital based project. It stand for patients appointment through the websites.
-                    A patient can book an appointment by using his account. Patient can choose the date of appointment
-                    and category of the appointment then book it. Different types of Dashboard in this website, one is
-                    for user, another is for admin panel.
-                  </p>
-                  <p><strong>Technology uses:</strong> React, React-Router, Firebase, Node.js </p>
-
-                  <p>
-                    <a href="https://doctors-portal-91849.firebaseapp.com/" target="_blank">Go to Live Site</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -625,7 +526,7 @@
       <div class="row">
         <div class="col-md-3 col-footer-info">
           <p><strong>Iqbal Ahmed</strong></p>
-          <p>Jr. Software Engineer</p>
+          <p>Software Engineer</p>
         </div>
         <div class="col-md-3 col-footer-info">
           <p><strong>Phone No.</strong></p>
@@ -637,20 +538,172 @@
         </div>
         <div class="col-md-3 col-footer-info">
           <p><strong>Address</strong></p>
-          <p>Summer Row, Birmingham B3 1JB</p>
+          <p>London, United Kingdom</p>
         </div>
       </div>
       <hr />
       <div class="text-center">
-        <span class="right-reserved">Iqbal@copy; 2026. All Right Reserved</span>
+        <span class="right-reserved">&copy; 2026 Iqbal Ahmed. All Rights Reserved.</span>
       </div>
     </div>
   </footer>
+  <!-- Project detail modals. Kept outside the AOS-animated sections: an animated (transformed)
+       ancestor would trap them underneath Bootstrap's backdrop. -->
+  <div class="modal fade project-modal" id="project-1" tabindex="-1" aria-labelledby="project-1-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="project-1-title">
+            Daily Islam
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            The Daily Islam is an online educational platform to help users build smart Islamic Lifestyles and
+            gain true knowledge of Islam. It's a cross-platform application developed using React Native,
+            designed to provide the Muslim ummah with comprehensive information about Islam and facilitate
+            connection with the global Muslim community. My contributions to this project include developing
+            major portions of the application, such as the Books Module, Prayer Module, Dua Module, and Quran
+            Module.
+          </p>
+          <p><strong>Technology uses:</strong> React-Native, Redux, TypeScript, SQ-Lite, Expo </p>
+          <p><a href="https://play.google.com/store/apps/details?id=org.dailyislam.android.preview&hl=en"
+              target="_blank">Go to Play Store</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade project-modal" id="project-2" tabindex="-1" aria-labelledby="project-2-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="project-2-title">
+            iNwe Web
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>A messaging platform developed using Angular, enabling users to connect with friends and family,
+            share their thoughts, and communicate either peer-to-peer or in groups. In this project, I
+            contributed by implementing the WebSocket feature for seamless client-server connections using
+            Stomp.js, and developing various chat room features such as message reactions, reply, forward
+            message, and many other chat-related functionalities.
+          </p>
+          <p><strong>Technology uses:</strong> Angular, WebSocket, TypeScript, RxJs </p>
+          <p>
+            <a href="http://chat.inweapp.com/" target="_blank">Go to Live Site</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade project-modal" id="project-3" tabindex="-1" aria-labelledby="project-3-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="project-3-title">
+            OZ BANGLA
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Oz Bangla is a leading data-driven digital marketing agency based in Bangladesh. I worked on the OZ
+            BANGLA project at Syftet Ltd. I designed an intuitive UI and developed the client-side with Angular,
+            integrating REST APIs and managing state. On the back-end, I built REST APIs using Node.js and
+            Express.js, ensuring smooth data flow and robust application performance.</p>
+          <p><strong>Technology uses:</strong> React, Firebase, Express.js, MongoDB</p>
+          <p>
+            <a href="http://portal.ozbangla.com/" target="_blank">Go to Live Site</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade project-modal" id="project-4" tabindex="-1" aria-labelledby="project-4-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="project-4-title">
+            Silvrback
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Silvrback is a well-supported platform hosting a small community of writers. It’s more personal. I
+            worked on the Silvrback project, where my primary responsibilities included designing the website
+            using SCSS and implementing key functionalities with JavaScript. I crafted a visually appealing and
+            responsive design using SCSS, ensuring consistency and scalability across the site. Additionally, I
+            utilized JavaScript to implement intersection functionality, enhancing user interactions and
+            improving the overall user experience.
+          </p>
+          <p><strong>Technology uses:</strong> SCSS, Bootstrap, JavaScript, Ruby-on-Rails </p>
+          <p>
+            <a href="https://www.silvrback.com/" target="_blank">Go to Live Site</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade project-modal" id="project-5" tabindex="-1" aria-labelledby="project-5-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="project-5-title">
+            Admission Funnel
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Admission Funnel System is a marketing strategy where a System is designed to attract students go
+            through admission and enrollment. Funnel system & Email Automation Increase website visitors and its
+            make business strategy more effective. Online admission and application form drop-offs make
+            organization better experienced.</p>
+          <p><strong>Technology uses:</strong> React, React-Router, Firebase, Node.js </p>
+          <p>
+            <a href="https://admission-funnel.web.app/" target="_blank">Go to Live Site</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade project-modal" id="project-6" tabindex="-1" aria-labelledby="project-6-title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="project-6-title">
+            Doctors Portal
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>
+            Doctors Portal is a Hospital based project. It stand for patients appointment through the websites.
+            A patient can book an appointment by using his account. Patient can choose the date of appointment
+            and category of the appointment then book it. Different types of Dashboard in this website, one is
+            for user, another is for admin panel.
+          </p>
+          <p><strong>Technology uses:</strong> React, React-Router, Firebase, Node.js </p>
+
+          <p>
+            <a href="https://doctors-portal-91849.firebaseapp.com/" target="_blank">Go to Live Site</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
     AOS.init();
   </script>
+  <script src="./ui.js"></script>
   <script type="module" src="./firebase-app.js"></script>
   <script type="module" src="./app.js"></script>
 </body>

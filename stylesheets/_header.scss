@@ -1,155 +1,149 @@
 .main {
-  background-image: url("../img/banner-bg.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
+  // Code-editor style backdrop: soft glows over a faint grid. Dark in both themes (navy in dark mode).
+  background-color: var(--hero-bg);
+  background-image: radial-gradient(ellipse 60% 50% at 15% 20%, rgba(56, 189, 248, 0.1), transparent),
+    radial-gradient(ellipse 50% 45% at 85% 75%, rgba(74, 222, 128, 0.08), transparent),
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: auto, auto, 44px 44px, 44px 44px;
   color: #ffffff;
   position: relative;
 
   #particles-js {
-    canvas {
-      height: 650px !important;
-    }
+    position: absolute;
+    inset: 0;
+    opacity: 0.35;
   }
 
+  // The hero fills the screen but can grow when its content needs more room
+  // (short laptop screens, landscape phones). 100svh = the visible area on mobile,
+  // excluding the browser's address bar; 100vh is the fallback for older browsers.
   .overlay {
-    background: #000;
-    height: 100vh;
-    opacity: 0.5;
-    overflow: hidden;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    // Vignette that fades the grid toward the edges.
+    background: radial-gradient(ellipse at center, transparent 35%, rgba(0, 0, 0, 0.55) 100%);
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+
+    > .container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   .logo {
     font-family: "Cormorant SC", serif;
     font-size: 2rem;
+    margin: 0;
   }
 
   .header-container {
-    height: 100vh;
+    flex: 1;
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
+    gap: 3rem;
+    // Bottom padding keeps clear of the scroll indicator and lifts the content slightly above centre.
+    padding: 2rem 0 7.5rem;
   }
 
   .intro {
-    margin-bottom: 150px;
+    flex: 1 1 auto;
   }
 
   .name {
-    font-size: 6rem;
+    font-size: clamp(3.5rem, 5.5vw, 6rem);
     font-weight: 800;
     margin: 12px 0;
   }
   .designation {
     font-size: 24px;
     font-weight: 500;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
   }
-  .fa {
-    width: 58px;
-    display: block;
-    text-align: center;
-    color: white;
-    font: normal 45px "FontAwesome";
-    line-height: 60px;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-  }
-  .fa-angle-double-down:before {
-    content: "\f107";
-  }
-
-  .bounce {
+  // Minimal mouse outline with a wheel that scrolls down in a loop.
+  .scroll-indicator {
     position: absolute;
-    bottom: 30px;
-    left: 10%;
-    width: 60px;
-    height: 60px;
-    margin-left: -30px;
-    border: 2px solid white;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    border-radius: 50%;
-    animation: bounce 2s infinite;
-    -webkit-animation: bounce 2s infinite;
-    -moz-animation: bounce 2s infinite;
-    -o-animation: bounce 2s infinite;
-  }
+    z-index: 1;
+    // Padding enlarges the tap target to 44x54px without changing the drawn mouse.
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: block;
+    padding: 8px 10px;
+    color: $heroText;
+    text-decoration: none;
+    opacity: 0.85;
+    transition: opacity 0.3s ease;
 
-  @-webkit-keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-      -webkit-transform: translateY(0);
+    &:hover,
+    &:focus-visible {
+      opacity: 1;
     }
-    40% {
-      -webkit-transform: translateY(-30px);
-    }
-    60% {
-      -webkit-transform: translateY(-15px);
+
+    &:focus-visible {
+      outline: 2px solid $heroText;
+      outline-offset: -2px;
+      border-radius: 16px;
     }
   }
 
-  @-moz-keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-      -moz-transform: translateY(0);
-    }
-    40% {
-      -moz-transform: translateY(-30px);
-    }
-    60% {
-      -moz-transform: translateY(-15px);
-    }
+  .scroll-mouse {
+    position: relative;
+    display: block;
+    width: 24px;
+    height: 38px;
+    border: 1.5px solid currentColor;
+    border-radius: 12px;
   }
 
-  @-o-keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-      -o-transform: translateY(0);
-    }
-    40% {
-      -o-transform: translateY(-30px);
-    }
-    60% {
-      -o-transform: translateY(-15px);
-    }
-  }
-  @keyframes bounce {
-    0%,
-    20%,
-    50%,
-    80%,
-    100% {
-      transform: translateY(0);
-    }
-    40% {
-      transform: translateY(-30px);
-    }
-    60% {
-      transform: translateY(-15px);
-    }
+  .scroll-wheel {
+    position: absolute;
+    top: 7px;
+    left: 50%;
+    width: 2px;
+    height: 7px;
+    margin-left: -1px;
+    border-radius: 2px;
+    background-color: currentColor;
+    animation: scroll-wheel 1.8s cubic-bezier(0.65, 0, 0.35, 1) infinite;
   }
 }
-@media (max-width: 800px) {
-  .name {
-    font-size: 4.5rem !important;
+
+@keyframes scroll-wheel {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
   }
-  .designation {
-    font-size: 21px !important;
+  15% {
+    opacity: 1;
+  }
+  70%,
+  100% {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .main .scroll-wheel {
+    animation: none;
+  }
+}
+
+
+@media (max-width: 800px) {
+  .main {
+    .name {
+      font-size: clamp(3rem, 14vw, 4.5rem);
+    }
+    .designation {
+      font-size: 1.25rem;
+    }
   }
 }

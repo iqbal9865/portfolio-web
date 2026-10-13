@@ -1,0 +1,81 @@
+// Custom animated cursor (dot + trailing ring), driven by ui.js.
+// ui.js only adds .has-custom-cursor on devices with a fine pointer (mouse/trackpad)
+// and when reduced motion is not requested, so touch devices keep their native behavior.
+// mix-blend-mode: difference keeps it visible on light, dark and the hero image alike.
+
+.has-custom-cursor,
+.has-custom-cursor * {
+  cursor: none !important;
+}
+
+// Text fields keep the native I-beam so typing still feels normal.
+.has-custom-cursor input,
+.has-custom-cursor textarea {
+  cursor: text !important;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  pointer-events: none;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  opacity: 0;
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background-color: #ffffff;
+  transition: opacity 0.3s ease, width 0.3s ease, height 0.3s ease, margin 0.3s ease;
+}
+
+.cursor-ring {
+  width: 34px;
+  height: 34px;
+  margin: -17px 0 0 -17px;
+  border: 1.5px solid #ffffff;
+  transition: opacity 0.3s ease, width 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    height 0.35s cubic-bezier(0.23, 1, 0.32, 1), margin 0.35s cubic-bezier(0.23, 1, 0.32, 1),
+    background-color 0.3s ease;
+}
+
+.cursor-visible {
+  .cursor-dot,
+  .cursor-ring {
+    opacity: 1;
+  }
+}
+
+// Hovering links, buttons and project cards: the ring expands and the dot fades out.
+.cursor-hover {
+  .cursor-ring {
+    width: 58px;
+    height: 58px;
+    margin: -29px 0 0 -29px;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+  .cursor-dot {
+    opacity: 0;
+  }
+}
+
+// Pressing the mouse button: the ring tightens briefly.
+.cursor-down .cursor-ring {
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+}
+
+// Over text fields the native I-beam takes over.
+.cursor-text {
+  .cursor-dot,
+  .cursor-ring {
+    opacity: 0;
+  }
+}
