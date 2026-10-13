@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
@@ -8,12 +8,11 @@
   <title>Iqbal Ahmed | Software Engineer</title>
   <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
   <script>
-    // Apply the saved (or OS-preferred) theme before first paint to avoid a flash.
+    // Dark is the default. Apply the visitor's saved choice (if any) before first paint to avoid a flash.
     (function () {
-      var theme = "light";
+      var theme = "dark";
       try {
-        theme = localStorage.getItem("theme") ||
-          (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        theme = localStorage.getItem("theme") || "dark";
       } catch (e) {}
       document.documentElement.setAttribute("data-theme", theme);
     })();
@@ -71,6 +70,7 @@
         </div>
       </nav>
     </div>
+    <span class="scroll-progress" aria-hidden="true"></span>
   </header>
 
   <main class="main">
@@ -79,10 +79,26 @@
       <div class="container">
         <section class="header-container">
           <div class="intro">
-            <h1 class="name">Hi! I'm Iqbal.</h1>
-            <p class="designation">
-              Software Engineer &middot; Front-End Specialist &middot; Creating thoughtful, scalable web applications
-            </p>
+            <h1 class="name">Iqbal Ahmed</h1>
+            <!-- Tagline: ui.js rotates the .role-word items; the sentence's words fade in one by one (CSS).
+                 The visually-hidden line is what screen readers get; the animated parts are aria-hidden. -->
+            <div class="tagline">
+              <p class="visually-hidden">Software Engineer and Front-End Specialist, creating thoughtful, scalable web applications.</p>
+              <p class="role-line" aria-hidden="true">
+                <span class="role-fixed">Software Engineer</span>
+                <span class="role-sep"></span>
+                <span class="role-rotator">
+                  <span class="role-word is-in">Front-End Specialist</span>
+                  <span class="role-word">React &amp; Angular</span>
+                  <span class="role-word">React Native apps</span>
+                  <span class="role-word">Node.js &amp; PostgreSQL</span>
+                  <span class="role-word">AI automation</span>
+                </span>
+              </p>
+              <p class="tag-sentence" aria-hidden="true">
+                <span class="w">Creating</span> <span class="w grad">thoughtful,</span> <span class="w grad">scalable</span> <span class="w">web</span> <span class="w">applications</span>
+              </p>
+            </div>
           </div>
 
           <!-- Decorative terminal; ui.js types it out line by line. The intro above carries the same info. -->
@@ -101,7 +117,7 @@
 <p class="term-line">{</p>
 <p class="term-line">  <span class="tk-key">"frontend"</span>: [<span class="tk-str">"React"</span>, <span class="tk-str">"Angular"</span>, <span class="tk-str">"TypeScript"</span>],</p>
 <p class="term-line">  <span class="tk-key">"mobile"</span>:   [<span class="tk-str">"React Native"</span>, <span class="tk-str">"Redux"</span>],</p>
-<p class="term-line">  <span class="tk-key">"backend"</span>:  [<span class="tk-str">"Node.js"</span>, <span class="tk-str">"MySQL"</span>]</p>
+<p class="term-line">  <span class="tk-key">"backend"</span>:  [<span class="tk-str">"Node.js"</span>, <span class="tk-str">"PostgreSQL"</span>]</p>
 <p class="term-line">}</p>
 <p class="term-line"><span class="term-prompt">❯</span> <span class="term-path">~</span> <span class="term-cmd">./journey.sh</span></p>
 <p class="term-line"><span class="tk-ok">✔</span> 3 yrs shipping web &amp; mobile apps @ Syftet Ltd.</p>
@@ -120,37 +136,45 @@
   <section class="about-container section" id="about-section">
     <div class="container">
       <div class="row">
-        <div class="col-md-5 image-container" data-aos="flip-left" data-aos-easing="linear">
+        <div class="col-md-5 image-container" data-aos="fade-up">
           <div class="about-img">
             <img src="./img/Iqbal_Formal_Pic2.jpg" alt="about-image" class="img-fluid" />
           </div>
         </div>
-        <div class="col-md-7" data-aos="flip-right" data-aos-easing="linear">
+        <div class="col-md-7" data-aos="fade-up" data-aos-delay="120">
           <div class="about-content py-5">
             <h5 class="sub-title">ABOUT</h5>
             <h2 class="title">About me</h2>
             <div class="py-3 about-text">
               <p>
-                I'm Iqbal Ahmed, a software engineer with a front-end focus. I build fast, user-friendly web and mobile
-                applications with JavaScript and TypeScript, using React, Angular, React Native and Node.js, and I care
-                about clean code and products people enjoy using.
+                I'm a software engineer with a front-end focus and three years of professional experience building web and
+                cross-platform mobile applications. I work mainly in JavaScript and TypeScript with React, Angular and
+                React Native, connect them to REST APIs and Node.js services, and care about products that feel fast and
+                dependable, and code that stays clean as a product grows.
               </p>
               <p>
-                Right now I'm actively exploring AI-powered software development: building MCP (Model Context Protocol)
-                servers that connect AI models to real tools and data, automating workflows with AI, and developing
-                agentic applications where AI agents plan and carry out multi-step tasks. I'm most interested in where
-                these ideas meet solid software engineering, so the result is reliable, secure and genuinely useful.
+                At Syftet Ltd., I <strong>improved the performance of React Native apps</strong> by optimising component
+                rendering, preventing unnecessary re-renders and tightening application logic and data handling. I
+                <strong>implemented an offline-first architecture with SQLite</strong>, so users could keep working with
+                their data without an internet connection and have it synchronise once connectivity returned.
               </p>
-            </div>
-
-            <div class="about-focus">
-              <span class="about-focus-label">Currently exploring</span>
-              <ul>
-                <li>MCP servers</li>
-                <li>AI automation</li>
-                <li>Agentic AI development</li>
-                <li>Software engineering</li>
-              </ul>
+              <p>
+                On larger front ends, I <strong>managed complex state and state transitions with Redux</strong> to keep
+                data flow predictable across feature-rich applications, and built them from
+                <strong>reusable, maintainable components</strong> shared across features. I've also delivered real-time
+                features, using WebSockets in Angular for live messaging and updates between users.
+              </p>
+              <p>
+                Much of my work sits where teams meet. I <strong>collaborate closely with designers, backend engineers and
+                project managers</strong> to turn designs into working features and integrate them with backend services,
+                including alongside a Ruby on Rails team. A teammate at Syftet described me as &ldquo;a proactive team
+                player who is always willing to lend a hand.&rdquo;
+              </p>
+              <p>
+                I'm now completing an MSc in Computer Science at University College Birmingham, where my dissertation
+                measures gender and ethnicity bias in machine-learning CV screening, and I'm exploring AI-powered
+                development: MCP servers, AI automation and agentic applications.
+              </p>
             </div>
 
             <div class="currently-working d-flex justify-content-between flex-wrap">
@@ -191,15 +215,15 @@
     </div>
   </section>
 
-  <section class="skill-section section" id="skill-section" data-aos="fade-up" data-aos-easing="linear">
+  <section class="skill-section section" id="skill-section">
     <div class="container">
-      <div class="text-center">
+      <div class="text-center" data-aos="fade-up">
         <h5 class="sub-title">SKILLS</h5>
         <h2 class="title">My professional skills</h2>
       </div>
 
       <div class="skills-grid">
-        <article class="skill-group">
+        <article class="skill-group" data-reveal>
           <div class="skill-group-head">
             <span class="skill-icon" aria-hidden="true"><i class="fa fa-code"></i></span>
             <h3 class="skill-group-title">Front-end</h3>
@@ -219,7 +243,7 @@
             <li>WebSocket</li>
           </ul>
         </article>
-        <article class="skill-group">
+        <article class="skill-group" data-reveal data-reveal-delay="100">
           <div class="skill-group-head">
             <span class="skill-icon" aria-hidden="true"><i class="fa fa-mobile"></i></span>
             <h3 class="skill-group-title">Mobile</h3>
@@ -233,7 +257,7 @@
             <li>SQLite</li>
           </ul>
         </article>
-        <article class="skill-group">
+        <article class="skill-group" data-reveal>
           <div class="skill-group-head">
             <span class="skill-icon" aria-hidden="true"><i class="fa fa-server"></i></span>
             <h3 class="skill-group-title">Back-end &amp; data</h3>
@@ -248,7 +272,7 @@
             <li>Firebase</li>
           </ul>
         </article>
-        <article class="skill-group skill-group-new">
+        <article class="skill-group skill-group-new" data-reveal data-reveal-delay="100">
           <div class="skill-group-head">
             <span class="skill-icon" aria-hidden="true"><i class="fa fa-microchip"></i></span>
             <h3 class="skill-group-title">AI &amp; automation</h3>
@@ -266,9 +290,9 @@
     </div>
   </section>
 
-  <section class="portfolio-section section" id="portfolio-section" data-aos="fade-down" data-aos-easing="linear">
+  <section class="portfolio-section section" id="portfolio-section">
     <div class="container">
-      <div class="titles text-center">
+      <div class="titles text-center" data-aos="fade-up">
         <h5 class="sub-title">PORTFOLIO</h5>
         <h2 class="title">Selected work</h2>
       </div>
@@ -283,16 +307,16 @@
   </section>
 
   <!-- Recommendations, quoted word for word from LinkedIn. ui.js handles "Read full recommendation". -->
-  <section class="recommendations-section section" id="recommendations-section" data-aos="fade-up" data-aos-easing="linear">
+  <section class="recommendations-section section" id="recommendations-section">
     <div class="container">
-      <div class="text-center">
+      <div class="text-center" data-aos="fade-up">
         <h5 class="sub-title">RECOMMENDATIONS</h5>
         <h2 class="title">What colleagues say</h2>
         <p class="recs-lede">From people I've worked with, as published on LinkedIn.</p>
       </div>
 
       <div class="recs">
-        <article class="rec">
+        <article class="rec" data-reveal>
           <span class="rec-mark" aria-hidden="true">&ldquo;</span>
           <p class="rec-highlight">I can attest to his exceptional work ethic, attention to detail, and dedication to his craft.</p>
           <div class="rec-full" id="rec-emran" hidden>
@@ -327,7 +351,7 @@
           </div>
         </article>
 
-        <article class="rec">
+        <article class="rec" data-reveal data-reveal-delay="120">
           <span class="rec-mark" aria-hidden="true">&ldquo;</span>
           <p class="rec-highlight">He&rsquo;s hardworking, helpful, and always willing to learn and solve problems together.</p>
           <div class="rec-full" id="rec-mazharul" hidden>
@@ -363,9 +387,9 @@
   </section>
 
   <!-- GitHub activity: activity.js fills the [data-*] slots from the GitHub API when the section nears the viewport. -->
-  <section class="activity-section section" id="activity-section" data-aos="fade-up" data-aos-easing="linear">
+  <section class="activity-section section" id="activity-section">
     <div class="container">
-      <div class="titles text-center">
+      <div class="titles text-center" data-aos="fade-up">
         <h5 class="sub-title">ACTIVITY</h5>
         <h2 class="title">What I'm building</h2>
       </div>
@@ -378,13 +402,13 @@
         <p class="activity-sync" data-sync aria-live="polite">Connecting to GitHub&hellip;</p>
 
         <div class="activity-stats">
-          <div class="activity-stat"><span class="activity-stat-value" data-stat="contributions">&ndash;</span><span class="activity-stat-label">Contributions this year</span></div>
-          <div class="activity-stat"><span class="activity-stat-value" data-stat="repos">&ndash;</span><span class="activity-stat-label">Public repositories</span></div>
-          <div class="activity-stat"><span class="activity-stat-value" data-stat="languages">&ndash;</span><span class="activity-stat-label">Top languages</span></div>
-          <div class="activity-stat"><span class="activity-stat-value" data-stat="last-push">&ndash;</span><span class="activity-stat-label">Last push</span></div>
+          <div class="activity-stat" data-aos="fade-up" data-aos-delay="0"><span class="activity-stat-value" data-stat="contributions">&ndash;</span><span class="activity-stat-label">Contributions this year</span></div>
+          <div class="activity-stat" data-aos="fade-up" data-aos-delay="80"><span class="activity-stat-value" data-stat="repos">&ndash;</span><span class="activity-stat-label">Public repositories</span></div>
+          <div class="activity-stat" data-aos="fade-up" data-aos-delay="160"><span class="activity-stat-value" data-stat="languages">&ndash;</span><span class="activity-stat-label">Top languages</span></div>
+          <div class="activity-stat" data-aos="fade-up" data-aos-delay="240"><span class="activity-stat-value" data-stat="last-push">&ndash;</span><span class="activity-stat-label">Last push</span></div>
         </div>
 
-        <div class="activity-card activity-calendar-card">
+        <div class="activity-card activity-calendar-card" data-aos="fade-up">
           <div class="activity-card-head">
             <h3 class="activity-card-title">Contributions</h3>
             <div class="activity-legend" aria-hidden="true">
@@ -398,7 +422,7 @@
 
         <div class="row g-4">
           <div class="col-lg-6">
-            <div class="activity-card h-100">
+            <div class="activity-card h-100" data-aos="fade-up" data-aos-delay="0">
               <h3 class="activity-card-title">Latest commits</h3>
               <ul class="activity-list" data-commits>
                 <li class="activity-skeleton"></li>
@@ -408,7 +432,7 @@
             </div>
           </div>
           <div class="col-lg-6">
-            <div class="activity-card h-100">
+            <div class="activity-card h-100" data-aos="fade-up" data-aos-delay="120">
               <h3 class="activity-card-title">Recently active repositories</h3>
               <ul class="activity-list" data-repos>
                 <li class="activity-skeleton"></li>
@@ -432,9 +456,9 @@
     </div>
   </section>
 
-  <section class="contact-section section" id="contact-section" data-aos="zoom-in-down" data-aos-easing="linear">
+  <section class="contact-section section" id="contact-section">
     <div class="container">
-      <div class="text-center">
+      <div class="text-center" data-aos="fade-up">
         <h5 class="sub-title">CONTACT</h5>
         <h2 class="title">Get in touch</h2>
         <p class="availability"><span class="availability-dot" aria-hidden="true"></span>Open to software engineering roles in the UK</p>
@@ -443,7 +467,7 @@
           <a href="mailto:iqbalahmed9865@gmail.com">iqbalahmed9865@gmail.com</a>.
         </p>
       </div>
-      <div class="row contact-form-container">
+      <div class="row contact-form-container" data-aos="fade-up" data-aos-delay="100">
         <form id="contactForm" class="mx-auto contact-form-responsive">
           <div class="row">
             <div class="col-md-6">
@@ -536,7 +560,14 @@
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
-    AOS.init();
+    // Soft, one-time reveals; switched off entirely for visitors who prefer reduced motion.
+    AOS.init({
+      duration: 700,
+      easing: "ease-out-cubic",
+      once: true,
+      offset: 60,
+      disable: () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    });
   </script>
   <script src="./ui.js"></script>
   <script src="./activity.js" defer></script>

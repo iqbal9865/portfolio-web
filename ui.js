@@ -3,15 +3,6 @@
 (function () {
   const root = document.documentElement;
   const toggle = document.getElementById("theme-toggle");
-  const systemDark = window.matchMedia("(prefers-color-scheme: dark)");
-
-  function getSavedTheme() {
-    try {
-      return localStorage.getItem("theme");
-    } catch (e) {
-      return null;
-    }
-  }
 
   function updateToggleLabel(theme) {
     const label = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
@@ -38,11 +29,6 @@
     } catch (e) {
       // Storage unavailable (private mode etc.) - the theme still applies for this visit.
     }
-  });
-
-  // Follow OS theme changes until the visitor picks a theme explicitly.
-  systemDark.addEventListener("change", (e) => {
-    if (!getSavedTheme()) applyTheme(e.matches ? "dark" : "light", true);
   });
 })();
 
@@ -152,10 +138,14 @@
   if (!header) return;
   const menuToggle = document.getElementById("menu-toggle");
   const links = Array.from(header.querySelectorAll('.menu a[href^="#"]'));
+  const progress = header.querySelector(".scroll-progress");
 
   let ticking = false;
   function updateHeader() {
     header.classList.toggle("is-scrolled", window.scrollY > 24);
+    // Thin line under the header showing how far down the page the reader is.
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    if (progress) progress.style.transform = `scaleX(${max > 0 ? Math.min(window.scrollY / max, 1) : 0})`;
     ticking = false;
   }
   window.addEventListener(
@@ -212,6 +202,74 @@
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && menuToggle && menuToggle.checked) menuToggle.checked = false;
   });
+})();
+
+// Hero tagline: the role after "Software Engineer —" rotates every few seconds.
+// The old word slides up and out (.is-out) while the next one slides in (.is-in).
+(function () {
+  const words = document.querySelectorAll(".role-word");
+  if (words.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  let current = 0;
+  setInterval(() => {
+    const prev = words[current];
+    current = (current + 1) % words.length;
+    const next = words[current];
+    prev.classList.replace("is-in", "is-out");
+    next.classList.remove("is-out");
+    next.classList.add("is-in");
+    setTimeout(() => prev.classList.remove("is-out"), 700);
+  }, 2600);
+})();
+
+// Card reveals: cards that lift on hover fade up once as they scroll into view. They use a
+// keyframe on the `translate` property (see _base.scss) rather than AOS, whose transform and
+// transition rules would override the hover lift. Works cards are rendered later by works.js,
+// so its containers are watched for new cards.
+(function () {
+  if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  document.documentElement.classList.add("reveal-ready");
+
+  const io = new IntersectionObserver(
+    (entries) =>
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-revealed");
+        io.unobserve(entry.target);
+      }),
+    { rootMargin: "0px 0px -60px 0px" }
+  );
+
+  function observe(scope) {
+    scope.querySelectorAll("[data-reveal]:not(.is-revealed)").forEach((el) => {
+      if (el.dataset.revealDelay) el.style.setProperty("--reveal-delay", el.dataset.revealDelay + "ms");
+      io.observe(el);
+    });
+  }
+
+  observe(document);
+  document.querySelectorAll("[data-works-featured], [data-works-grid]").forEach((container) => {
+    new MutationObserver(() => observe(container)).observe(container, { childList: true });
+  });
+})();
+
+// Card spotlight: a soft glow follows the pointer across cards that lift on hover
+// (drawn by the card-surface mixin from --mx / --my). Mouse and trackpad only.
+(function () {
+  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+  const cards = ".skill-group, .rec, .works-feature, .works-card";
+
+  document.addEventListener(
+    "pointermove",
+    (e) => {
+      const card = e.target.closest(cards);
+      if (!card) return;
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+      card.style.setProperty("--my", `${e.clientY - rect.top}px`);
+    },
+    { passive: true }
+  );
 })();
 
 // Footer copyright year.

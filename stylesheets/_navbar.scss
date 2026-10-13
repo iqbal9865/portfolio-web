@@ -10,6 +10,24 @@
   padding: 20px 0;
   transition: padding 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
 
+  // Reading progress along the bottom edge (ui.js sets its scaleX). Only shown on the frosted bar.
+  .scroll-progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--hero-grad-line);
+    transform: scaleX(0);
+    transform-origin: left;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  &.is-scrolled .scroll-progress {
+    opacity: 1;
+  }
+
   &.is-scrolled {
     padding: 8px 0;
     background-color: var(--header-bg);

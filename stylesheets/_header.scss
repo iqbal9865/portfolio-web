@@ -1,3 +1,6 @@
+// Easing for the hero tagline (role rotator and word fade-in).
+$tagline-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
 .main {
   // Code-editor style backdrop: soft glows over a faint grid. Dark in both themes (navy in dark mode).
   background-color: var(--hero-bg);
@@ -59,13 +62,83 @@
     color: $heroText;
     margin: 12px 0 20px;
   }
-  .designation {
+  // Tagline: "Software Engineer — <rotating role>" above a sentence whose words fade in.
+  .role-line {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.9rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 2vw, 1.7rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: $heroText;
+  }
+
+  .role-sep {
+    width: 28px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--hero-grad-line);
+  }
+
+  // Every word sits in the same grid cell, so the rotator is as wide as the longest one.
+  .role-rotator {
+    display: inline-grid;
+    overflow: hidden;
+    height: 1.35em;
+    line-height: 1.35;
+  }
+
+  .role-word,
+  .grad {
+    background: var(--hero-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .role-word {
+    grid-area: 1 / 1;
+    white-space: nowrap;
+    font-weight: 700;
+    opacity: 0;
+    transform: translateY(100%);
+    filter: blur(6px);
+    transition: transform 0.7s $tagline-ease, opacity 0.7s, filter 0.7s;
+
+    &.is-in {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+
+    &.is-out {
+      transform: translateY(-100%);
+    }
+  }
+
+  .tag-sentence {
     max-width: 34ch;
-    font-size: clamp(1.1rem, 1.5vw, 1.35rem);
-    font-weight: 500;
+    margin: 0.9rem 0 0;
+    font-size: clamp(1.05rem, 1.4vw, 1.25rem);
     line-height: 1.55;
     color: rgba(255, 255, 255, 0.72);
-    margin: 0;
+
+    .w {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(0.5em);
+      filter: blur(4px);
+      animation: tagline-word-in 0.8s $tagline-ease forwards;
+
+      @for $i from 1 through 5 {
+        &:nth-child(#{$i}) {
+          animation-delay: 0.27s + $i * 0.08s;
+        }
+      }
+    }
   }
   // Minimal mouse outline with a wheel that scrolls down in a loop.
   .scroll-indicator {
@@ -116,6 +189,14 @@
   }
 }
 
+@keyframes tagline-word-in {
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
+
 @keyframes scroll-wheel {
   0% {
     transform: translateY(0);
@@ -135,6 +216,13 @@
   .main .scroll-wheel {
     animation: none;
   }
+  // Show the tagline as plain text (ui.js also doesn't rotate the role).
+  .main .tag-sentence .w {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
 }
 
 
@@ -143,8 +231,8 @@
     .name {
       font-size: clamp(3rem, 14vw, 4.5rem);
     }
-    .designation {
-      font-size: 1.25rem;
+    .tag-sentence {
+      font-size: 1.15rem;
     }
   }
 }

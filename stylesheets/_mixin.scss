@@ -10,3 +10,39 @@
 @mixin border-radius($variable) {
   border-radius: $variable;
 }
+
+// Shared card look: solid white in light mode, translucent blurred "glass"
+// (like the hero terminal) in dark mode. Hover lifts the card and tints its border.
+@mixin card-surface($lift: true) {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  backdrop-filter: var(--card-blur);
+  box-shadow: var(--card-shadow);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+
+  @if $lift {
+    position: relative;
+
+    &:hover {
+      transform: translateY(-4px);
+      border-color: var(--card-hover-border);
+      box-shadow: var(--card-hover-shadow);
+    }
+
+    // Spotlight that follows the pointer; ui.js sets --mx / --my (centre-top until it does).
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      pointer-events: none;
+      background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 0%), var(--card-spot), transparent 65%);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    &:hover::after {
+      opacity: 1;
+    }
+  }
+}

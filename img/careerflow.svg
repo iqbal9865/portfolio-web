@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'JetBrains Mono', ui-monospace, Consolas, monospace">
+  <!-- CareerFlow cover: the API's request path through its layers. Matches the site's navy hero palette. -->
+  <defs>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0V44" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+    <radialGradient id="glowA" cx="0.18" cy="0.2" r="0.55">
+      <stop offset="0" stop-color="#38bdf8" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.85" cy="0.8" r="0.5">
+      <stop offset="0" stop-color="#4ade80" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#4ade80" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0" x2="1">
+      <stop offset="0" stop-color="#79c0ff"/>
+      <stop offset="0.5" stop-color="#94a9ff"/>
+      <stop offset="1" stop-color="#4ade80"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#94a9ff"/>
+    </marker>
+  </defs>
+
+  <rect width="1600" height="900" fill="#0b1020"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <rect width="1600" height="900" fill="url(#glowA)"/>
+  <rect width="1600" height="900" fill="url(#glowB)"/>
+
+  <!-- Title -->
+  <text x="120" y="250" fill="#ffffff" font-family="Sora, 'Segoe UI', sans-serif" font-size="92" font-weight="700" letter-spacing="-3">CareerFlow</text>
+  <text x="124" y="312" fill="url(#accent)" font-size="30" font-weight="600">REST API · in progress</text>
+  <text x="124" y="400" fill="#96a0ba" font-size="24">Express.js · TypeScript</text>
+  <text x="124" y="440" fill="#96a0ba" font-size="24">Prisma · PostgreSQL</text>
+  <text x="124" y="480" fill="#96a0ba" font-size="24">JWT access + refresh tokens</text>
+
+  <g font-size="22">
+    <rect x="124" y="560" width="132" height="44" rx="22" fill="#79c0ff" fill-opacity="0.08" stroke="#79c0ff" stroke-opacity="0.3"/>
+    <text x="190" y="589" fill="#a5d6ff" text-anchor="middle">auth</text>
+    <rect x="272" y="560" width="164" height="44" rx="22" fill="#79c0ff" fill-opacity="0.08" stroke="#79c0ff" stroke-opacity="0.3"/>
+    <text x="354" y="589" fill="#a5d6ff" text-anchor="middle">profiles</text>
+    <rect x="452" y="560" width="210" height="44" rx="22" fill="#79c0ff" fill-opacity="0.08" stroke="#79c0ff" stroke-opacity="0.3"/>
+    <text x="557" y="589" fill="#a5d6ff" text-anchor="middle">applications</text>
+  </g>
+
+  <!-- Layer stack -->
+  <g font-size="26">
+    <rect x="900" y="110" width="560" height="680" rx="22" fill="#0d1117" fill-opacity="0.85" stroke="#ffffff" stroke-opacity="0.1"/>
+    <circle cx="936" cy="146" r="8" fill="#ff5f57"/>
+    <circle cx="962" cy="146" r="8" fill="#febc2e"/>
+    <circle cx="988" cy="146" r="8" fill="#28c840"/>
+    <text x="1180" y="154" fill="#ffffff" fill-opacity="0.45" font-size="18" text-anchor="middle">request flow</text>
+    <line x1="900" y1="180" x2="1460" y2="180" stroke="#ffffff" stroke-opacity="0.06"/>
+
+    <g fill="#141b2e" stroke="#94a9ff" stroke-opacity="0.35">
+      <rect x="960" y="210" width="440" height="66" rx="12"/>
+      <rect x="960" y="306" width="440" height="66" rx="12"/>
+      <rect x="960" y="402" width="440" height="66" rx="12"/>
+      <rect x="960" y="498" width="440" height="66" rx="12"/>
+      <rect x="960" y="594" width="440" height="66" rx="12"/>
+    </g>
+    <rect x="960" y="690" width="440" height="66" rx="12" fill="#4ade80" fill-opacity="0.1" stroke="#4ade80" stroke-opacity="0.5"/>
+
+    <g fill="#e6edf3">
+      <text x="990" y="252">routes</text>
+      <text x="990" y="348">middleware</text>
+      <text x="990" y="444">controllers</text>
+      <text x="990" y="540">services</text>
+      <text x="990" y="636">prisma</text>
+      <text x="990" y="732" fill="#4ade80">postgresql</text>
+    </g>
+    <g fill="#79c0ff" font-size="19" text-anchor="end">
+      <text x="1376" y="251">Express</text>
+      <text x="1376" y="347">JWT · validation</text>
+      <text x="1376" y="443">request / response</text>
+      <text x="1376" y="539">business logic</text>
+      <text x="1376" y="635">data access</text>
+      <text x="1376" y="731" fill="#4ade80">database</text>
+    </g>
+
+    <g stroke="#94a9ff" stroke-width="2" marker-end="url(#arrow)">
+      <line x1="1180" y1="278" x2="1180" y2="300"/>
+      <line x1="1180" y1="374" x2="1180" y2="396"/>
+      <line x1="1180" y1="470" x2="1180" y2="492"/>
+      <line x1="1180" y1="566" x2="1180" y2="588"/>
+      <line x1="1180" y1="662" x2="1180" y2="684"/>
+    </g>
+  </g>
+</svg>

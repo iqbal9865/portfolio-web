@@ -129,22 +129,20 @@ $card-radius: 12px;
     margin: 3rem 0 4.5rem;
   }
 
+  // Content gets slightly more room than the image (55 / 45), mirrored on every other row.
   .works-feature {
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     overflow: hidden;
-    border: 1px solid var(--color-border);
-    background-color: var(--color-surface);
     border-radius: $card-radius;
-    transition: transform 0.3s, box-shadow 0.3s;
+    @include card-surface;
 
-    &:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 40px var(--shadow-color);
-    }
+    &:nth-child(even) {
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
 
-    &:nth-child(even) .works-feature-media {
-      order: 2;
+      .works-feature-media {
+        order: 2;
+      }
     }
   }
 
@@ -246,17 +244,10 @@ $card-radius: 12px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border: 1px solid var(--color-border);
-    background-color: var(--color-surface);
     color: var(--color-text);
     text-decoration: none;
     border-radius: $card-radius;
-    transition: transform 0.3s, box-shadow 0.3s;
-
-    &:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 18px 40px var(--shadow-color);
-    }
+    @include card-surface;
   }
 
   .works-card-media {
@@ -608,12 +599,13 @@ html.case-study-open body {
 
 @media (max-width: 860px) {
   .portfolio-section {
-    .works-feature {
+    .works-feature,
+    .works-feature:nth-child(even) {
       grid-template-columns: 1fr;
+    }
 
-      &:nth-child(even) .works-feature-media {
-        order: 0;
-      }
+    .works-feature:nth-child(even) .works-feature-media {
+      order: 0;
     }
 
     .works-feature-media {

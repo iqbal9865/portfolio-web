@@ -59,6 +59,69 @@ html {
   }
 }
 
+// Every content section shares the hero's backdrop: a faint 44px grid, soft glows
+// that drift slowly (::before) and, in dark mode, a vignette (::after).
+// Each section keeps its own background-color, so they still alternate.
+.section:not(.footer-section) {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-top: 1px solid var(--section-divider);
+  background-image: linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 44px 44px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+  &::before {
+    inset: -20%;
+    background: radial-gradient(ellipse 35% 30% at 18% 25%, var(--glow-a), transparent 70%),
+      radial-gradient(ellipse 30% 28% at 82% 72%, var(--glow-b), transparent 70%),
+      radial-gradient(ellipse 28% 24% at 60% 10%, var(--glow-c), transparent 70%);
+    animation: section-glow 24s ease-in-out infinite alternate;
+  }
+
+  // Mirror the glows on every other section so they don't line up down the page.
+  &:nth-of-type(even)::before {
+    animation-name: section-glow-flip;
+  }
+
+  &::after {
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 45%, var(--section-vignette) 100%);
+  }
+}
+
+@keyframes section-glow {
+  from {
+    transform: translate3d(-3%, -2%, 0);
+  }
+  to {
+    transform: translate3d(3%, 3%, 0);
+  }
+}
+
+@keyframes section-glow-flip {
+  from {
+    transform: scaleX(-1) translate3d(-3%, -2%, 0);
+  }
+  to {
+    transform: scaleX(-1) translate3d(3%, 3%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section::before {
+    animation: none;
+  }
+}
+
 // Section heading: small accent eyebrow (.sub-title) above a large display title (.title).
 html .sub-title {
   display: inline-flex;
@@ -78,6 +141,36 @@ html .sub-title {
     height: 2px;
     border-radius: 2px;
     background-color: currentColor;
+  }
+}
+
+// The eyebrow's leading rule draws in when its heading is revealed by AOS. (With reduced
+// motion AOS is disabled and strips data-aos, so the rule is simply shown.)
+html [data-aos] .sub-title::before {
+  width: 0;
+  transition: width 0.6s cubic-bezier(0.215, 0.61, 0.355, 1) 0.25s;
+}
+html [data-aos].aos-animate .sub-title::before {
+  width: 1.5rem;
+}
+
+// Card reveals (ui.js): cards that lift on hover fade up once on scroll. The keyframe moves
+// the separate `translate` property, so it never fights the hover `transform`.
+.reveal-ready [data-reveal] {
+  opacity: 0;
+}
+.reveal-ready [data-reveal].is-revealed {
+  animation: reveal-up 0.7s cubic-bezier(0.215, 0.61, 0.355, 1) var(--reveal-delay, 0ms) both;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    translate: 0 28px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
   }
 }
 

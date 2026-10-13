@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+  <!-- Silvrback cover: a published post in a clean, words-first reading layout, with the SCSS
+       design system on the left and the writing side (draft, publish, reading progress) on the right. -->
+  <defs>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0V44" fill="none" stroke="#ffffff" stroke-opacity="0.045"/>
+    </pattern>
+    <radialGradient id="glowA" cx="0.5" cy="0.4" r="0.55">
+      <stop offset="0" stop-color="#c0c7d6" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#c0c7d6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.12" cy="0.85" r="0.4">
+      <stop offset="0" stop-color="#f59e0b" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="page"><rect x="440" y="110" width="720" height="700" rx="18"/></clipPath>
+  </defs>
+
+  <rect width="1600" height="900" fill="#0c1020"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <rect width="1600" height="900" fill="url(#glowA)"/>
+  <rect width="1600" height="900" fill="url(#glowB)"/>
+
+  <!-- Left: SCSS design system -->
+  <g transform="translate(180 190)">
+    <rect width="230" height="430" rx="20" fill="#0d1117" fill-opacity="0.88" stroke="#ffffff" stroke-opacity="0.1"/>
+    <text x="22" y="42" fill="#f9a8d4" font-family="'JetBrains Mono', Consolas, monospace" font-size="13" font-weight="700">_design-system.scss</text>
+    <line x1="22" y1="60" x2="208" y2="60" stroke="#ffffff" stroke-opacity="0.08"/>
+    <text x="22" y="92" fill="#9ba7b4" font-size="12" letter-spacing="1.5" font-weight="700">TYPE</text>
+    <text x="22" y="140" fill="#ffffff" font-family="Georgia, 'Times New Roman', serif" font-size="44">Aa</text>
+    <text x="92" y="140" fill="#c9d1d9" font-family="Georgia, serif" font-size="28">Aa</text>
+    <text x="142" y="140" fill="#9ba7b4" font-family="Georgia, serif" font-size="18">Aa</text>
+    <text x="22" y="186" fill="#9ba7b4" font-size="12" letter-spacing="1.5" font-weight="700">COLOUR</text>
+    <circle cx="38" cy="214" r="14" fill="#f4efe6"/><circle cx="76" cy="214" r="14" fill="#1f2328"/><circle cx="114" cy="214" r="14" fill="#a3a9b5"/><circle cx="152" cy="214" r="14" fill="#c2410c"/>
+    <text x="22" y="264" fill="#9ba7b4" font-size="12" letter-spacing="1.5" font-weight="700">SPACING</text>
+    <g fill="#79c0ff" fill-opacity="0.7"><rect x="22" y="280" width="8" height="16" rx="2"/><rect x="38" y="280" width="16" height="16" rx="2"/><rect x="62" y="280" width="24" height="16" rx="2"/><rect x="94" y="280" width="40" height="16" rx="2"/><rect x="142" y="280" width="64" height="16" rx="2"/></g>
+    <g font-family="'JetBrains Mono', Consolas, monospace" font-size="13">
+      <text x="22" y="338" fill="#79c0ff">$measure</text><text x="208" y="338" fill="#a5d6ff" text-anchor="end">65ch</text>
+      <text x="22" y="366" fill="#79c0ff">$leading</text><text x="208" y="366" fill="#a5d6ff" text-anchor="end">1.7</text>
+      <text x="22" y="394" fill="#79c0ff">@mixin</text><text x="208" y="394" fill="#a5d6ff" text-anchor="end">card</text>
+    </g>
+  </g>
+
+  <!-- Right: writing side -->
+  <g transform="translate(1190 200)">
+    <rect width="230" height="250" rx="20" fill="#0d1117" fill-opacity="0.88" stroke="#ffffff" stroke-opacity="0.1"/>
+    <text x="22" y="42" fill="#9ba7b4" font-size="12" letter-spacing="1.5" font-weight="700">DRAFT</text>
+    <circle cx="28" cy="72" r="5" fill="#4ade80"/>
+    <text x="42" y="77" fill="#e6edf3" font-size="15">Saved</text>
+    <rect x="22" y="98" width="186" height="8" rx="4" fill="#ffffff" fill-opacity="0.16"/>
+    <rect x="22" y="116" width="150" height="8" rx="4" fill="#ffffff" fill-opacity="0.1"/>
+    <rect x="22" y="134" width="170" height="8" rx="4" fill="#ffffff" fill-opacity="0.1"/>
+    <rect x="22" y="176" width="186" height="48" rx="12" fill="#f4efe6"/>
+    <text x="115" y="206" fill="#1f2328" font-size="16" font-weight="700" text-anchor="middle">Publish</text>
+  </g>
+  <g transform="translate(1190 480)">
+    <rect width="230" height="140" rx="20" fill="#0d1117" fill-opacity="0.88" stroke="#ffffff" stroke-opacity="0.1"/>
+    <text x="22" y="42" fill="#9ba7b4" font-size="12" letter-spacing="1.5" font-weight="700">READING PROGRESS</text>
+    <rect x="22" y="66" width="186" height="8" rx="4" fill="#ffffff" fill-opacity="0.12"/>
+    <rect x="22" y="66" width="112" height="8" rx="4" fill="#f59e0b"/>
+    <text x="22" y="110" fill="#e6edf3" font-size="15">60% · 4 min left</text>
+  </g>
+
+  <!-- Centre: the article -->
+  <g clip-path="url(#page)">
+    <rect x="440" y="110" width="720" height="700" fill="#f4efe6"/>
+    <!-- browser bar -->
+    <rect x="440" y="110" width="720" height="50" fill="#e7e1d6"/>
+    <circle cx="470" cy="135" r="6" fill="#ff5f57"/><circle cx="490" cy="135" r="6" fill="#febc2e"/><circle cx="510" cy="135" r="6" fill="#28c840"/>
+    <rect x="600" y="122" width="400" height="26" rx="13" fill="#f4efe6"/>
+    <text x="800" y="140" fill="#6b6457" font-size="13" text-anchor="middle">yourname.silvrback.com</text>
+    <!-- progress bar driven by scroll -->
+    <rect x="440" y="160" width="430" height="4" fill="#f59e0b"/>
+
+    <g transform="translate(560 0)">
+      <text x="0" y="226" fill="#8a8173" font-size="13" letter-spacing="2" font-weight="700">ESSAY</text>
+      <text x="0" y="284" fill="#1f2328" font-family="Georgia, 'Times New Roman', serif" font-size="46" font-weight="700">Notes on writing</text>
+      <text x="0" y="338" fill="#1f2328" font-family="Georgia, 'Times New Roman', serif" font-size="46" font-weight="700">every day</text>
+      <circle cx="16" cy="382" r="16" fill="#a3a9b5"/>
+      <text x="44" y="388" fill="#4b4740" font-size="15">A. Writer · 6 min read</text>
+      <line x1="0" y1="420" x2="480" y2="420" stroke="#1f2328" stroke-opacity="0.12"/>
+
+      <g font-family="Georgia, 'Times New Roman', serif" fill="#2d2a26" font-size="19">
+        <text x="0" y="498" font-size="66" font-weight="700" fill="#c2410c">T</text>
+        <text x="50" y="460">he blank page is less frightening</text>
+        <text x="50" y="492">when you meet it every morning.</text>
+        <text x="0" y="530">Small, honest paragraphs add up, and a quiet</text>
+        <text x="0" y="562">place to publish them makes it easier to keep</text>
+        <text x="0" y="594">going.</text>
+      </g>
+      <rect x="0" y="626" width="4" height="74" fill="#c2410c"/>
+      <text x="22" y="656" fill="#1f2328" font-family="Georgia, serif" font-size="22" font-style="italic">“Write for the reader who stays</text>
+      <text x="22" y="688" fill="#1f2328" font-family="Georgia, serif" font-size="22" font-style="italic">to the last line.”</text>
+      <rect x="0" y="730" width="470" height="8" rx="4" fill="#2d2a26" fill-opacity="0.14"/>
+      <rect x="0" y="750" width="420" height="8" rx="4" fill="#2d2a26" fill-opacity="0.1"/>
+    </g>
+  </g>
+  <rect x="440" y="110" width="720" height="700" rx="18" fill="none" stroke="#ffffff" stroke-opacity="0.18"/>
+</svg>

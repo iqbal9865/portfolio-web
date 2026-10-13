@@ -124,30 +124,59 @@
   }
 }
 
-// Below the large breakpoint there's no room beside the intro, so the terminal is hidden...
+// Below the large breakpoint there's no room beside the intro, so the terminal
+// stacks underneath it instead (tablets, phones in portrait and landscape).
 @media (max-width: 991px) {
-  .terminal {
-    display: none;
-  }
-}
-
-// ...except on tall tablets (portrait iPad etc.), where it stacks under the intro
-// instead of leaving the hero half empty. The height check keeps it off landscape phones.
-@media (min-width: 768px) and (max-width: 991px) and (min-height: 820px) {
   .main .header-container {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    gap: 2.5rem;
   }
   .main .intro {
     flex: 0 0 auto;
   }
   .terminal {
-    display: block;
     width: 560px;
   }
   .terminal-body {
-    font-size: 13.5px;
-    min-height: 355px;
+    font-size: 13px;
+    min-height: 345px;
+  }
+}
+
+// Phones: the terminal takes the full width and the text scales with the screen
+// so the longest line (~50 chars) still fits. On the narrowest screens (<360px)
+// lines wrap instead of overflowing. min-height is in em so it scales with the font.
+@media (max-width: 575px) {
+  .main .header-container {
+    gap: 2rem;
+  }
+  .terminal {
+    width: 100%;
+    border-radius: 10px;
+  }
+  .terminal-bar {
+    gap: 6px;
+    padding: 10px 12px;
+  }
+  .terminal-dot {
+    width: 10px;
+    height: 10px;
+  }
+  .terminal-title {
+    font-size: 11px;
+  }
+  .terminal-body {
+    font-size: clamp(9.5px, 2.75vw, 12px);
+    // 13 lines × 1.7 line-height, plus the vertical padding.
+    min-height: calc(22.1em + 28px);
+    padding: 12px 14px 16px;
+    line-height: 1.7;
+
+    .term-line {
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
   }
 }

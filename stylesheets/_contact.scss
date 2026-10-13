@@ -48,6 +48,14 @@
   .contact-form-container {
     padding: 25px 10px;
     form {
+      padding: 2rem;
+      border-radius: 14px;
+      @include card-surface(false);
+
+      @media (max-width: 575px) {
+        padding: 1.25rem;
+      }
+
       input, textarea {
         width: 100%;
         padding: 15px;

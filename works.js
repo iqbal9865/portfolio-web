@@ -36,7 +36,7 @@
       .filter((p) => p.featured)
       .map(
         (p) => `
-      <article class="works-feature">
+      <article class="works-feature" data-reveal>
         <a class="works-feature-media" href="${HASH_PREFIX}${p.id}" aria-label="Read the ${esc(p.title)} case study">
           <img src="${esc(p.image)}" alt="${esc(p.title)} screenshot" loading="lazy" />
         </a>
@@ -44,7 +44,7 @@
           ${eyebrow(["Featured", p.type, p.platform])}
           <h3 class="works-feature-title">${esc(p.title)}</h3>
           <p class="works-lede">${esc(p.tagline)}</p>
-          ${p.contributions ? bullets(p.contributions) : ""}
+          ${p.highlights || p.contributions ? bullets(p.highlights || p.contributions) : ""}
           ${chips(techOf(p))}
           <div class="works-actions">
             <a class="works-btn" href="${HASH_PREFIX}${p.id}">Read case study <span class="works-arrow" aria-hidden="true">→</span></a>
@@ -75,8 +75,8 @@
     gridEl.innerHTML = others
       .filter((p) => activeFilter === "All" || p.category === activeFilter)
       .map(
-        (p) => `
-      <a class="works-card" href="${HASH_PREFIX}${p.id}">
+        (p, i) => `
+      <a class="works-card" href="${HASH_PREFIX}${p.id}" data-reveal data-reveal-delay="${(i % 2) * 100}">
         <div class="works-card-media"><img src="${esc(p.image)}" alt="" loading="lazy" /></div>
         <div class="works-card-body">
           ${eyebrow([p.category, p.type])}

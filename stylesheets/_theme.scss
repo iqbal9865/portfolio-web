@@ -30,6 +30,9 @@
   --footer-fg: #f1f3fa;
   --footer-muted: #a3aac0;
   --hero-bg: #0b1020;
+  // Hero tagline gradient (the hero is dark in both themes, so these aren't overridden).
+  --hero-grad: linear-gradient(90deg, #79c0ff, #94a9ff 50%, #4ade80);
+  --hero-grad-line: linear-gradient(90deg, #79c0ff, #94a9ff);
   --header-height: 90px;
   --header-bg: rgba(11, 16, 32, 0.92);
   --nav-accent: #94a9ff;
@@ -42,41 +45,74 @@
   --heat-4: #2a3db0;
   --live: #16a34a;
   --live-soft: rgba(22, 163, 74, 0.1);
+
+  // Section backdrop (same grid + glows as the hero, see .section in _base.scss).
+  --grid-line: rgba(14, 20, 36, 0.05);
+  --glow-a: rgba(56, 189, 248, 0.1);
+  --glow-b: rgba(74, 222, 128, 0.07);
+  --glow-c: rgba(58, 82, 214, 0.08);
+  --section-vignette: transparent;
+  --section-divider: rgba(14, 20, 36, 0.05);
+  // Cards (card-surface mixin) and skill tags.
+  --card-blur: none;
+  --card-shadow: 0 1px 2px rgba(14, 20, 36, 0.04);
+  --card-hover-shadow: 0 18px 40px var(--shadow-color);
+  --card-hover-border: rgba(58, 82, 214, 0.3);
+  --card-spot: rgba(58, 82, 214, 0.07);
+  --tag-bg: var(--color-alt-bg);
+  --tag-border: var(--color-border);
+  --tag-fg: var(--color-fg);
 }
 
 :root[data-theme="dark"] {
-  // Navy palette taken from the shirt in the About photo (~#2a2f43).
+  // Deep navy matching the hero; cards are translucent "glass" like the hero terminal.
   color-scheme: dark;
-  --color-bg: #252b40;
+  --color-bg: #0e1426;
   --color-fg: #f2f4fb;
-  --color-text: #c9cee0;
-  --color-muted: #9da4bb;
-  --color-muted-bg: #2f3650;
-  --color-alt-bg: #1e2336;
-  --color-surface: #2c3249;
-  --color-border: #3c4360;
+  --color-text: #c3cadc;
+  --color-muted: #96a0ba;
+  --color-muted-bg: #1a2138;
+  --color-alt-bg: #0b1020;
+  --color-surface: rgba(16, 22, 40, 0.7);
+  --color-border: rgba(255, 255, 255, 0.09);
   --color-accent: #94a9ff;
   --color-accent-soft: rgba(148, 169, 255, 0.12);
   --color-link: #94a9ff;
   --color-error: #ff8080;
-  --input-bg: #1e2336;
-  --input-border: #434a66;
-  --card-overlay: rgba(37, 43, 64, 0.92);
-  --shadow-color: rgba(8, 10, 20, 0.45);
-  --footer-bg: #161a29;
+  --input-bg: rgba(8, 12, 26, 0.6);
+  --input-border: rgba(255, 255, 255, 0.12);
+  --card-overlay: rgba(14, 20, 38, 0.92);
+  --shadow-color: rgba(0, 0, 0, 0.55);
+  --footer-bg: #070b17;
   --footer-fg: #f2f4fb;
   --footer-muted: #9da4bb;
   --hero-bg: #141a2b;
   --header-bg: rgba(20, 26, 43, 0.8);
-  --menu-bg: #1e2336;
-  --menu-border: #3c4360;
-  --heat-0: #2f3650;
+  --menu-bg: #0b1020;
+  --menu-border: #2a3148;
+  --heat-0: #1f2740;
   --heat-1: #3d4a86;
   --heat-2: #5a6fc6;
   --heat-3: #8ea3ff;
   --heat-4: #d6deff;
   --live: #4ade80;
   --live-soft: rgba(74, 222, 128, 0.12);
+
+  --grid-line: rgba(255, 255, 255, 0.04);
+  --glow-a: rgba(56, 189, 248, 0.16);
+  --glow-b: rgba(74, 222, 128, 0.11);
+  --glow-c: rgba(148, 169, 255, 0.14);
+  --section-vignette: rgba(0, 0, 0, 0.45);
+  --section-divider: rgba(255, 255, 255, 0.05);
+  --card-blur: blur(8px);
+  --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --card-hover-shadow: 0 24px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(148, 169, 255, 0.12);
+  --card-hover-border: rgba(148, 169, 255, 0.35);
+  --card-spot: rgba(148, 169, 255, 0.1);
+  // Skill tags use the hero terminal's code blue.
+  --tag-bg: rgba(121, 192, 255, 0.07);
+  --tag-border: rgba(121, 192, 255, 0.18);
+  --tag-fg: #a5d6ff;
 }
 
 @media (prefers-reduced-motion: no-preference) {

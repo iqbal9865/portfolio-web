@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif">
+  <!-- iNwe cover: a live group conversation (reply, reaction, forward, typing), with the chat-room
+       list on the left and the real-time WebSocket/STOMP event stream on the right. Key content
+       stays in the centre so it survives the featured row's portrait crop. -->
+  <defs>
+    <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
+      <path d="M44 0H0V44" fill="none" stroke="#ffffff" stroke-opacity="0.045"/>
+    </pattern>
+    <radialGradient id="glowA" cx="0.5" cy="0.45" r="0.55">
+      <stop offset="0" stop-color="#2f80ed" stop-opacity="0.24"/>
+      <stop offset="1" stop-color="#2f80ed" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="0.9" cy="0.15" r="0.4">
+      <stop offset="0" stop-color="#4ade80" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#4ade80" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mine" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2f80ed"/>
+      <stop offset="1" stop-color="#5b6cf0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="900" fill="#0a0f1e"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <rect width="1600" height="900" fill="url(#glowA)"/>
+  <rect width="1600" height="900" fill="url(#glowB)"/>
+
+  <!-- Left: chat rooms -->
+  <g transform="translate(232 170)">
+    <rect width="230" height="470" rx="20" fill="#0d1117" fill-opacity="0.85" stroke="#ffffff" stroke-opacity="0.1"/>
+    <text x="22" y="42" fill="#ffffff" font-size="20" font-weight="700">Chats</text>
+    <g font-size="15">
+      <rect x="10" y="64" width="210" height="64" rx="14" fill="#2f80ed" fill-opacity="0.18"/>
+      <circle cx="42" cy="96" r="18" fill="#5b6cf0"/><text x="42" y="101" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">FG</text>
+      <text x="70" y="92" fill="#ffffff" font-weight="600">Family group</text><text x="70" y="112" fill="#9ba7b4" font-size="13">Omar: booking for 6</text>
+
+      <circle cx="42" cy="170" r="18" fill="#0f766e"/><text x="42" y="175" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">A</text>
+      <text x="70" y="166" fill="#e6edf3" font-weight="600">Ayesha</text><text x="70" y="186" fill="#9ba7b4" font-size="13">See you tomorrow</text>
+      <circle cx="200" cy="172" r="10" fill="#4ade80"/><text x="200" y="177" fill="#05210f" font-size="12" font-weight="700" text-anchor="middle">2</text>
+
+      <circle cx="42" cy="244" r="18" fill="#9a3412"/><text x="42" y="249" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">WT</text>
+      <text x="70" y="240" fill="#e6edf3" font-weight="600">Work team</text><text x="70" y="260" fill="#9ba7b4" font-size="13">Shared a file</text>
+
+      <circle cx="42" cy="318" r="18" fill="#6d28d9"/><text x="42" y="323" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">BC</text>
+      <text x="70" y="314" fill="#e6edf3" font-weight="600">Book club</text><text x="70" y="334" fill="#9ba7b4" font-size="13">Next meet-up?</text>
+      <circle cx="200" cy="320" r="10" fill="#4ade80"/><text x="200" y="325" fill="#05210f" font-size="12" font-weight="700" text-anchor="middle">5</text>
+
+      <circle cx="42" cy="392" r="18" fill="#b45309"/><text x="42" y="397" fill="#fff" font-size="13" font-weight="700" text-anchor="middle">R</text>
+      <text x="70" y="388" fill="#e6edf3" font-weight="600">Rafi</text><text x="70" y="408" fill="#9ba7b4" font-size="13">Reacted ♥ to a message</text>
+    </g>
+  </g>
+
+  <!-- Right: real-time event stream -->
+  <g transform="translate(1140 200)" font-family="'JetBrains Mono', Consolas, monospace">
+    <rect width="230" height="410" rx="20" fill="#0d1117" fill-opacity="0.85" stroke="#ffffff" stroke-opacity="0.1"/>
+    <circle cx="26" cy="36" r="6" fill="#4ade80"/>
+    <text x="42" y="41" fill="#4ade80" font-size="14" font-weight="700">WebSocket live</text>
+    <text x="22" y="74" fill="#79c0ff" font-size="12">STOMP /topic/room</text>
+    <line x1="22" y1="92" x2="208" y2="92" stroke="#ffffff" stroke-opacity="0.08"/>
+    <g font-size="13">
+      <text x="22" y="126" fill="#9ba7b4">↓</text><text x="44" y="126" fill="#e6edf3">message.new</text>
+      <text x="22" y="170" fill="#9ba7b4">↓</text><text x="44" y="170" fill="#e6edf3">message.reply</text>
+      <text x="22" y="214" fill="#9ba7b4">↓</text><text x="44" y="214" fill="#e6edf3">reaction.add</text>
+      <text x="22" y="258" fill="#9ba7b4">↓</text><text x="44" y="258" fill="#e6edf3">message.forward</text>
+      <text x="22" y="302" fill="#9ba7b4">↓</text><text x="44" y="302" fill="#e6edf3">user.typing</text>
+    </g>
+    <rect x="22" y="336" width="186" height="46" rx="12" fill="#2f80ed" fill-opacity="0.12" stroke="#2f80ed" stroke-opacity="0.4"/>
+    <text x="115" y="364" fill="#a5d6ff" font-size="12" text-anchor="middle">REST · history, rooms</text>
+  </g>
+
+  <!-- Centre: conversation -->
+  <g transform="translate(500 70)">
+    <rect width="600" height="760" rx="26" fill="#0f1626" stroke="#ffffff" stroke-opacity="0.12"/>
+    <!-- header -->
+    <rect width="600" height="86" rx="26" fill="#131c30"/>
+    <rect y="60" width="600" height="26" fill="#131c30"/>
+    <line x1="0" y1="86" x2="600" y2="86" stroke="#ffffff" stroke-opacity="0.07"/>
+    <circle cx="48" cy="43" r="22" fill="#5b6cf0"/><text x="48" y="49" fill="#fff" font-size="15" font-weight="700" text-anchor="middle">FG</text>
+    <text x="84" y="38" fill="#ffffff" font-size="20" font-weight="700">Family group</text>
+    <circle cx="90" cy="60" r="5" fill="#4ade80"/>
+    <text x="102" y="65" fill="#9ba7b4" font-size="14">5 online</text>
+    <text x="552" y="50" fill="#ffffff" font-size="30" font-weight="800" text-anchor="end" letter-spacing="-1">iNwe</text>
+
+    <g font-size="17">
+      <!-- Sara -->
+      <circle cx="40" cy="140" r="16" fill="#0f766e"/><text x="40" y="145" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">S</text>
+      <text x="68" y="122" fill="#5eead4" font-size="13" font-weight="600">Sara</text>
+      <rect x="64" y="130" width="300" height="50" rx="18" fill="#1b2540"/>
+      <text x="84" y="161" fill="#e6edf3">Who's in for dinner on Friday?</text>
+
+      <!-- Me + reaction -->
+      <rect x="352" y="206" width="220" height="50" rx="18" fill="url(#mine)"/>
+      <text x="372" y="237" fill="#ffffff">Count me in!</text>
+      <text x="556" y="238" fill="#dbe4ff" font-size="12" text-anchor="end">✓✓</text>
+      <rect x="470" y="244" width="76" height="30" rx="15" fill="#0f1626" stroke="#ffffff" stroke-opacity="0.18"/>
+      <text x="508" y="265" fill="#ff7b9c" font-size="15" text-anchor="middle">♥ 3</text>
+
+      <!-- Omar replies -->
+      <circle cx="40" cy="330" r="16" fill="#9a3412"/><text x="40" y="335" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">O</text>
+      <text x="68" y="300" fill="#fdba74" font-size="13" font-weight="600">Omar</text>
+      <rect x="64" y="308" width="330" height="96" rx="18" fill="#1b2540"/>
+      <rect x="80" y="322" width="4" height="34" rx="2" fill="#5b6cf0"/>
+      <text x="94" y="336" fill="#a5b4fc" font-size="12" font-weight="600">Replying to you</text>
+      <text x="94" y="352" fill="#9ba7b4" font-size="14">Count me in!</text>
+      <text x="84" y="388" fill="#e6edf3">Great, booking a table for 6</text>
+
+      <!-- Forwarded -->
+      <circle cx="40" cy="470" r="16" fill="#9a3412"/><text x="40" y="475" fill="#fff" font-size="12" font-weight="700" text-anchor="middle">O</text>
+      <rect x="64" y="430" width="330" height="80" rx="18" fill="#1b2540"/>
+      <text x="84" y="458" fill="#9ba7b4" font-size="13" font-style="italic">↪ Forwarded</text>
+      <text x="84" y="490" fill="#e6edf3">Table confirmed for 7pm</text>
+
+      <!-- Me -->
+      <rect x="392" y="536" width="180" height="50" rx="18" fill="url(#mine)"/>
+      <text x="412" y="567" fill="#ffffff">Perfect, thanks!</text>
+
+      <!-- typing -->
+      <rect x="64" y="612" width="84" height="44" rx="18" fill="#1b2540"/>
+      <circle cx="88" cy="634" r="5" fill="#9ba7b4"/><circle cx="106" cy="634" r="5" fill="#9ba7b4" fill-opacity="0.7"/><circle cx="124" cy="634" r="5" fill="#9ba7b4" fill-opacity="0.4"/>
+      <text x="160" y="640" fill="#9ba7b4" font-size="13">Sara is typing…</text>
+    </g>
+
+    <!-- composer -->
+    <rect x="24" y="684" width="490" height="52" rx="26" fill="#131c30" stroke="#ffffff" stroke-opacity="0.08"/>
+    <text x="50" y="716" fill="#6b7a90" font-size="16">Message</text>
+    <circle cx="548" cy="710" r="26" fill="url(#mine)"/>
+    <path d="M537 710l22-10-7 22-4-8z" fill="#ffffff"/>
+  </g>
+</svg>
