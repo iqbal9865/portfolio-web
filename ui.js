@@ -110,7 +110,7 @@
   document.body.append(dot, ring);
   root.classList.add("has-custom-cursor");
 
-  const interactive = "a, button, label, select, .project, [data-bs-toggle], .social-icon";
+  const interactive = "a, button, label, select, .social-icon";
   const textField = "input, textarea";
 
   let mouseX = -100;

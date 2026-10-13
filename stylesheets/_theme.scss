@@ -5,6 +5,7 @@
   --color-bg: #ffffff;
   --color-fg: #222222;
   --color-text: #212529;
+  --color-muted: #6b6f76;
   --color-muted-bg: #e9e9e9;
   --color-alt-bg: #f2f2f2;
   --color-surface: #ffffff;
@@ -36,6 +37,7 @@
   --color-bg: #252b40;
   --color-fg: #eef0f7;
   --color-text: #c8cde0;
+  --color-muted: #9aa1b8;
   --color-muted-bg: #2f3650;
   --color-alt-bg: #1e2336;
   --color-surface: #2c3249;
@@ -76,27 +78,6 @@ html body {
 
 .skill-section .progress {
   background-color: var(--progress-track);
-}
-
-.project-modal {
-  .modal-content {
-    background-color: var(--color-surface);
-    color: var(--color-text);
-    border-color: var(--color-border);
-  }
-  .modal-header {
-    border-bottom-color: var(--color-border);
-  }
-  .modal-title {
-    color: var(--color-fg);
-  }
-  .modal-body a {
-    color: var(--color-link);
-  }
-}
-
-:root[data-theme="dark"] .btn-close {
-  filter: invert(1) grayscale(100%) brightness(200%);
 }
 
 // Added briefly by ui.js while switching themes so colors cross-fade

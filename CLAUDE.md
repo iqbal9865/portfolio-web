@@ -4,7 +4,7 @@ This file guides Claude Code (claude.ai/code) when it works in this repository.
 
 ## Project overview
 
-Iqbal Ahmed's personal portfolio. It is one static page, hand-written in 2022 with no framework and no build tooling apart from Sass. The page has these sections in order: hero (with particles), About, Skills, Works (portfolio), Activity (live GitHub data), Contact and Footer. Contact form submissions go to Firebase Firestore and are emailed via Formspree.
+Iqbal Ahmed's personal portfolio, live at https://iqbal-ahmed-dev.netlify.app/ (Netlify). It is one static page, hand-written in 2022 with no framework and no build tooling apart from Sass. The page has these sections in order: hero (with particles), About, Skills, Works (portfolio), Activity (live GitHub data), Contact and Footer. Contact form submissions go to Firebase Firestore and are emailed via Formspree.
 
 There is no `package.json`, bundler, test suite or linter. All third-party libraries load from CDNs.
 
@@ -25,7 +25,7 @@ npx serve .            # or: python -m http.server 8000
   sass --watch stylesheets/index.scss:stylesheets/index.css  # while editing
   ```
   Commit the regenerated `index.css` together with the SCSS change. (`index.css.map` is currently an empty file.)
-- `index.scss` only lists `@import`s, one partial per page section: `_theme` (light/dark tokens and Bootstrap overrides), `_navbar` (including the theme toggle), `_header` (hero, mouse scroll indicator), `_about`, `_skills`, `_portfolio` (project cards and modals), `_activity` (GitHub activity section), `_contact` (form and validation error styles), `_footer`, `_terminal` (hero terminal), `_cursor` (custom cursor).
+- `index.scss` only lists `@import`s, one partial per page section: `_theme` (light/dark tokens and Bootstrap overrides), `_navbar` (including the theme toggle), `_header` (hero, mouse scroll indicator), `_about`, `_skills`, `_portfolio` (Works section and case study panel), `_activity` (GitHub activity section), `_contact` (form and validation error styles), `_footer`, `_terminal` (hero terminal), `_cursor` (custom cursor).
 - Shared helpers: `_mixin.scss` (`icons-container`, `border-radius($r)`).
 
 ### Theming (light / dark)
@@ -41,7 +41,7 @@ npx serve .            # or: python -m http.server 8000
 
 | Library | Version | Used for |
 |---|---|---|
-| Bootstrap CSS + JS bundle | 5.0.2 | grid, utilities, progress bars, portfolio **modals** (`data-bs-toggle="modal"`) |
+| Bootstrap CSS + JS bundle | 5.0.2 | grid, utilities, progress bars (the JS bundle is no longer used by anything) |
 | AOS | `@next` (unpinned) | scroll animations through `data-aos="..."` attributes, started by an inline `AOS.init()` |
 | SweetAlert2 | `@11` | success/error popups after the contact form is submitted (`Swal.fire`) |
 | Firebase JS SDK | 12.6.0 (gstatic ESM URLs) | Firestore |
@@ -57,7 +57,8 @@ Load order matters: `stylesheets/index.css` is linked **before** Bootstrap, so a
 - **`app.js`** (a module) does two separate jobs:
   1. **Contact form** (`#contactForm`): validation on the client, then `addDoc` into the Firestore `messages` collection (`firstName, lastName, email, phone, message, createdAt: serverTimestamp()`), then a POST of the same fields to Formspree (`https://formspree.io/f/xqkjeldo`), then a SweetAlert. Validation rules: first and last name required, valid email, phone of 7–15 digits only, message of at least 10 chars. Errors are written to the `<small class="error">` that is the input's **next sibling** (`element.nextElementSibling`), and the input gets the `.error-input` class. Keep that markup shape if you change the form. Field ids are `first-name`, `last-name`, `email`, `phone`, `text`.
   2. **Particles**: `particlesJS("particles-js", {...})` config (white circles drifting down, click to repulse).
-- **`activity.js`** (classic script, `defer`) fills the Activity section for the user in `data-github-user` (`iqbal9865`). It calls the public GitHub REST API without a token, so the limit is 60 requests per hour per visitor IP. It makes about 5 calls: profile, repos sorted by push date, and commits by that user in the 3 most recently pushed repos. The Events API no longer includes commits in push events, which is why commits are read per repo. The contribution heatmap comes from `github-contributions-api.jogruber.de`, because GitHub has no unauthenticated endpoint for it. Results are cached in `localStorage` (`gh-activity:<user>`) for 30 minutes, and nothing is fetched until the section is within 600px of the viewport. All text is inserted with `textContent`. If the GitHub calls fail, an error line and the profile button are shown, and if only the calendar fails, its card is hidden. The heatmap colors are the `--heat-0..4` tokens, and the live dot is `--live`.
+- **`activity.js`** (classic script, `defer`) fills the Activity section for the user in `data-github-user` (`iqbal9865`). It calls the public GitHub REST API without a token, so the limit is 60 requests per hour per visitor IP. It makes about 5 calls: profile, repos sorted by push date, and commits by that user in the 3 most recently pushed repos. The Events API no longer includes commits in push events, which is why commits are read per repo. The contribution heatmap comes from `github-contributions-api.jogruber.de`, because GitHub has no unauthenticated endpoint for it. Updates are near real time. While the section is within 600px of the viewport and the tab is visible, it polls only the repo list every 2 minutes (1 request), comparing `pushed_at` of the top repos. When that changes, or every 30 minutes, it re-fetches profile, commits and calendar, and new commits get the `.is-new` highlight. Unauthenticated 304s still count against the limit, so polling pauses when `X-RateLimit-Remaining` drops to 8 or less. The last result is kept in `localStorage` (`gh-activity:<user>`, up to 24 hours), shown instantly, then refreshed. `[data-time]` labels and the `[data-sync]` "Live · synced" line tick every 30 seconds. All text is inserted with `textContent`. If the GitHub calls fail, an error line and the profile button are shown, and if only the calendar fails, its card is hidden. The heatmap colors are the `--heat-0..4` tokens, and the live dot is `--live`.
+- **`works.js`** (classic script, `defer`, after `projects.js`) renders the Works section and the case study panel. See Content editing.
 - **`ui.js`** (classic script, loaded after AOS) holds UI behavior. It's kept separate from `app.js` because `app.js` throws at `new Stats()` (see Known quirks), and any code added after that line would never run.
   1. **Hero terminal typing**: types out `#terminal-body`, or shows it statically when reduced motion is on.
   2. **Theme toggle** (`#theme-toggle` in the nav): switches `data-theme`, saves the choice to `localStorage`, and follows OS changes until the visitor picks a theme.
@@ -73,7 +74,7 @@ Load order matters: `stylesheets/index.css` is linked **before** Bootstrap, so a
 
 Nearly all copy is hardcoded in `index.html`:
 - **Skills**: each skill is a Bootstrap `.progress` bar. The `style="width: NN%"` value is what's displayed.
-- **Portfolio**: each project needs **two** pieces: a card (`.project` with an image from `img/` and a button whose `data-bs-target="#project-N"`) and a matching `.modal.project-modal` with `id="project-N"`. Add or remove both together. The modals live at the **end of `<body>`**, not inside the Works section. AOS gives animated sections a `transform`, which would trap a modal underneath Bootstrap's backdrop. Cards use `col-sm-6 col-lg-4`, images get a 4:3 `object-fit: cover` frame, and on touch devices (`hover: none`) the title shows as a caption bar.
+- **Portfolio (Works)**: content lives in `projects.js` (`window.PROJECTS`), and `works.js` renders it. A featured project (`featured: true`) gets a large row with alternating sides. The others become cards in a 2-column grid, filtered by `category`. Clicking any project opens a full-screen case study panel (`#case-study`) at `#work/<id>`. Back and Esc close it, and moving between case studies with Next replaces the history entry. The panel sits at the **end of `<body>`** because AOS gives animated sections a `transform`, which would break `position: fixed`. Every field after `tagline` is optional, and a missing field hides its part of the case study (see the comment at the top of `projects.js`). Images come from `img/`.
 - **Hero**: there's no photo. The backdrop is CSS (glows plus a grid in `.main`, `_header.scss`), and the right side holds a decorative terminal (`.terminal` in `index.html`, styled in `_terminal.scss`, hidden below 992px, but stacked under the intro on tall tablets: 768–991px wide and at least 820px tall). To change what it types, edit its `<p class="term-line">` elements. A line with a `.term-cmd` span gets typed character by character, and any other line appears whole. The lines use `white-space: pre`, so the spaces inside them are what's displayed.
 - **Images** live in `img/`.
 - The resume button links to Google Drive. `img/Resume_Iqbal_Ahmed.pdf` is not linked anywhere.

@@ -8,7 +8,10 @@
   const API = "https://api.github.com";
   const CALENDAR_API = `https://github-contributions-api.jogruber.de/v4/${user}?y=last`;
   const CACHE_KEY = `gh-activity:${user}`;
-  const CACHE_MS = 30 * 60 * 1000;
+  const CACHE_MAX_AGE = 24 * 60 * 60 * 1000; // shown instantly on return visits, then refreshed
+  const FULL_REFRESH_MS = 30 * 60 * 1000; // re-read stats even without a new push
+  const POLL_MS = 2 * 60 * 1000; // one request per check, so ~30 requests/hour at most
+  const RATE_RESERVE = 8;
   const COMMIT_REPOS = 3; // how many recently pushed repos to pull commits from
   const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -42,8 +45,20 @@
     return "just now";
   }
 
-  async function getJSON(url) {
-    const res = await fetch(url, { headers: { Accept: "application/vnd.github+json" } });
+  // GitHub counts every unauthenticated request (even 304s) against 60/hour per IP,
+  // so we track the remaining budget and pause polling before running out.
+  let pausedUntil = 0;
+
+  async function getJSON(url, github = true) {
+    const res = await fetch(url, {
+      cache: "no-store",
+      headers: github ? { Accept: "application/vnd.github+json" } : {},
+    });
+    if (github) {
+      const remaining = Number(res.headers.get("X-RateLimit-Remaining"));
+      const reset = Number(res.headers.get("X-RateLimit-Reset"));
+      if (res.headers.has("X-RateLimit-Remaining") && remaining <= RATE_RESERVE) pausedUntil = reset * 1000;
+    }
     if (!res.ok) throw new Error(`${res.status} ${url}`);
     return res.json();
   }
@@ -51,7 +66,7 @@
   function readCache() {
     try {
       const cached = JSON.parse(localStorage.getItem(CACHE_KEY));
-      if (cached && Date.now() - cached.savedAt < CACHE_MS) return cached.data;
+      if (cached && Date.now() - cached.savedAt < CACHE_MAX_AGE) return cached;
     } catch (e) {}
     return null;
   }
@@ -62,20 +77,20 @@
     } catch (e) {}
   }
 
-  async function load() {
-    const [profile, repos, calendar] = await Promise.allSettled([
-      getJSON(`${API}/users/${user}`),
-      getJSON(`${API}/users/${user}/repos?sort=pushed&per_page=100&type=owner`),
-      getJSON(CALENDAR_API),
-    ]);
-    if (repos.status !== "fulfilled") throw repos.reason;
+  // Skip forks and the profile README repo (named after the user).
+  const ownRepos = (list) => list.filter((r) => !r.fork && r.name.toLowerCase() !== user.toLowerCase());
 
-    // Skip forks and the profile README repo (named after the user).
-    const ownRepos = repos.value.filter((r) => !r.fork && r.name.toLowerCase() !== user.toLowerCase());
+  // A push changes pushed_at on the repo, so this changes whenever there's new work.
+  const signatureOf = (repos) =>
+    repos
+      .slice(0, COMMIT_REPOS)
+      .map((r) => `${r.name}@${r.pushed_at}`)
+      .join("|");
 
+  async function loadCommits(repos) {
     // The Events API no longer lists commits in push events, so read them per repo.
     const commitLists = await Promise.allSettled(
-      ownRepos.slice(0, COMMIT_REPOS).map((r) =>
+      repos.slice(0, COMMIT_REPOS).map((r) =>
         getJSON(`${API}/repos/${user}/${r.name}/commits?author=${user}&per_page=5`).then((list) =>
           list.map((c) => ({
             repo: r.name,
@@ -87,25 +102,35 @@
         )
       )
     );
-
-    const commits = commitLists
+    return commitLists
       .filter((r) => r.status === "fulfilled")
       .flatMap((r) => r.value)
       .sort((a, b) => new Date(b.date) - new Date(a.date))
       .slice(0, 6);
+  }
+
+  // Full load: profile, commits and calendar on top of an already fetched repo list.
+  async function loadAll(repoList) {
+    const repos = ownRepos(repoList);
+    const [profile, commits, calendar] = await Promise.allSettled([
+      getJSON(`${API}/users/${user}`),
+      loadCommits(repos),
+      getJSON(CALENDAR_API, false),
+    ]);
 
     const languageCounts = {};
-    ownRepos.forEach((r) => {
+    repos.forEach((r) => {
       if (r.language) languageCounts[r.language] = (languageCounts[r.language] || 0) + 1;
     });
 
     return {
-      publicRepos: profile.status === "fulfilled" ? profile.value.public_repos : ownRepos.length,
+      signature: signatureOf(repos),
+      publicRepos: profile.status === "fulfilled" ? profile.value.public_repos : repos.length,
       languages: Object.entries(languageCounts)
         .sort((a, b) => b[1] - a[1])
         .slice(0, 3)
         .map(([name]) => name),
-      repos: ownRepos.slice(0, 5).map((r) => ({
+      repos: repos.slice(0, 5).map((r) => ({
         name: r.name,
         description: r.description,
         language: r.language,
@@ -113,7 +138,7 @@
         pushedAt: r.pushed_at,
         url: r.html_url,
       })),
-      commits,
+      commits: commits.status === "fulfilled" ? commits.value : [],
       calendar:
         calendar.status === "fulfilled"
           ? { total: calendar.value.total.lastYear, days: calendar.value.contributions }
@@ -134,7 +159,9 @@
     $('[data-stat="repos"]').textContent = data.publicRepos;
     $('[data-stat="contributions"]').textContent = data.calendar ? data.calendar.total : "–";
     $('[data-stat="languages"]').textContent = data.languages.join(" · ") || "–";
-    $('[data-stat="last-push"]').textContent = now ? timeAgo(now.pushedAt) : "–";
+    const lastPush = $('[data-stat="last-push"]');
+    if (now) lastPush.setAttribute("data-time", now.pushedAt);
+    lastPush.textContent = now ? timeAgo(now.pushedAt) : "–";
   }
 
   function renderCalendar(calendar) {
@@ -185,17 +212,23 @@
     items.forEach((item) => target.appendChild(el("li", {}, [build(item)])));
   }
 
-  function render(data) {
+  function render(data, previous) {
+    $("[data-error]").hidden = true;
+    $(".activity-now").hidden = false;
+    $(".activity-calendar-card").hidden = false;
+    container.querySelectorAll(".row").forEach((row) => (row.hidden = false));
     renderStats(data);
     renderCalendar(data.calendar);
 
+    // Commits that weren't on screen before (e.g. a push while the page is open) get a brief highlight.
+    const seen = previous ? new Set(previous.commits.map((c) => c.sha)) : null;
     renderList($("[data-commits]"), data.commits, "No recent public commits.", (c) =>
-      el("a", { class: "activity-item", href: c.url, target: "_blank", rel: "noopener" }, [
+      el("a", { class: `activity-item${seen && !seen.has(c.sha) ? " is-new" : ""}`, href: c.url, target: "_blank", rel: "noopener" }, [
         el("span", { class: "activity-item-title", text: c.message }),
         el("span", { class: "activity-meta" }, [
           el("span", { text: c.repo }),
           el("code", { text: c.sha }),
-          el("span", { text: timeAgo(c.date) }),
+          el("span", { text: timeAgo(c.date), "data-time": c.date }),
         ]),
       ])
     );
@@ -207,7 +240,7 @@
         el("span", { class: "activity-meta" }, [
           r.language ? el("span", { text: r.language }) : null,
           el("span", { text: `★ ${r.stars}` }),
-          el("span", { text: `Updated ${timeAgo(r.pushedAt)}` }),
+          el("span", { text: `Updated ${timeAgo(r.pushedAt)}`, "data-time": r.pushedAt, "data-prefix": "Updated " }),
         ]),
       ])
     );
@@ -226,31 +259,86 @@
     });
   }
 
-  async function start() {
-    const cached = readCache();
-    if (cached) return render(cached);
+  let current = null; // the data on screen
+  let fullLoadedAt = 0;
+  let lastChecked = 0;
+  let checking = false;
+  let visible = false;
+
+  // Keep every "x minutes ago" label and the sync status current without refetching.
+  function tick() {
+    container.querySelectorAll("[data-time]").forEach((node) => {
+      node.textContent = (node.getAttribute("data-prefix") || "") + timeAgo(node.getAttribute("data-time"));
+    });
+    const sync = $("[data-sync]");
+    if (lastChecked) sync.textContent = `Live · synced ${timeAgo(new Date(lastChecked).toISOString())}`;
+  }
+
+  // One request (the repo list) per check. Only when a repo's pushed_at changes, or the
+  // data is old, do we spend the extra requests on profile, commits and calendar.
+  async function check() {
+    if (checking || Date.now() < pausedUntil) return;
+    checking = true;
     try {
-      const data = await load();
-      writeCache(data);
-      render(data);
+      const repoList = await getJSON(`${API}/users/${user}/repos?sort=pushed&per_page=100&type=owner`);
+      lastChecked = Date.now();
+      const changed = !current || current.signature !== signatureOf(ownRepos(repoList));
+      if (changed || Date.now() - fullLoadedAt > FULL_REFRESH_MS) {
+        const data = await loadAll(repoList);
+        fullLoadedAt = Date.now();
+        // Keep the last good calendar if the calendar API hiccups.
+        if (!data.calendar && current) data.calendar = current.calendar;
+        render(data, current);
+        current = data;
+        writeCache(data);
+      }
     } catch (e) {
-      showError();
+      if (!current) showError();
+    } finally {
+      checking = false;
+      tick();
     }
+  }
+
+  function start() {
+    const cached = readCache();
+    if (cached) {
+      current = cached.data;
+      fullLoadedAt = cached.savedAt;
+      lastChecked = cached.savedAt;
+      render(current);
+      tick();
+    }
+    check();
+
+    // Poll only while the section is on screen and the tab is in the foreground.
+    window.setInterval(() => {
+      if (visible && document.visibilityState === "visible") check();
+    }, POLL_MS);
+    window.setInterval(tick, 30 * 1000);
+    document.addEventListener("visibilitychange", () => {
+      if (document.visibilityState === "visible" && visible && Date.now() - lastChecked > POLL_MS) check();
+    });
   }
 
   // Wait until the section is near the viewport before spending API requests.
   if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(
+    let started = false;
+    new IntersectionObserver(
       (entries) => {
-        if (entries.some((e) => e.isIntersecting)) {
-          observer.disconnect();
+        visible = entries.some((e) => e.isIntersecting);
+        if (!visible) return;
+        if (!started) {
+          started = true;
           start();
+        } else if (Date.now() - lastChecked > POLL_MS) {
+          check();
         }
       },
       { rootMargin: "600px 0px" }
-    );
-    observer.observe(container);
+    ).observe(container);
   } else {
+    visible = true;
     start();
   }
 })();

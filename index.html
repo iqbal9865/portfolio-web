@@ -288,91 +288,15 @@
     <div class="container">
       <div class="titles text-center">
         <h5 class="sub-title">PORTFOLIO</h5>
-        <h2 class="title">WORK I HAVE DONE</h2>
+        <h2 class="title">SELECTED WORK</h2>
       </div>
-      <div class="projects-fillter-container text-center">
-        <div class="row project-container">
-          <div class="col-sm-6 col-lg-4">
-            <div class="project project-one">
-              <img src="./img/mosque.jpg" alt="demoprojectimg" class="img-fluid" />
-              <div class="project-img-title">
-                <div class="text">
-                  <div class="project-title mb-3">Daily Islam</div>
-                  <button class="shadow btn" data-bs-toggle="modal" data-bs-target="#project-1" type="button">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4">
-            <div class="project project-two">
-              <img src="./img/iNwe.jpg" alt="demoprojectimg" class="img-fluid" />
-              <div class="project-img-title">
-                <div class="text">
-                  <div class="project-title mb-3">iNwe Web</div>
-                  <button class="shadow btn" data-bs-toggle="modal" data-bs-target="#project-2" type="button">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4">
-            <div class="project project-three">
-              <img src="./img/img-3.jpg" alt="demoprojectimg" class="img-fluid" />
-              <div class="project-img-title">
-                <div class="text">
-                  <div class="project-title mb-3">OZ BANGLA</div>
-                  <button class="shadow btn" data-bs-toggle="modal" data-bs-target="#project-3" type="button">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4">
-            <div class="project project-four">
-              <img src="./img/img-4.jpg" alt="demoprojectimg" class="img-fluid" />
-              <div class="project-img-title">
-                <div class="text">
-                  <div class="project-title mb-3">Silvrback</div>
-                  <button class="shadow btn" data-bs-toggle="modal" data-bs-target="#project-4" type="button">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4">
-            <div class="project project-five">
-              <img src="./img/Admission.gif" alt="demoprojectimg" class="img-fluid" />
-              <div class="project-img-title">
-                <div class="text">
-                  <div class="project-title mb-3">Admission Funnel</div>
-                  <button class="shadow btn" data-bs-toggle="modal" data-bs-target="#project-5" type="button">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-4">
-            <div class="project project-six">
-              <img src="./img/img-6.jpg" alt="demoprojectimg" class="img-fluid" />
-              <div class="project-img-title">
-                <div class="text">
-                  <div class="project-title mb-3">Doctors Portal</div>
-                  <button class="shadow btn" data-bs-toggle="modal" data-bs-target="#project-6" type="button">
-                    <i class="fa fa-search"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+      <!-- works.js renders the projects listed in projects.js into these containers. -->
+      <div class="works-featured" data-works-featured></div>
+      <div class="works-more-head">
+        <h3 class="works-more-title">More projects</h3>
+        <div class="works-filters" data-works-filters role="group" aria-label="Filter projects"></div>
       </div>
+      <div class="works-grid" data-works-grid></div>
     </div>
   </section>
 
@@ -389,6 +313,7 @@
           <span class="activity-pulse" aria-hidden="true"></span>
           <span>Currently working on <a data-now href="https://github.com/iqbal9865" target="_blank" rel="noopener">&hellip;</a></span>
         </div>
+        <p class="activity-sync" data-sync aria-live="polite">Connecting to GitHub&hellip;</p>
 
         <div class="activity-stats">
           <div class="activity-stat"><span class="activity-stat-value" data-stat="contributions">&ndash;</span><span class="activity-stat-label">Contributions this year</span></div>
@@ -525,155 +450,16 @@
       </div>
     </div>
   </footer>
-  <!-- Project detail modals. Kept outside the AOS-animated sections: an animated (transformed)
-       ancestor would trap them underneath Bootstrap's backdrop. -->
-  <div class="modal fade project-modal" id="project-1" tabindex="-1" aria-labelledby="project-1-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="project-1-title">
-            Daily Islam
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>
-            The Daily Islam is an online educational platform to help users build smart Islamic Lifestyles and
-            gain true knowledge of Islam. It's a cross-platform application developed using React Native,
-            designed to provide the Muslim ummah with comprehensive information about Islam and facilitate
-            connection with the global Muslim community. My contributions to this project include developing
-            major portions of the application, such as the Books Module, Prayer Module, Dua Module, and Quran
-            Module.
-          </p>
-          <p><strong>Technology uses:</strong> React-Native, Redux, TypeScript, SQ-Lite, Expo </p>
-          <p><a href="https://play.google.com/store/apps/details?id=org.dailyislam.android.preview&hl=en"
-              target="_blank">Go to Play Store</a></p>
-        </div>
-      </div>
+  <!-- Case study panel (filled by works.js). Kept outside the AOS-animated sections:
+       a transformed ancestor would break its position: fixed. -->
+  <div class="case-study" id="case-study" role="dialog" aria-modal="true" aria-labelledby="case-study-title"
+    aria-hidden="true" tabindex="-1">
+    <div class="case-bar">
+      <button class="case-bar-btn" type="button" data-case-close><span aria-hidden="true">←</span> Back to work</button>
+      <span class="case-crumb" data-case-crumb></span>
+      <a class="case-bar-btn" href="#" data-case-next>Next <span aria-hidden="true">→</span></a>
     </div>
-  </div>
-
-  <div class="modal fade project-modal" id="project-2" tabindex="-1" aria-labelledby="project-2-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="project-2-title">
-            iNwe Web
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>A messaging platform developed using Angular, enabling users to connect with friends and family,
-            share their thoughts, and communicate either peer-to-peer or in groups. In this project, I
-            contributed by implementing the WebSocket feature for seamless client-server connections using
-            Stomp.js, and developing various chat room features such as message reactions, reply, forward
-            message, and many other chat-related functionalities.
-          </p>
-          <p><strong>Technology uses:</strong> Angular, WebSocket, TypeScript, RxJs </p>
-          <p>
-            <a href="http://chat.inweapp.com/" target="_blank">Go to Live Site</a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade project-modal" id="project-3" tabindex="-1" aria-labelledby="project-3-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="project-3-title">
-            OZ BANGLA
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Oz Bangla is a leading data-driven digital marketing agency based in Bangladesh. I worked on the OZ
-            BANGLA project at Syftet Ltd. I designed an intuitive UI and developed the client-side with Angular,
-            integrating REST APIs and managing state. On the back-end, I built REST APIs using Node.js and
-            Express.js, ensuring smooth data flow and robust application performance.</p>
-          <p><strong>Technology uses:</strong> React, Firebase, Express.js, MongoDB</p>
-          <p>
-            <a href="http://portal.ozbangla.com/" target="_blank">Go to Live Site</a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade project-modal" id="project-4" tabindex="-1" aria-labelledby="project-4-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="project-4-title">
-            Silvrback
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Silvrback is a well-supported platform hosting a small community of writers. It’s more personal. I
-            worked on the Silvrback project, where my primary responsibilities included designing the website
-            using SCSS and implementing key functionalities with JavaScript. I crafted a visually appealing and
-            responsive design using SCSS, ensuring consistency and scalability across the site. Additionally, I
-            utilized JavaScript to implement intersection functionality, enhancing user interactions and
-            improving the overall user experience.
-          </p>
-          <p><strong>Technology uses:</strong> SCSS, Bootstrap, JavaScript, Ruby-on-Rails </p>
-          <p>
-            <a href="https://www.silvrback.com/" target="_blank">Go to Live Site</a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade project-modal" id="project-5" tabindex="-1" aria-labelledby="project-5-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="project-5-title">
-            Admission Funnel
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>Admission Funnel System is a marketing strategy where a System is designed to attract students go
-            through admission and enrollment. Funnel system & Email Automation Increase website visitors and its
-            make business strategy more effective. Online admission and application form drop-offs make
-            organization better experienced.</p>
-          <p><strong>Technology uses:</strong> React, React-Router, Firebase, Node.js </p>
-          <p>
-            <a href="https://admission-funnel.web.app/" target="_blank">Go to Live Site</a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade project-modal" id="project-6" tabindex="-1" aria-labelledby="project-6-title" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="project-6-title">
-            Doctors Portal
-          </h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>
-            Doctors Portal is a Hospital based project. It stand for patients appointment through the websites.
-            A patient can book an appointment by using his account. Patient can choose the date of appointment
-            and category of the appointment then book it. Different types of Dashboard in this website, one is
-            for user, another is for admin panel.
-          </p>
-          <p><strong>Technology uses:</strong> React, React-Router, Firebase, Node.js </p>
-
-          <p>
-            <a href="https://doctors-portal-91849.firebaseapp.com/" target="_blank">Go to Live Site</a>
-          </p>
-        </div>
-      </div>
-    </div>
+    <div class="case-inner" data-case-body></div>
   </div>
 
   <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -683,6 +469,8 @@
   </script>
   <script src="./ui.js"></script>
   <script src="./activity.js" defer></script>
+  <script src="./projects.js" defer></script>
+  <script src="./works.js" defer></script>
   <script type="module" src="./firebase-app.js"></script>
   <script type="module" src="./app.js"></script>
 </body>
