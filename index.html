@@ -515,35 +515,31 @@
     </div>
   </section>
 
+  <!-- Footer styled as a Node REPL. The ASCII name is decorative (screen readers get the hidden line).
+       The version is the date of the latest push to the site's repo, set by activity.js. -->
   <footer class="footer-section section">
     <div class="container">
-      <div class="row">
-        <div class="col-md-4 col-footer-info">
-          <p><strong>Iqbal Ahmed</strong></p>
-          <p>Software Engineer</p>
-        </div>
-        <div class="col-md-4 col-footer-info">
-          <p><strong>Email</strong></p>
-          <p class="footer-email"><a href="mailto:iqbalahmed9865@gmail.com">iqbalahmed9865@gmail.com</a></p>
-        </div>
-        <div class="col-md-4 col-footer-info">
-          <p><strong>Based in</strong></p>
-          <p>London, United Kingdom</p>
-        </div>
-      </div>
-      <div class="footer-social">
-        <a href="https://www.linkedin.com/in/iqbal-ahmed43/" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <i class="fa fa-linkedin" aria-hidden="true"></i>
-        </a>
-        <a href="https://github.com/iqbal9865" target="_blank" rel="noopener" aria-label="GitHub">
-          <i class="fa fa-github" aria-hidden="true"></i>
-        </a>
-      </div>
-      <hr />
-      <div class="text-center">
-        <span class="right-reserved">&copy; <span data-year>2026</span> Iqbal Ahmed. All rights reserved.</span>
+      <p class="visually-hidden">Iqbal Ahmed</p>
+      <pre class="footer-wordmark" aria-hidden="true">  ___ ___  ____    _    _          _    _   _ __  __ _____ ____
+ |_ _/ _ \| __ )  / \  | |        / \  | | | |  \/  | ____|  _ \
+  | | | | |  _ \ / _ \ | |       / _ \ | |_| | |\/| |  _| | | | |
+  | | |_| | |_) / ___ \| |___   / ___ \|  _  | |  | | |___| |_| |
+ |___\__\_\____/_/   \_\_____| /_/   \_\_| |_|_|  |_|_____|____/</pre>
+      <div class="footer-shell">
+        <p>
+          <span class="footer-prompt" aria-hidden="true">&gt;</span>
+          <span class="footer-fn">console.log</span>(<span class="footer-str">"&copy; <span data-year>2026</span> Iqbal Ahmed"</span>)
+          <span class="footer-links">
+            <a href="https://github.com/iqbal9865" target="_blank" rel="noopener">github</a>
+            <a href="https://www.linkedin.com/in/iqbal-ahmed43/" target="_blank" rel="noopener">linkedin</a>
+            <a href="./resume/Iqbal-Ahmed-Resume.pdf" target="_blank" rel="noopener">resume</a>
+          </span>
+        </p>
+        <p class="footer-comment">// <span data-site-version data-repo="portfolio-web">v2026.10.14</span></p>
+        <p class="footer-comment"><span class="footer-fn">process.exit</span>(<span class="footer-num">0</span>)</p>
       </div>
     </div>
+    <a class="footer-top" href="#" aria-label="Back to top"><span aria-hidden="true">&uarr;</span> top</a>
   </footer>
   <!-- Case study panel (filled by works.js). Kept outside the AOS-animated sections:
        a transformed ancestor would break its position: fixed. -->

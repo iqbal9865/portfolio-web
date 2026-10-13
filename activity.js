@@ -19,6 +19,20 @@
 
   const $ = (sel) => container.querySelector(sel);
 
+  // Footer version ("// v2026.10.14"): the date of the latest push to the site's own repo,
+  // taken from the repo list this script already fetches, so it costs no extra request.
+  const versionEl = document.querySelector("[data-site-version]");
+  const SITE_REPO = versionEl ? versionEl.getAttribute("data-repo") : null;
+
+  // The date is taken in UK time so every visitor sees the same version.
+  const versionDate = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/London", year: "numeric", month: "2-digit", day: "2-digit" });
+
+  function showVersion(iso) {
+    const date = iso ? new Date(iso) : null;
+    if (!versionEl || !date || isNaN(date)) return;
+    versionEl.textContent = "v" + versionDate.format(date).replace(/-/g, ".");
+  }
+
   // Build DOM nodes without innerHTML so repo/commit text can never inject markup.
   function el(tag, attrs, children) {
     const node = document.createElement(tag);
@@ -134,8 +148,11 @@
       if (r.language) languageCounts[r.language] = (languageCounts[r.language] || 0) + 1;
     });
 
+    const site = repoList.find((r) => r.name === SITE_REPO);
+
     return {
       signature: signatureOf(repos),
+      sitePushedAt: site ? site.pushed_at : null,
       // Requests can fail part-way (e.g. the 60/hour limit runs out mid-load). Missing parts
       // are null so check() can keep the last good values and retry instead of showing blanks.
       complete: profile.status === "fulfilled" && commits.status === "fulfilled",
@@ -314,6 +331,8 @@
     try {
       const repoList = await getJSON(`${API}/users/${user}/repos?sort=pushed&per_page=100&type=owner`);
       lastChecked = Date.now();
+      const site = repoList.find((r) => r.name === SITE_REPO);
+      if (site) showVersion(site.pushed_at);
       const changed = !current || current.signature !== signatureOf(ownRepos(repoList));
       if (changed || Date.now() - fullLoadedAt > FULL_REFRESH_MS) {
         const data = await loadAll(repoList);
@@ -322,6 +341,7 @@
           if (!data.calendar) data.calendar = current.calendar;
           if (data.commits === null) data.commits = current.commits;
           if (data.publicRepos === null) data.publicRepos = current.publicRepos;
+          if (!data.sitePushedAt) data.sitePushedAt = current.sitePushedAt;
         }
         if (data.complete) {
           fullLoadedAt = Date.now();
@@ -347,6 +367,10 @@
       tick();
     }
   }
+
+  // The footer shows the saved version right away, before the section starts loading.
+  const saved = readCache();
+  if (saved) showVersion(saved.data.sitePushedAt);
 
   function start() {
     const cached = readCache();

@@ -1,49 +1,139 @@
-footer {
-    background-color: var(--footer-bg);
-    color: var(--footer-fg);
-    text-align: center;
-    .col-footer-info {
-        line-height: 15px;
-    }
-    hr {
-        height: .1px;
-        color: var(--footer-muted);
-    }
-    a {
-        color: inherit;
-        text-decoration: none;
-    }
-    .footer-social {
-        display: flex;
-        justify-content: center;
-        gap: 12px;
-        margin-top: 1.5rem;
+// Footer styled as a Node REPL: a big ASCII "IQBAL AHMED" in the hero gradient, then a
+// console.log line with the © and links, the site version (set by activity.js) and
+// process.exit(0). Dark in both themes.
+footer.footer-section {
+  position: relative;
+  padding: 4.5rem 0 3.5rem;
+  background-color: var(--footer-bg);
+  color: var(--footer-muted);
+  text-align: center;
 
-        a {
-            display: grid;
-            place-items: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
-            transition: 0.25s;
+  // Thin gradient rule along the top edge.
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--footer-rule);
+  }
 
-            &:hover {
-                background-color: var(--footer-fg);
-                color: var(--footer-bg);
-            }
-        }
-    }
-    .footer-email {
-        line-break: anywhere;
-    }
-    .right-reserved {
-        color: var(--footer-muted);
-        font-size: 14px;
-    }
+  // _base.scss sets the body font on `*`, so the monospace font must target descendants too.
+  &,
+  * {
+    font-family: var(--font-mono);
+  }
+
+  p {
+    margin: 0;
+  }
 }
-@media (max-width: 768px ) {
-    .col-footer-info {
-        margin: 15px 0;
+
+// The ASCII name is 65 columns wide; the font size is capped so it always fits the screen.
+footer .footer-wordmark {
+  display: inline-block;
+  margin: 0 auto 2.25rem;
+  overflow: visible;
+  font-size: min(15px, calc((100vw - 40px) / 65 / 0.6));
+  font-weight: 600;
+  line-height: 1.02;
+  text-align: left;
+  white-space: pre;
+  background: var(--hero-grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+footer .footer-shell {
+  font-size: 0.85rem;
+  line-height: 1.9;
+
+  .footer-prompt {
+    margin-right: 0.35rem;
+    color: var(--code-prompt);
+  }
+  .footer-fn {
+    color: var(--code-fn);
+  }
+  .footer-num {
+    color: var(--code-num);
+  }
+  .footer-str {
+    font-weight: 600;
+    color: var(--footer-fg);
+  }
+
+  .footer-links {
+    margin-left: 0.6rem;
+    white-space: nowrap;
+  }
+
+  a {
+    margin: 0 0.4rem;
+    color: var(--footer-muted);
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 4px;
+    transition: color 0.2s, text-decoration-color 0.2s;
+
+    &:hover {
+      color: var(--code-fn);
+      text-decoration-color: currentColor;
     }
+  }
+
+  .footer-comment {
+    opacity: 0.8;
+  }
+}
+
+footer .footer-top {
+  position: absolute;
+  right: 24px;
+  bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--footer-border);
+  border-radius: 10px;
+  color: var(--footer-muted);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s, transform 0.2s;
+
+  &:hover {
+    color: var(--code-fn);
+    border-color: var(--code-fn);
+    transform: translateY(-2px);
+  }
+}
+
+// Phones: links drop to their own line and "top" moves to the bottom centre.
+@media (max-width: 767px) {
+  footer.footer-section {
+    padding: 3.5rem 0 5.5rem;
+  }
+  footer .footer-shell {
+    font-size: 0.78rem;
+  }
+  footer .footer-top {
+    right: 50%;
+    bottom: 20px;
+    transform: translateX(50%);
+
+    &:hover {
+      transform: translateX(50%) translateY(-2px);
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  footer .footer-shell .footer-links {
+    display: block;
+    margin-left: 0;
+  }
 }
