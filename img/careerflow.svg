@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" font-family="'JetBrains Mono', ui-monospace, Consolas, monospace">
-  <!-- CareerFlow cover: the API's request path through its layers. Matches the site's navy hero palette. -->
+  <!-- CareerFlow cover: the web app's job application board. Matches the site's navy hero palette. -->
   <defs>
     <pattern id="grid" width="44" height="44" patternUnits="userSpaceOnUse">
       <path d="M44 0H0V44" fill="none" stroke="#ffffff" stroke-opacity="0.05" stroke-width="1"/>
@@ -17,9 +17,9 @@
       <stop offset="0.5" stop-color="#94a9ff"/>
       <stop offset="1" stop-color="#4ade80"/>
     </linearGradient>
-    <marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto">
-      <path d="M0 0L10 5L0 10z" fill="#94a9ff"/>
-    </marker>
+    <filter id="lift" x="-30%" y="-30%" width="160%" height="170%">
+      <feDropShadow dx="0" dy="14" stdDeviation="14" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
   </defs>
 
   <rect width="1600" height="900" fill="#0b1020"/>
@@ -28,62 +28,119 @@
   <rect width="1600" height="900" fill="url(#glowB)"/>
 
   <!-- Title -->
-  <text x="120" y="250" fill="#ffffff" font-family="Sora, 'Segoe UI', sans-serif" font-size="92" font-weight="700" letter-spacing="-3">CareerFlow</text>
-  <text x="124" y="312" fill="url(#accent)" font-size="30" font-weight="600">REST API · in progress</text>
-  <text x="124" y="400" fill="#96a0ba" font-size="24">Express.js · TypeScript</text>
-  <text x="124" y="440" fill="#96a0ba" font-size="24">Prisma · PostgreSQL</text>
-  <text x="124" y="480" fill="#96a0ba" font-size="24">JWT access + refresh tokens</text>
+  <text x="100" y="250" fill="#ffffff" font-family="Sora, 'Segoe UI', sans-serif" font-size="88" font-weight="700" letter-spacing="-3">CareerFlow</text>
+  <text x="104" y="310" fill="url(#accent)" font-size="30" font-weight="600">Web app · in progress</text>
+  <text x="104" y="400" fill="#96a0ba" font-size="24">Job application tracker</text>
+  <text x="104" y="440" fill="#96a0ba" font-size="24">Sign in, profile and a</text>
+  <text x="104" y="480" fill="#96a0ba" font-size="24">board for every application</text>
 
   <g font-size="22">
-    <rect x="124" y="560" width="132" height="44" rx="22" fill="#79c0ff" fill-opacity="0.08" stroke="#79c0ff" stroke-opacity="0.3"/>
-    <text x="190" y="589" fill="#a5d6ff" text-anchor="middle">auth</text>
-    <rect x="272" y="560" width="164" height="44" rx="22" fill="#79c0ff" fill-opacity="0.08" stroke="#79c0ff" stroke-opacity="0.3"/>
-    <text x="354" y="589" fill="#a5d6ff" text-anchor="middle">profiles</text>
-    <rect x="452" y="560" width="210" height="44" rx="22" fill="#79c0ff" fill-opacity="0.08" stroke="#79c0ff" stroke-opacity="0.3"/>
-    <text x="557" y="589" fill="#a5d6ff" text-anchor="middle">applications</text>
+    <rect x="104" y="560" width="132" height="44" rx="22" fill="#79c0ff" fill-opacity="0.08" stroke="#79c0ff" stroke-opacity="0.3"/>
+    <text x="170" y="589" fill="#a5d6ff" text-anchor="middle">auth</text>
+    <rect x="252" y="560" width="164" height="44" rx="22" fill="#79c0ff" fill-opacity="0.08" stroke="#79c0ff" stroke-opacity="0.3"/>
+    <text x="334" y="589" fill="#a5d6ff" text-anchor="middle">profiles</text>
+    <rect x="432" y="560" width="210" height="44" rx="22" fill="#79c0ff" fill-opacity="0.08" stroke="#79c0ff" stroke-opacity="0.3"/>
+    <text x="537" y="589" fill="#a5d6ff" text-anchor="middle">applications</text>
   </g>
 
-  <!-- Layer stack -->
-  <g font-size="26">
-    <rect x="900" y="110" width="560" height="680" rx="22" fill="#0d1117" fill-opacity="0.85" stroke="#ffffff" stroke-opacity="0.1"/>
-    <circle cx="936" cy="146" r="8" fill="#ff5f57"/>
-    <circle cx="962" cy="146" r="8" fill="#febc2e"/>
-    <circle cx="988" cy="146" r="8" fill="#28c840"/>
-    <text x="1180" y="154" fill="#ffffff" fill-opacity="0.45" font-size="18" text-anchor="middle">request flow</text>
-    <line x1="900" y1="180" x2="1460" y2="180" stroke="#ffffff" stroke-opacity="0.06"/>
+  <!-- Browser window -->
+  <rect x="720" y="110" width="800" height="680" rx="22" fill="#0d1117" fill-opacity="0.9" stroke="#ffffff" stroke-opacity="0.1"/>
+  <circle cx="756" cy="146" r="8" fill="#ff5f57"/>
+  <circle cx="782" cy="146" r="8" fill="#febc2e"/>
+  <circle cx="808" cy="146" r="8" fill="#28c840"/>
+  <rect x="980" y="128" width="380" height="36" rx="18" fill="#ffffff" fill-opacity="0.05"/>
+  <text x="1170" y="152" fill="#ffffff" fill-opacity="0.45" font-size="17" text-anchor="middle">/applications</text>
+  <line x1="720" y1="180" x2="1520" y2="180" stroke="#ffffff" stroke-opacity="0.06"/>
 
-    <g fill="#141b2e" stroke="#94a9ff" stroke-opacity="0.35">
-      <rect x="960" y="210" width="440" height="66" rx="12"/>
-      <rect x="960" y="306" width="440" height="66" rx="12"/>
-      <rect x="960" y="402" width="440" height="66" rx="12"/>
-      <rect x="960" y="498" width="440" height="66" rx="12"/>
-      <rect x="960" y="594" width="440" height="66" rx="12"/>
-    </g>
-    <rect x="960" y="690" width="440" height="66" rx="12" fill="#4ade80" fill-opacity="0.1" stroke="#4ade80" stroke-opacity="0.5"/>
-
-    <g fill="#e6edf3">
-      <text x="990" y="252">routes</text>
-      <text x="990" y="348">middleware</text>
-      <text x="990" y="444">controllers</text>
-      <text x="990" y="540">services</text>
-      <text x="990" y="636">prisma</text>
-      <text x="990" y="732" fill="#4ade80">postgresql</text>
-    </g>
-    <g fill="#79c0ff" font-size="19" text-anchor="end">
-      <text x="1376" y="251">Express</text>
-      <text x="1376" y="347">JWT · validation</text>
-      <text x="1376" y="443">request / response</text>
-      <text x="1376" y="539">business logic</text>
-      <text x="1376" y="635">data access</text>
-      <text x="1376" y="731" fill="#4ade80">database</text>
-    </g>
-
-    <g stroke="#94a9ff" stroke-width="2" marker-end="url(#arrow)">
-      <line x1="1180" y1="278" x2="1180" y2="300"/>
-      <line x1="1180" y1="374" x2="1180" y2="396"/>
-      <line x1="1180" y1="470" x2="1180" y2="492"/>
-      <line x1="1180" y1="566" x2="1180" y2="588"/>
-      <line x1="1180" y1="662" x2="1180" y2="684"/>
-    </g>
+  <!-- Sidebar -->
+  <path d="M720 180H880V790H742A22 22 0 0 1 720 768Z" fill="#ffffff" fill-opacity="0.025"/>
+  <line x1="880" y1="180" x2="880" y2="790" stroke="#ffffff" stroke-opacity="0.06"/>
+  <circle cx="760" cy="226" r="20" fill="url(#accent)"/>
+  <rect x="790" y="214" width="70" height="9" rx="4.5" fill="#ffffff" fill-opacity="0.35"/>
+  <rect x="790" y="230" width="48" height="7" rx="3.5" fill="#ffffff" fill-opacity="0.15"/>
+  <g font-size="16">
+    <text x="744" y="304" fill="#96a0ba">Dashboard</text>
+    <rect x="732" y="322" width="136" height="40" rx="10" fill="#94a9ff" fill-opacity="0.14"/>
+    <rect x="732" y="330" width="3" height="24" rx="1.5" fill="#94a9ff"/>
+    <text x="744" y="348" fill="#c9d4ff">Applications</text>
+    <text x="744" y="392" fill="#96a0ba">Profile</text>
   </g>
+
+  <!-- Board header -->
+  <text x="912" y="226" fill="#ffffff" font-family="Sora, 'Segoe UI', sans-serif" font-size="30" font-weight="700">Applications</text>
+  <rect x="1384" y="198" width="112" height="40" rx="10" fill="#94a9ff"/>
+  <text x="1440" y="224" fill="#0b1020" font-size="17" font-weight="700" text-anchor="middle">+ Add</text>
+  <rect x="912" y="254" width="380" height="42" rx="10" fill="#ffffff" fill-opacity="0.04" stroke="#ffffff" stroke-opacity="0.1"/>
+  <circle cx="936" cy="274" r="7" fill="none" stroke="#96a0ba" stroke-width="2"/>
+  <line x1="941" y1="279" x2="947" y2="285" stroke="#96a0ba" stroke-width="2" stroke-linecap="round"/>
+  <text x="958" y="281" fill="#ffffff" fill-opacity="0.35" font-size="16">Search roles or companies</text>
+
+  <!-- Columns -->
+  <g fill="#ffffff" fill-opacity="0.025">
+    <rect x="912" y="318" width="184" height="450" rx="14"/>
+    <rect x="1112" y="318" width="184" height="450" rx="14"/>
+    <rect x="1312" y="318" width="184" height="450" rx="14"/>
+  </g>
+  <g font-size="16" fill="#e6edf3">
+    <circle cx="932" cy="344" r="5" fill="#79c0ff"/>
+    <text x="944" y="350">Applied</text>
+    <circle cx="1132" cy="344" r="5" fill="#febc2e"/>
+    <text x="1144" y="350">Interview</text>
+    <circle cx="1332" cy="344" r="5" fill="#4ade80"/>
+    <text x="1344" y="350">Offer</text>
+  </g>
+
+  <!-- Cards -->
+  <g fill="#141b2e" stroke="#ffffff" stroke-opacity="0.08">
+    <rect x="922" y="368" width="164" height="96" rx="12"/>
+    <rect x="922" y="476" width="164" height="96" rx="12"/>
+    <rect x="922" y="584" width="164" height="96" rx="12"/>
+    <rect x="1122" y="368" width="164" height="96" rx="12"/>
+    <rect x="1322" y="368" width="164" height="96" rx="12" stroke="#4ade80" stroke-opacity="0.45"/>
+  </g>
+  <!-- Drop target where the dragged card will land -->
+  <rect x="1122" y="476" width="164" height="96" rx="12" fill="#febc2e" fill-opacity="0.04" stroke="#febc2e" stroke-opacity="0.45" stroke-dasharray="6 6"/>
+
+  <g font-size="15" fill="#e6edf3">
+    <rect x="936" y="382" width="28" height="28" rx="7" fill="#79c0ff" fill-opacity="0.25"/>
+    <text x="974" y="401">Frontend</text>
+    <rect x="936" y="490" width="28" height="28" rx="7" fill="#94a9ff" fill-opacity="0.25"/>
+    <text x="974" y="509">UI Eng.</text>
+    <rect x="936" y="598" width="28" height="28" rx="7" fill="#4ade80" fill-opacity="0.2"/>
+    <text x="974" y="617">Web Dev</text>
+    <rect x="1136" y="382" width="28" height="28" rx="7" fill="#febc2e" fill-opacity="0.25"/>
+    <text x="1174" y="401">React Dev</text>
+    <rect x="1336" y="382" width="28" height="28" rx="7" fill="#4ade80" fill-opacity="0.25"/>
+    <text x="1374" y="401">Engineer</text>
+  </g>
+  <g fill="#ffffff" fill-opacity="0.14">
+    <rect x="974" y="412" width="90" height="7" rx="3.5"/>
+    <rect x="974" y="520" width="70" height="7" rx="3.5"/>
+    <rect x="974" y="628" width="84" height="7" rx="3.5"/>
+    <rect x="1174" y="412" width="80" height="7" rx="3.5"/>
+    <rect x="1374" y="412" width="76" height="7" rx="3.5"/>
+  </g>
+  <g font-size="12" text-anchor="middle">
+    <rect x="936" y="434" width="60" height="20" rx="10" fill="#79c0ff" fill-opacity="0.12"/>
+    <text x="966" y="448" fill="#a5d6ff">2d ago</text>
+    <rect x="936" y="542" width="60" height="20" rx="10" fill="#79c0ff" fill-opacity="0.12"/>
+    <text x="966" y="556" fill="#a5d6ff">5d ago</text>
+    <rect x="936" y="650" width="60" height="20" rx="10" fill="#79c0ff" fill-opacity="0.12"/>
+    <text x="966" y="664" fill="#a5d6ff">1w ago</text>
+    <rect x="1136" y="434" width="72" height="20" rx="10" fill="#febc2e" fill-opacity="0.14"/>
+    <text x="1172" y="448" fill="#fde68a">Thu 10:00</text>
+    <rect x="1336" y="434" width="60" height="20" rx="10" fill="#4ade80" fill-opacity="0.14"/>
+    <text x="1366" y="448" fill="#86efac">Offer</text>
+  </g>
+
+  <!-- Card being dragged from Applied to Interview -->
+  <g transform="rotate(-4 1100 560)" filter="url(#lift)">
+    <rect x="1030" y="520" width="164" height="96" rx="12" fill="#1a2340" stroke="#94a9ff" stroke-opacity="0.7"/>
+    <rect x="1044" y="534" width="28" height="28" rx="7" fill="#94a9ff" fill-opacity="0.3"/>
+    <text x="1082" y="553" fill="#ffffff" font-size="15">Front-end</text>
+    <rect x="1082" y="564" width="86" height="7" rx="3.5" fill="#ffffff" fill-opacity="0.2"/>
+    <rect x="1044" y="586" width="60" height="20" rx="10" fill="#79c0ff" fill-opacity="0.16"/>
+    <text x="1074" y="600" fill="#a5d6ff" font-size="12" text-anchor="middle">today</text>
+  </g>
+  <path d="M1176 592L1176 624L1185 615L1192 630L1198 627L1191 612L1203 612Z" fill="#ffffff" stroke="#0b1020" stroke-width="2" stroke-linejoin="round"/>
 </svg>
